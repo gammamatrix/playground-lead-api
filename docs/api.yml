@@ -21,18 +21,148 @@ externalDocs:
   url: ''
 tags:
   -
-    name: Board
-    description: 'Manage boards in storage.'
+    name: Campaign
+    description: 'Manage campaigns in storage.'
+  -
+    name: Goal
+    description: 'Manage goals in storage.'
+  -
+    name: Lead
+    description: 'Manage leads in storage.'
+  -
+    name: Opportunity
+    description: 'Manage opportunities in storage.'
+  -
+    name: Plan
+    description: 'Manage plans in storage.'
+  -
+    name: Region
+    description: 'Manage regions in storage.'
+  -
+    name: Report
+    description: 'Manage reports in storage.'
+  -
+    name: Source
+    description: 'Manage sources in storage.'
+  -
+    name: Task
+    description: 'Manage tasks in storage.'
+  -
+    name: Team
+    description: 'Manage teams in storage.'
+  -
+    name: Teammate
+    description: 'Manage teammates in storage.'
 paths:
-  '/api/lead/backlogs/{id}':
-    $ref: paths/backlogs/id.yml
-  /api/lead/backlogs:
-    $ref: paths/backlogs/index.yml
-  '/api/lead/backlogs/lock/{id}':
-    $ref: paths/backlogs/lock.yml
-  '/api/lead/backlogs/restore/{id}':
-    $ref: paths/backlogs/restore.yml
+  '/api/lead/campaigns/{id}':
+    $ref: paths/campaigns/id.yml
+  /api/lead/campaigns:
+    $ref: paths/campaigns/index.yml
+  '/api/lead/campaigns/lock/{id}':
+    $ref: paths/campaigns/lock.yml
+  '/api/lead/campaigns/restore/{id}':
+    $ref: paths/campaigns/restore.yml
+  '/api/lead/goals/{id}':
+    $ref: paths/goals/id.yml
+  /api/lead/goals:
+    $ref: paths/goals/index.yml
+  '/api/lead/goals/lock/{id}':
+    $ref: paths/goals/lock.yml
+  '/api/lead/goals/restore/{id}':
+    $ref: paths/goals/restore.yml
+  '/api/lead/leads/{id}':
+    $ref: paths/leads/id.yml
+  /api/lead/leads:
+    $ref: paths/leads/index.yml
+  '/api/lead/leads/lock/{id}':
+    $ref: paths/leads/lock.yml
+  '/api/lead/leads/restore/{id}':
+    $ref: paths/leads/restore.yml
+  '/api/lead/opportunities/{id}':
+    $ref: paths/opportunities/id.yml
+  /api/lead/opportunities:
+    $ref: paths/opportunities/index.yml
+  '/api/lead/opportunities/lock/{id}':
+    $ref: paths/opportunities/lock.yml
+  '/api/lead/opportunities/restore/{id}':
+    $ref: paths/opportunities/restore.yml
+  '/api/lead/plans/{id}':
+    $ref: paths/plans/id.yml
+  /api/lead/plans:
+    $ref: paths/plans/index.yml
+  '/api/lead/plans/lock/{id}':
+    $ref: paths/plans/lock.yml
+  '/api/lead/plans/restore/{id}':
+    $ref: paths/plans/restore.yml
+  '/api/lead/regions/{id}':
+    $ref: paths/regions/id.yml
+  /api/lead/regions:
+    $ref: paths/regions/index.yml
+  '/api/lead/regions/lock/{id}':
+    $ref: paths/regions/lock.yml
+  '/api/lead/regions/restore/{id}':
+    $ref: paths/regions/restore.yml
+  '/api/lead/reports/{id}':
+    $ref: paths/reports/id.yml
+  /api/lead/reports:
+    $ref: paths/reports/index.yml
+  '/api/lead/reports/lock/{id}':
+    $ref: paths/reports/lock.yml
+  '/api/lead/reports/restore/{id}':
+    $ref: paths/reports/restore.yml
+  '/api/lead/sources/{id}':
+    $ref: paths/sources/id.yml
+  /api/lead/sources:
+    $ref: paths/sources/index.yml
+  '/api/lead/sources/lock/{id}':
+    $ref: paths/sources/lock.yml
+  '/api/lead/sources/restore/{id}':
+    $ref: paths/sources/restore.yml
+  '/api/lead/tasks/{id}':
+    $ref: paths/tasks/id.yml
+  /api/lead/tasks:
+    $ref: paths/tasks/index.yml
+  '/api/lead/tasks/lock/{id}':
+    $ref: paths/tasks/lock.yml
+  '/api/lead/tasks/restore/{id}':
+    $ref: paths/tasks/restore.yml
+  '/api/lead/teams/{id}':
+    $ref: paths/teams/id.yml
+  /api/lead/teams:
+    $ref: paths/teams/index.yml
+  '/api/lead/teams/lock/{id}':
+    $ref: paths/teams/lock.yml
+  '/api/lead/teams/restore/{id}':
+    $ref: paths/teams/restore.yml
+  '/api/lead/teammates/{id}':
+    $ref: paths/teammates/id.yml
+  /api/lead/teammates:
+    $ref: paths/teammates/index.yml
+  '/api/lead/teammates/lock/{id}':
+    $ref: paths/teammates/lock.yml
+  '/api/lead/teammates/restore/{id}':
+    $ref: paths/teammates/restore.yml
 components:
   schemas:
-    Backlog:
-      $ref: models/backlog.yml
+    Campaign:
+      $ref: models/campaign.yml
+    Goal:
+      $ref: models/goal.yml
+    Lead:
+      $ref: models/lead.yml
+    Opportunity:
+      $ref: models/opportunity.yml
+    Plan:
+      $ref: models/plan.yml
+    Region:
+      $ref: models/region.yml
+    Report:
+      $ref: models/report.yml
+    Source:
+      $ref: models/source.yml
+    Task:
+      $ref: models/task.yml
+    Team:
+      $ref: models/team.yml
+    Teammate:
+      $ref: models/teammate.yml
