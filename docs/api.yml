@@ -1,0 +1,38 @@
+openapi: 3.0.3
+servers:
+  -
+    url: 'https://api.example.com'
+    description: 'Production server'
+  -
+    url: 'https://api.staging.example.com'
+    description: 'Staging server'
+  -
+    url: 'https://api.dev.example.com'
+    description: 'Dev server'
+info:
+  title: Playground Lead API
+  description: ''
+  termsOfService: ''
+  # contact:
+  #   email: support@example.com
+  version: 73.0.0
+externalDocs:
+  description: ''
+  url: ''
+tags:
+  -
+    name: Board
+    description: 'Manage boards in storage.'
+paths:
+  '/api/lead/backlogs/{id}':
+    $ref: paths/backlogs/id.yml
+  /api/lead/backlogs:
+    $ref: paths/backlogs/index.yml
+  '/api/lead/backlogs/lock/{id}':
+    $ref: paths/backlogs/lock.yml
+  '/api/lead/backlogs/restore/{id}':
+    $ref: paths/backlogs/restore.yml
+components:
+  schemas:
+    Backlog:
+      $ref: models/backlog.yml
