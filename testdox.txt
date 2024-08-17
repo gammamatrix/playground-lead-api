@@ -36,9 +36,105 @@ Campaign Route (Tests\Feature\Playground\Lead\Api\Http\Controllers\Playground\Ca
  [x] Json destroy as user and get denied and no force delete allowed
 
 Command (Tests\Feature\Playground\Lead\Api\Console\Commands\About\Command)
- [x] Command about displays package information and succeed with code 0
+ [x] Command about displays package information and succeed
 
 Create Request (Tests\Unit\Playground\Lead\Api\Http\Requests\Campaign\CreateRequest)
+ [x] Request instance
+
+Create Request (Tests\Unit\Playground\Lead\Api\Http\Requests\Goal\CreateRequest)
+ [x] Request instance
+
+Create Request (Tests\Unit\Playground\Lead\Api\Http\Requests\Lead\CreateRequest)
+ [x] Request instance
+
+Create Request (Tests\Unit\Playground\Lead\Api\Http\Requests\Opportunity\CreateRequest)
+ [x] Request instance
+
+Create Request (Tests\Unit\Playground\Lead\Api\Http\Requests\Plan\CreateRequest)
+ [x] Request instance
+
+Create Request (Tests\Unit\Playground\Lead\Api\Http\Requests\Region\CreateRequest)
+ [x] Request instance
+
+Create Request (Tests\Unit\Playground\Lead\Api\Http\Requests\Report\CreateRequest)
+ [x] Request instance
+
+Create Request (Tests\Unit\Playground\Lead\Api\Http\Requests\Source\CreateRequest)
+ [x] Request instance
+
+Create Request (Tests\Unit\Playground\Lead\Api\Http\Requests\Task\CreateRequest)
+ [x] Request instance
+
+Create Request (Tests\Unit\Playground\Lead\Api\Http\Requests\Team\CreateRequest)
+ [x] Request instance
+
+Create Request (Tests\Unit\Playground\Lead\Api\Http\Requests\Teammate\CreateRequest)
+ [x] Request instance
+
+Destroy Request (Tests\Unit\Playground\Lead\Api\Http\Requests\Campaign\DestroyRequest)
+ [x] Request instance
+
+Destroy Request (Tests\Unit\Playground\Lead\Api\Http\Requests\Goal\DestroyRequest)
+ [x] Request instance
+
+Destroy Request (Tests\Unit\Playground\Lead\Api\Http\Requests\Lead\DestroyRequest)
+ [x] Request instance
+
+Destroy Request (Tests\Unit\Playground\Lead\Api\Http\Requests\Opportunity\DestroyRequest)
+ [x] Request instance
+
+Destroy Request (Tests\Unit\Playground\Lead\Api\Http\Requests\Plan\DestroyRequest)
+ [x] Request instance
+
+Destroy Request (Tests\Unit\Playground\Lead\Api\Http\Requests\Region\DestroyRequest)
+ [x] Request instance
+
+Destroy Request (Tests\Unit\Playground\Lead\Api\Http\Requests\Report\DestroyRequest)
+ [x] Request instance
+
+Destroy Request (Tests\Unit\Playground\Lead\Api\Http\Requests\Source\DestroyRequest)
+ [x] Request instance
+
+Destroy Request (Tests\Unit\Playground\Lead\Api\Http\Requests\Task\DestroyRequest)
+ [x] Request instance
+
+Destroy Request (Tests\Unit\Playground\Lead\Api\Http\Requests\Team\DestroyRequest)
+ [x] Request instance
+
+Destroy Request (Tests\Unit\Playground\Lead\Api\Http\Requests\Teammate\DestroyRequest)
+ [x] Request instance
+
+Edit Request (Tests\Unit\Playground\Lead\Api\Http\Requests\Campaign\EditRequest)
+ [x] Request instance
+
+Edit Request (Tests\Unit\Playground\Lead\Api\Http\Requests\Goal\EditRequest)
+ [x] Request instance
+
+Edit Request (Tests\Unit\Playground\Lead\Api\Http\Requests\Lead\EditRequest)
+ [x] Request instance
+
+Edit Request (Tests\Unit\Playground\Lead\Api\Http\Requests\Opportunity\EditRequest)
+ [x] Request instance
+
+Edit Request (Tests\Unit\Playground\Lead\Api\Http\Requests\Plan\EditRequest)
+ [x] Request instance
+
+Edit Request (Tests\Unit\Playground\Lead\Api\Http\Requests\Region\EditRequest)
+ [x] Request instance
+
+Edit Request (Tests\Unit\Playground\Lead\Api\Http\Requests\Report\EditRequest)
+ [x] Request instance
+
+Edit Request (Tests\Unit\Playground\Lead\Api\Http\Requests\Source\EditRequest)
+ [x] Request instance
+
+Edit Request (Tests\Unit\Playground\Lead\Api\Http\Requests\Task\EditRequest)
+ [x] Request instance
+
+Edit Request (Tests\Unit\Playground\Lead\Api\Http\Requests\Team\EditRequest)
+ [x] Request instance
+
+Edit Request (Tests\Unit\Playground\Lead\Api\Http\Requests\Teammate\EditRequest)
  [x] Request instance
 
 Goal Route (Tests\Feature\Playground\Lead\Api\Http\Controllers\Playground\GoalRoute)
@@ -77,6 +173,42 @@ Goal Route (Tests\Feature\Playground\Lead\Api\Http\Controllers\Playground\GoalRo
  [x] Json unlock as user and get denied
  [x] Json destroy as admin and succeed and ignore redirect
  [x] Json destroy as user and get denied and no force delete allowed
+
+Index Request (Tests\Unit\Playground\Lead\Api\Http\Requests\Campaign\IndexRequest)
+ [x] Request instance
+
+Index Request (Tests\Unit\Playground\Lead\Api\Http\Requests\Goal\IndexRequest)
+ [x] Request instance
+
+Index Request (Tests\Unit\Playground\Lead\Api\Http\Requests\Lead\IndexRequest)
+ [x] Request instance
+
+Index Request (Tests\Unit\Playground\Lead\Api\Http\Requests\Opportunity\IndexRequest)
+ [x] Request instance
+
+Index Request (Tests\Unit\Playground\Lead\Api\Http\Requests\Plan\IndexRequest)
+ [x] Request instance
+
+Index Request (Tests\Unit\Playground\Lead\Api\Http\Requests\Region\IndexRequest)
+ [x] Request instance
+
+Index Request (Tests\Unit\Playground\Lead\Api\Http\Requests\Report\IndexRequest)
+ [x] Request instance
+
+Index Request (Tests\Unit\Playground\Lead\Api\Http\Requests\Source\IndexRequest)
+ [x] Request instance
+
+Index Request (Tests\Unit\Playground\Lead\Api\Http\Requests\Task\IndexRequest)
+ [x] Request instance
+
+Index Request (Tests\Unit\Playground\Lead\Api\Http\Requests\Team\IndexRequest)
+ [x] Request instance
+
+Index Request (Tests\Unit\Playground\Lead\Api\Http\Requests\Teammate\IndexRequest)
+ [x] Request instance
+
+Instance (Tests\Feature\Playground\Lead\Api\Http\Requests\FormRequest\Instance)
+ [x] FormRequest authorize with admin
 
 Instance (Tests\Unit\Playground\Lead\Api\Http\Requests\FormRequest\Instance)
  [x] FormRequest authorize without user
@@ -127,6 +259,39 @@ Lead Route (Tests\Feature\Playground\Lead\Api\Http\Controllers\Playground\LeadRo
  [x] Json unlock as user and get denied
  [x] Json destroy as admin and succeed and ignore redirect
  [x] Json destroy as user and get denied and no force delete allowed
+
+Lock Request (Tests\Unit\Playground\Lead\Api\Http\Requests\Campaign\LockRequest)
+ [x] Request instance
+
+Lock Request (Tests\Unit\Playground\Lead\Api\Http\Requests\Goal\LockRequest)
+ [x] Request instance
+
+Lock Request (Tests\Unit\Playground\Lead\Api\Http\Requests\Lead\LockRequest)
+ [x] Request instance
+
+Lock Request (Tests\Unit\Playground\Lead\Api\Http\Requests\Opportunity\LockRequest)
+ [x] Request instance
+
+Lock Request (Tests\Unit\Playground\Lead\Api\Http\Requests\Plan\LockRequest)
+ [x] Request instance
+
+Lock Request (Tests\Unit\Playground\Lead\Api\Http\Requests\Region\LockRequest)
+ [x] Request instance
+
+Lock Request (Tests\Unit\Playground\Lead\Api\Http\Requests\Report\LockRequest)
+ [x] Request instance
+
+Lock Request (Tests\Unit\Playground\Lead\Api\Http\Requests\Source\LockRequest)
+ [x] Request instance
+
+Lock Request (Tests\Unit\Playground\Lead\Api\Http\Requests\Task\LockRequest)
+ [x] Request instance
+
+Lock Request (Tests\Unit\Playground\Lead\Api\Http\Requests\Team\LockRequest)
+ [x] Request instance
+
+Lock Request (Tests\Unit\Playground\Lead\Api\Http\Requests\Teammate\LockRequest)
+ [x] Request instance
 
 Opportunity Route (Tests\Feature\Playground\Lead\Api\Http\Controllers\Playground\OpportunityRoute)
  [x] Json guest cannot see info
@@ -205,6 +370,36 @@ Plan Route (Tests\Feature\Playground\Lead\Api\Http\Controllers\Playground\PlanRo
 Policy (Tests\Unit\Playground\Lead\Api\Policies\CampaignPolicy\Policy)
  [x] Policy instance
 
+Policy (Tests\Unit\Playground\Lead\Api\Policies\GoalPolicy\Policy)
+ [x] Policy instance
+
+Policy (Tests\Unit\Playground\Lead\Api\Policies\LeadPolicy\Policy)
+ [x] Policy instance
+
+Policy (Tests\Unit\Playground\Lead\Api\Policies\OpportunityPolicy\Policy)
+ [x] Policy instance
+
+Policy (Tests\Unit\Playground\Lead\Api\Policies\PlanPolicy\Policy)
+ [x] Policy instance
+
+Policy (Tests\Unit\Playground\Lead\Api\Policies\RegionPolicy\Policy)
+ [x] Policy instance
+
+Policy (Tests\Unit\Playground\Lead\Api\Policies\ReportPolicy\Policy)
+ [x] Policy instance
+
+Policy (Tests\Unit\Playground\Lead\Api\Policies\SourcePolicy\Policy)
+ [x] Policy instance
+
+Policy (Tests\Unit\Playground\Lead\Api\Policies\TaskPolicy\Policy)
+ [x] Policy instance
+
+Policy (Tests\Unit\Playground\Lead\Api\Policies\TeamPolicy\Policy)
+ [x] Policy instance
+
+Policy (Tests\Unit\Playground\Lead\Api\Policies\TeammatePolicy\Policy)
+ [x] Policy instance
+
 Region Route (Tests\Feature\Playground\Lead\Api\Http\Controllers\Playground\RegionRoute)
  [x] Json guest cannot see info
  [x] Json guest cannot destroy
@@ -279,6 +474,72 @@ Report Route (Tests\Feature\Playground\Lead\Api\Http\Controllers\Playground\Repo
  [x] Json destroy as admin and succeed and ignore redirect
  [x] Json destroy as user and get denied and no force delete allowed
 
+Restore Request (Tests\Unit\Playground\Lead\Api\Http\Requests\Campaign\RestoreRequest)
+ [x] Request instance
+
+Restore Request (Tests\Unit\Playground\Lead\Api\Http\Requests\Goal\RestoreRequest)
+ [x] Request instance
+
+Restore Request (Tests\Unit\Playground\Lead\Api\Http\Requests\Lead\RestoreRequest)
+ [x] Request instance
+
+Restore Request (Tests\Unit\Playground\Lead\Api\Http\Requests\Opportunity\RestoreRequest)
+ [x] Request instance
+
+Restore Request (Tests\Unit\Playground\Lead\Api\Http\Requests\Plan\RestoreRequest)
+ [x] Request instance
+
+Restore Request (Tests\Unit\Playground\Lead\Api\Http\Requests\Region\RestoreRequest)
+ [x] Request instance
+
+Restore Request (Tests\Unit\Playground\Lead\Api\Http\Requests\Report\RestoreRequest)
+ [x] Request instance
+
+Restore Request (Tests\Unit\Playground\Lead\Api\Http\Requests\Source\RestoreRequest)
+ [x] Request instance
+
+Restore Request (Tests\Unit\Playground\Lead\Api\Http\Requests\Task\RestoreRequest)
+ [x] Request instance
+
+Restore Request (Tests\Unit\Playground\Lead\Api\Http\Requests\Team\RestoreRequest)
+ [x] Request instance
+
+Restore Request (Tests\Unit\Playground\Lead\Api\Http\Requests\Teammate\RestoreRequest)
+ [x] Request instance
+
+Show Request (Tests\Unit\Playground\Lead\Api\Http\Requests\Campaign\ShowRequest)
+ [x] Request instance
+
+Show Request (Tests\Unit\Playground\Lead\Api\Http\Requests\Goal\ShowRequest)
+ [x] Request instance
+
+Show Request (Tests\Unit\Playground\Lead\Api\Http\Requests\Lead\ShowRequest)
+ [x] Request instance
+
+Show Request (Tests\Unit\Playground\Lead\Api\Http\Requests\Opportunity\ShowRequest)
+ [x] Request instance
+
+Show Request (Tests\Unit\Playground\Lead\Api\Http\Requests\Plan\ShowRequest)
+ [x] Request instance
+
+Show Request (Tests\Unit\Playground\Lead\Api\Http\Requests\Region\ShowRequest)
+ [x] Request instance
+
+Show Request (Tests\Unit\Playground\Lead\Api\Http\Requests\Report\ShowRequest)
+ [x] Request instance
+
+Show Request (Tests\Unit\Playground\Lead\Api\Http\Requests\Source\ShowRequest)
+ [x] Request instance
+
+Show Request (Tests\Unit\Playground\Lead\Api\Http\Requests\Task\ShowRequest)
+ [x] Request instance
+
+Show Request (Tests\Unit\Playground\Lead\Api\Http\Requests\Team\ShowRequest)
+ [x] Request instance
+
+Show Request (Tests\Unit\Playground\Lead\Api\Http\Requests\Teammate\ShowRequest)
+ [x] Request instance
+
 Source Route (Tests\Feature\Playground\Lead\Api\Http\Controllers\Playground\SourceRoute)
  [x] Json guest cannot see info
  [x] Json guest cannot destroy
@@ -318,6 +579,58 @@ Source Route (Tests\Feature\Playground\Lead\Api\Http\Controllers\Playground\Sour
 
 Store Request (Tests\Unit\Playground\Lead\Api\Http\Requests\Campaign\StoreRequest)
  [x] Request instance
+ [x] StoreRequest rules with optional revisions disabled
+ [x] StoreRequest rules with optional revisions enabled
+
+Store Request (Tests\Unit\Playground\Lead\Api\Http\Requests\Goal\StoreRequest)
+ [x] Request instance
+ [x] StoreRequest rules with optional revisions disabled
+ [x] StoreRequest rules with optional revisions enabled
+
+Store Request (Tests\Unit\Playground\Lead\Api\Http\Requests\Lead\StoreRequest)
+ [x] Request instance
+ [x] StoreRequest rules with optional revisions disabled
+ [x] StoreRequest rules with optional revisions enabled
+
+Store Request (Tests\Unit\Playground\Lead\Api\Http\Requests\Opportunity\StoreRequest)
+ [x] Request instance
+ [x] StoreRequest rules with optional revisions disabled
+ [x] StoreRequest rules with optional revisions enabled
+
+Store Request (Tests\Unit\Playground\Lead\Api\Http\Requests\Plan\StoreRequest)
+ [x] Request instance
+ [x] StoreRequest rules with optional revisions disabled
+ [x] StoreRequest rules with optional revisions enabled
+
+Store Request (Tests\Unit\Playground\Lead\Api\Http\Requests\Region\StoreRequest)
+ [x] Request instance
+ [x] StoreRequest rules with optional revisions disabled
+ [x] StoreRequest rules with optional revisions enabled
+
+Store Request (Tests\Unit\Playground\Lead\Api\Http\Requests\Report\StoreRequest)
+ [x] Request instance
+ [x] StoreRequest rules with optional revisions disabled
+ [x] StoreRequest rules with optional revisions enabled
+
+Store Request (Tests\Unit\Playground\Lead\Api\Http\Requests\Source\StoreRequest)
+ [x] Request instance
+ [x] StoreRequest rules with optional revisions disabled
+ [x] StoreRequest rules with optional revisions enabled
+
+Store Request (Tests\Unit\Playground\Lead\Api\Http\Requests\Task\StoreRequest)
+ [x] Request instance
+ [x] StoreRequest rules with optional revisions disabled
+ [x] StoreRequest rules with optional revisions enabled
+
+Store Request (Tests\Unit\Playground\Lead\Api\Http\Requests\Team\StoreRequest)
+ [x] Request instance
+ [x] StoreRequest rules with optional revisions disabled
+ [x] StoreRequest rules with optional revisions enabled
+
+Store Request (Tests\Unit\Playground\Lead\Api\Http\Requests\Teammate\StoreRequest)
+ [x] Request instance
+ [x] StoreRequest rules with optional revisions disabled
+ [x] StoreRequest rules with optional revisions enabled
 
 Task Route (Tests\Feature\Playground\Lead\Api\Http\Controllers\Playground\TaskRoute)
  [x] Json guest cannot see info
@@ -430,6 +743,91 @@ Teammate Route (Tests\Feature\Playground\Lead\Api\Http\Controllers\Playground\Te
  [x] Json destroy as admin and succeed and ignore redirect
  [x] Json destroy as user and get denied and no force delete allowed
 
+Unlock Request (Tests\Unit\Playground\Lead\Api\Http\Requests\Campaign\UnlockRequest)
+ [x] Request instance
+
+Unlock Request (Tests\Unit\Playground\Lead\Api\Http\Requests\Goal\UnlockRequest)
+ [x] Request instance
+
+Unlock Request (Tests\Unit\Playground\Lead\Api\Http\Requests\Lead\UnlockRequest)
+ [x] Request instance
+
+Unlock Request (Tests\Unit\Playground\Lead\Api\Http\Requests\Opportunity\UnlockRequest)
+ [x] Request instance
+
+Unlock Request (Tests\Unit\Playground\Lead\Api\Http\Requests\Plan\UnlockRequest)
+ [x] Request instance
+
+Unlock Request (Tests\Unit\Playground\Lead\Api\Http\Requests\Region\UnlockRequest)
+ [x] Request instance
+
+Unlock Request (Tests\Unit\Playground\Lead\Api\Http\Requests\Report\UnlockRequest)
+ [x] Request instance
+
+Unlock Request (Tests\Unit\Playground\Lead\Api\Http\Requests\Source\UnlockRequest)
+ [x] Request instance
+
+Unlock Request (Tests\Unit\Playground\Lead\Api\Http\Requests\Task\UnlockRequest)
+ [x] Request instance
+
+Unlock Request (Tests\Unit\Playground\Lead\Api\Http\Requests\Team\UnlockRequest)
+ [x] Request instance
+
+Unlock Request (Tests\Unit\Playground\Lead\Api\Http\Requests\Teammate\UnlockRequest)
+ [x] Request instance
+
 Update Request (Tests\Unit\Playground\Lead\Api\Http\Requests\Campaign\UpdateRequest)
  [x] Request instance
+ [x] UpdateRequest rules with optional revisions disabled
+ [x] UpdateRequest rules with optional revisions enabled
+
+Update Request (Tests\Unit\Playground\Lead\Api\Http\Requests\Goal\UpdateRequest)
+ [x] Request instance
+ [x] UpdateRequest rules with optional revisions disabled
+ [x] UpdateRequest rules with optional revisions enabled
+
+Update Request (Tests\Unit\Playground\Lead\Api\Http\Requests\Lead\UpdateRequest)
+ [x] Request instance
+ [x] UpdateRequest rules with optional revisions disabled
+ [x] UpdateRequest rules with optional revisions enabled
+
+Update Request (Tests\Unit\Playground\Lead\Api\Http\Requests\Opportunity\UpdateRequest)
+ [x] Request instance
+ [x] UpdateRequest rules with optional revisions disabled
+ [x] UpdateRequest rules with optional revisions enabled
+
+Update Request (Tests\Unit\Playground\Lead\Api\Http\Requests\Plan\UpdateRequest)
+ [x] Request instance
+ [x] UpdateRequest rules with optional revisions disabled
+ [x] UpdateRequest rules with optional revisions enabled
+
+Update Request (Tests\Unit\Playground\Lead\Api\Http\Requests\Region\UpdateRequest)
+ [x] Request instance
+ [x] UpdateRequest rules with optional revisions disabled
+ [x] UpdateRequest rules with optional revisions enabled
+
+Update Request (Tests\Unit\Playground\Lead\Api\Http\Requests\Report\UpdateRequest)
+ [x] Request instance
+ [x] UpdateRequest rules with optional revisions disabled
+ [x] UpdateRequest rules with optional revisions enabled
+
+Update Request (Tests\Unit\Playground\Lead\Api\Http\Requests\Source\UpdateRequest)
+ [x] Request instance
+ [x] UpdateRequest rules with optional revisions disabled
+ [x] UpdateRequest rules with optional revisions enabled
+
+Update Request (Tests\Unit\Playground\Lead\Api\Http\Requests\Task\UpdateRequest)
+ [x] Request instance
+ [x] UpdateRequest rules with optional revisions disabled
+ [x] UpdateRequest rules with optional revisions enabled
+
+Update Request (Tests\Unit\Playground\Lead\Api\Http\Requests\Team\UpdateRequest)
+ [x] Request instance
+ [x] UpdateRequest rules with optional revisions disabled
+ [x] UpdateRequest rules with optional revisions enabled
+
+Update Request (Tests\Unit\Playground\Lead\Api\Http\Requests\Teammate\UpdateRequest)
+ [x] Request instance
+ [x] UpdateRequest rules with optional revisions disabled
+ [x] UpdateRequest rules with optional revisions enabled
 
