@@ -1,25 +1,16 @@
 <?php
-
-declare(strict_types=1);
 /**
  * Playground
  */
+
+declare(strict_types=1);
 namespace Playground\Lead\Api\Http\Controllers;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
-use Playground\Lead\Api\Http\Requests\Campaign\CreateRequest;
-use Playground\Lead\Api\Http\Requests\Campaign\DestroyRequest;
-use Playground\Lead\Api\Http\Requests\Campaign\EditRequest;
-use Playground\Lead\Api\Http\Requests\Campaign\IndexRequest;
-use Playground\Lead\Api\Http\Requests\Campaign\LockRequest;
-use Playground\Lead\Api\Http\Requests\Campaign\RestoreRequest;
-use Playground\Lead\Api\Http\Requests\Campaign\ShowRequest;
-use Playground\Lead\Api\Http\Requests\Campaign\StoreRequest;
-use Playground\Lead\Api\Http\Requests\Campaign\UnlockRequest;
-use Playground\Lead\Api\Http\Requests\Campaign\UpdateRequest;
-use Playground\Lead\Api\Http\Resources\Campaign as CampaignResource;
-use Playground\Lead\Api\Http\Resources\CampaignCollection;
+use Illuminate\Support\Carbon;
+use Playground\Lead\Api\Http\Requests;
+use Playground\Lead\Api\Http\Resources;
 use Playground\Lead\Models\Campaign;
 
 /**
@@ -31,7 +22,7 @@ class CampaignController extends Controller
      * @var array<string, string>
      */
     public array $packageInfo = [
-        'model_attribute' => 'label',
+        'model_attribute' => 'title',
         'model_label' => 'Campaign',
         'model_label_plural' => 'Campaigns',
         'model_route' => 'playground.lead.api.campaigns',
@@ -46,33 +37,35 @@ class CampaignController extends Controller
     ];
 
     /**
-     * Create information for the Campaign resource in storage.
+     * Create the Campaign resource in storage.
      *
      * @route GET /api/lead/campaigns/create playground.lead.api.campaigns.create
      */
     public function create(
-        CreateRequest $request
-    ): JsonResponse|CampaignResource {
+        Requests\Campaign\CreateRequest $request
+    ): JsonResponse|Resources\Campaign {
 
         $validated = $request->validated();
 
+        $user = $request->user();
+
         $campaign = new Campaign($validated);
 
-        return (new CampaignResource($campaign))->additional(['meta' => [
+        return (new Resources\Campaign($campaign))->additional(['meta' => [
             'info' => $this->packageInfo,
         ]])->response($request);
     }
 
     /**
-     * Edit information for the Campaign resource in storage.
+     * Edit the Campaign resource in storage.
      *
      * @route GET /api/lead/campaigns/edit playground.lead.api.campaigns.edit
      */
     public function edit(
         Campaign $campaign,
-        EditRequest $request
-    ): JsonResponse|CampaignResource {
-        return (new CampaignResource($campaign))->additional(['meta' => [
+        Requests\Campaign\EditRequest $request
+    ): JsonResponse|Resources\Campaign {
+        return (new Resources\Campaign($campaign))->additional(['meta' => [
             'info' => $this->packageInfo,
         ]])->response($request);
     }
@@ -84,9 +77,16 @@ class CampaignController extends Controller
      */
     public function destroy(
         Campaign $campaign,
-        DestroyRequest $request
+        Requests\Campaign\DestroyRequest $request
     ): Response {
+
         $validated = $request->validated();
+
+        $user = $request->user();
+
+        if ($user?->id) {
+            $campaign->modified_by_id = $user->id;
+        }
 
         if (empty($validated['force'])) {
             $campaign->delete();
@@ -104,15 +104,22 @@ class CampaignController extends Controller
      */
     public function lock(
         Campaign $campaign,
-        LockRequest $request
-    ): JsonResponse|CampaignResource {
+        Requests\Campaign\LockRequest $request
+    ): JsonResponse|Resources\Campaign {
+
         $validated = $request->validated();
 
-        $campaign->setAttribute('locked', true);
+        $user = $request->user();
+
+        if ($user?->id) {
+            $campaign->modified_by_id = $user->id;
+        }
+
+        $campaign->locked = true;
 
         $campaign->save();
 
-        return (new CampaignResource($campaign))->additional(['meta' => [
+        return (new Resources\Campaign($campaign))->additional(['meta' => [
             'info' => $this->packageInfo,
         ]])->response($request);
     }
@@ -123,8 +130,9 @@ class CampaignController extends Controller
      * @route GET /api/lead/campaigns playground.lead.api.campaigns
      */
     public function index(
-        IndexRequest $request
-    ): JsonResponse|CampaignCollection {
+        Requests\Campaign\IndexRequest $request
+    ): JsonResponse|Resources\CampaignCollection {
+
         $user = $request->user();
 
         $validated = $request->validated();
@@ -134,6 +142,7 @@ class CampaignController extends Controller
         $query->sort($validated['sort'] ?? null);
 
         if (! empty($validated['filter']) && is_array($validated['filter'])) {
+
             $query->filterTrash($validated['filter']['trash'] ?? null);
 
             $query->filterIds(
@@ -158,13 +167,11 @@ class CampaignController extends Controller
         }
 
         $perPage = ! empty($validated['perPage']) && is_int($validated['perPage']) ? $validated['perPage'] : null;
-        $paginator = $query->paginate( $perPage);
+        $paginator = $query->paginate($perPage);
 
         $paginator->appends($validated);
 
-        return (new CampaignCollection($paginator))->additional(['meta' => [
-            'info' => $this->packageInfo,
-        ]])->response($request);
+        return (new Resources\CampaignCollection($paginator))->response($request);
     }
 
     /**
@@ -174,15 +181,18 @@ class CampaignController extends Controller
      */
     public function restore(
         Campaign $campaign,
-        RestoreRequest $request
-    ): JsonResponse|CampaignResource {
-        $validated = $request->validated();
+        Requests\Campaign\RestoreRequest $request
+    ): JsonResponse|Resources\Campaign {
 
         $user = $request->user();
 
+        if ($user?->id) {
+            $campaign->modified_by_id = $user->id;
+        }
+
         $campaign->restore();
 
-        return (new CampaignResource($campaign))->additional(['meta' => [
+        return (new Resources\Campaign($campaign))->additional(['meta' => [
             'info' => $this->packageInfo,
         ]])->response($request);
     }
@@ -194,21 +204,21 @@ class CampaignController extends Controller
      */
     public function show(
         Campaign $campaign,
-        ShowRequest $request
-    ): JsonResponse|CampaignResource {
-        return (new CampaignResource($campaign))->additional(['meta' => [
+        Requests\Campaign\ShowRequest $request
+    ): JsonResponse|Resources\Campaign {
+        return (new Resources\Campaign($campaign))->additional(['meta' => [
             'info' => $this->packageInfo,
         ]])->response($request);
     }
 
-    /**
+   /**
      * Store a newly created API Campaign resource in storage.
      *
      * @route POST /api/lead/campaigns playground.lead.api.campaigns.post
      */
     public function store(
-        StoreRequest $request
-    ): Response|JsonResponse|CampaignResource {
+        Requests\Campaign\StoreRequest $request
+    ): Response|JsonResponse|Resources\Campaign {
         $validated = $request->validated();
 
         $user = $request->user();
@@ -219,9 +229,9 @@ class CampaignController extends Controller
 
         $campaign->save();
 
-        return (new CampaignResource($campaign))->additional(['meta' => [
+        return (new Resources\Campaign($campaign))->additional(['meta' => [
             'info' => $this->packageInfo,
-        ]])->response($request);
+        ]])->response($request)->setStatusCode(201);
     }
 
     /**
@@ -231,15 +241,22 @@ class CampaignController extends Controller
      */
     public function unlock(
         Campaign $campaign,
-        UnlockRequest $request
-    ): JsonResponse|CampaignResource {
+        Requests\Campaign\UnlockRequest $request
+    ): JsonResponse|Resources\Campaign {
+
         $validated = $request->validated();
 
-        $campaign->setAttribute('locked', false);
+        $user = $request->user();
+
+        $campaign->locked = false;
+
+        if ($user?->id) {
+            $campaign->modified_by_id = $user->id;
+        }
 
         $campaign->save();
 
-        return (new CampaignResource($campaign))->additional(['meta' => [
+        return (new Resources\Campaign($campaign))->additional(['meta' => [
             'info' => $this->packageInfo,
         ]])->response($request);
     }
@@ -251,17 +268,20 @@ class CampaignController extends Controller
      */
     public function update(
         Campaign $campaign,
-        UpdateRequest $request
-    ): JsonResponse|CampaignResource {
+        Requests\Campaign\UpdateRequest $request
+    ): JsonResponse {
+
         $validated = $request->validated();
 
         $user = $request->user();
 
-        $campaign->modified_by_id = $user?->id;
+        if ($user?->id) {
+            $campaign->modified_by_id = $user->id;
+        }
 
         $campaign->update($validated);
 
-        return (new CampaignResource($campaign))->additional(['meta' => [
+        return (new Resources\Campaign($campaign))->additional(['meta' => [
             'info' => $this->packageInfo,
         ]])->response($request);
     }

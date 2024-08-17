@@ -1,14 +1,10 @@
 {
     "name": "gammamatrix/playground-lead-api",
-    "description": "Playground: Provide the Matrix API for a Laravel application.",
+    "description": "Playground: Provides an API, without a UI for interacting with Playground Lead, a Lead System for Laravel applications.",
     "keywords": [
-        "matrix",
-        "agile",
-        "sprints",
-        "projects",
-        "tickets",
         "gammamatrix",
         "laravel",
+        "lead",
         "playground"
     ],
     "homepage": "https://github.com/gammamatrix/playground-lead-api",
@@ -20,24 +16,17 @@
             "role": "Developer"
         }
     ],
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/gammamatrix/playground-lead"
-        }
-    ],
     "require": {
-        "php": "^8.1",
-        "gammamatrix/playground-auth": "dev-develop|dev-master|dev-feature/*|^73.0@dev|^73.0",
-        "gammamatrix/playground-http": "dev-develop|dev-master|dev-feature/*|^73.0@dev|^73.0",
-        "gammamatrix/playground-lead": "dev-develop|dev-master|dev-feature/*|^73.0@dev|^73.0"
+        "php": "^8.2",
+        "gammamatrix/playground": "*",
+        "gammamatrix/playground-auth": "*",
+        "gammamatrix/playground-http": "*",
+        "gammamatrix/playground-lead": "*"
     },
     "require-dev": {
-        "gammamatrix/playground-test": "dev-develop|dev-master|dev-feature/*|^73.0@dev|^73.0",
+        "gammamatrix/playground-test": "*",
         "laravel/sanctum": "^4.0"
     },
-    "minimum-stability": "dev",
-    "prefer-stable": true,
     "autoload": {
         "psr-4": {
             "Playground\\Lead\\Api\\": "src/"
@@ -58,8 +47,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-develop": "73.x-dev",
-            "dev-master": "73.x-dev"
+            "dev-develop": "73.x-dev"
         },
         "laravel": {
             "providers": [
@@ -67,9 +55,12 @@
             ]
         }
     },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
     "scripts": {
-        "test": "vendor/bin/phpunit",
+        "analyse": "vendor/bin/phpstan analyse --verbose --debug --level max",
+        "cloc": "cloc --exclude-dir=node_modules,output,vendor .",
         "format": "vendor/bin/php-cs-fixer fix",
-        "analyse": "vendor/bin/phpstan analyse --verbose --debug --level max"
+        "test": "vendor/bin/testbench package:test"
     }
 }

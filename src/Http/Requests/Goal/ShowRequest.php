@@ -1,12 +1,12 @@
 <?php
-
-declare(strict_types=1);
 /**
  * Playground
  */
+
+declare(strict_types=1);
 namespace Playground\Lead\Api\Http\Requests\Goal;
 
-use Playground\Lead\Api\Http\Requests\ShowRequest as FormRequest;
+use Playground\Lead\Api\Http\Requests\FormRequest;
 
 /**
  * \Playground\Lead\Api\Http\Requests\Goal\ShowRequest

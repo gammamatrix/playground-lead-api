@@ -1,23 +1,12 @@
-# Playground Lead Api
+# Playground: Lead API
 
 [![Playground CI Workflow](https://github.com/gammamatrix/playground-lead-api/actions/workflows/ci.yml/badge.svg?branch=develop)](https://raw.githubusercontent.com/gammamatrix/playground-lead-api/testing/develop/testdox.txt)
 [![Test Coverage](https://raw.githubusercontent.com/gammamatrix/playground-lead-api/testing/develop/coverage.svg)](tests)
-[![PHPStan Level 9 src and tests](https://img.shields.io/badge/PHPStan-level%209-brightgreen)](.github/workflows/ci.yml#L120)
+[![PHPStan Level 9](https://img.shields.io/badge/PHPStan-level%209-brightgreen)](.github/workflows/ci.yml#L120)
 
-The `playground-lead-api` Laravel package.
-
-This package provides an API for interacting with the [Playground Lead](https://github.com/gammamatrix/playground-lead), a Campaign Sales Management tool.
-
-If you need a UI, then use [Playground Lead Resource](https://github.com/gammamatrix/playground-lead-resource), which provides a Blade UI.
+The Playground: Lead API package.
 
 ## Documentation
-
-Read more on using [Playground Lead API at Read the Docs: Playground Documentation.](https://gammamatrix-playground.readthedocs.io/en/develop/components/lead.html)
-
-<!-- ### Postman
-
-A postman collection is provided in the repository: [postman-playground-lead-api.json.](postman-playground-lead-api.json)
-- This same collection is viewable on the [Postman: GammaMatrix Playground workspace.](https://www.postman.com/gammamatrix/workspace/playground) -->
 
 ### Swagger
 
@@ -26,7 +15,7 @@ This application provides Swagger documentation: [swagger.json](swagger.json).
 - Index endpoints support advanced query filtering.
 
 Swagger API Documentation is built with npm.
-- npm is only needed to generate documentation and is not needed to operate the LEAD API.
+- npm is only needed to generate documentation and is not needed to operate the Lead API.
 
 See [package.json](package.json) requirements.
 
@@ -54,47 +43,49 @@ You can install the package via composer:
 composer require gammamatrix/playground-lead-api
 ```
 
-## `artisan about`
-
-Playground provides information in the `artisan about` command.
-
-<!-- <img src="resources/docs/artisan-about-playground-lead-api.png" alt="screenshot of artisan about command with Playground Lead Api."> -->
-
 ## Configuration
 
-You can publish the config file with:
+All options are disabled by default.
 
+See the contents of the published config file: [config/playground-lead-api.php](config/playground-lead-api.php)
+
+You can publish the config file with:
 ```bash
 php artisan vendor:publish --provider="Playground\Lead\Api\ServiceProvider" --tag="playground-config"
 ```
 
-All routes are enabled by default. They may be disabled via enviroment variable or the configuration.
+## Cloc
 
-See the contents of the published config file: [config/playground-lead-api.php](config/playground-lead-api.php)
-
-You can publish the routes file with:
-```bash
-php artisan vendor:publish --provider="Playground\Lead\Api\ServiceProvider" --tag="playground-routes"
+```sh
+composer cloc
 ```
-- The routes while be published in a folder at `routes/playground-lead-api`
 
-### Environment Variables
+```
+➜  playground-lead-api git:(feature/GH-1) ✗ composer cloc
+> cloc --exclude-dir=node_modules,output,vendor .
+     618 text files.
+     446 unique files.
+     173 files ignored.
 
-If you are unable or do not want to publish [configuration files for this package](config/playground-lead-api.php),
-you may override the options via system environment variables.
-
-Information on [environment variables is available on the wiki for this package](https://github.com/gammamatrix/playground-lead-api/wiki/Environment-Variables)
-
-
-## Migrations
-
-This package requires the migrations in [playground-lead](https://github.com/gammamatrix/playground-lead) a Laravel package.
+github.com/AlDanial/cloc v 1.98  T=0.61 s (725.4 files/s, 117450.6 lines/s)
+-------------------------------------------------------------------------------
+Language                     files          blank        comment           code
+-------------------------------------------------------------------------------
+JSON                             5              0              0          35543
+PHP                            322           2433           3998          16335
+YAML                           112              5              0          13544
+XML                              3              0              7            215
+Markdown                         3             37              0             85
+INI                              1              3              0             12
+-------------------------------------------------------------------------------
+SUM:                           446           2478           4005          65734
+-------------------------------------------------------------------------------
+```
 
 ## PHPStan
 
 Tests at level 9 on:
 - `config/`
-- `database/`
 - `routes/`
 - `src/`
 - `tests/Feature/`
@@ -110,12 +101,16 @@ composer analyse
 composer format
 ```
 
-## Tests
+## Testing
 
 ```sh
-composer test
+composer test --parallel
 ```
 
 ## Changelog
 
 Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed recently.
+
+## License
+
+The MIT License (MIT). Please see [License File](LICENSE.md) for more information.

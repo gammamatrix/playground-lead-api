@@ -1,10 +1,51 @@
 <?php
+/**
+ * Playground
+ */
 
 declare(strict_types=1);
 
+/**
+ * Playground: Lead API Configuration and Environment Variables
+ */
 return [
+
+    /*
+    |--------------------------------------------------------------------------
+    | About Information
+    |--------------------------------------------------------------------------
+    |
+    | By default, information will be displayed about this package when using:
+    |
+    | `artisan about`
+    |
+    */
+
     'about' => (bool) env('PLAYGROUND_LEAD_API_ABOUT', true),
-    'default_key' => env('PLAYGROUND_LEAD_API_DEFAULT_KEY', ''),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Loading
+    |--------------------------------------------------------------------------
+    |
+    | By default, translations and views are loaded.
+    |
+    */
+
+    'load' => [
+        'policies' => (bool) env('PLAYGROUND_LEAD_API_LOAD_POLICIES', true),
+        'routes' => (bool) env('PLAYGROUND_LEAD_API_LOAD_ROUTES', true),
+        'translations' => (bool) env('PLAYGROUND_LEAD_API_LOAD_TRANSLATIONS', true),
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Middleware
+    |--------------------------------------------------------------------------
+    |
+    |
+    */
+
     'middleware' => [
         'default' => env('PLAYGROUND_LEAD_API_MIDDLEWARE_DEFAULT', [
             'web',
@@ -24,6 +65,15 @@ return [
             Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
         ]),
     ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Policies
+    |--------------------------------------------------------------------------
+    |
+    |
+    */
+
     'policies' => [
         Playground\Lead\Models\Campaign::class => Playground\Lead\Api\Policies\CampaignPolicy::class,
         Playground\Lead\Models\Goal::class => Playground\Lead\Api\Policies\GoalPolicy::class,
@@ -37,10 +87,15 @@ return [
         Playground\Lead\Models\Team::class => Playground\Lead\Api\Policies\TeamPolicy::class,
         Playground\Lead\Models\Teammate::class => Playground\Lead\Api\Policies\TeammatePolicy::class,
     ],
-    'load' => [
-        'policies' => (bool) env('PLAYGROUND_LEAD_API_LOAD_POLICIES', true),
-        'routes' => (bool) env('PLAYGROUND_LEAD_API_LOAD_ROUTES', true),
-    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Routes
+    |--------------------------------------------------------------------------
+    |
+    |
+    */
+
     'routes' => [
         'campaigns' => (bool) env('PLAYGROUND_LEAD_API_ROUTES_CAMPAIGNS', true),
         'goals' => (bool) env('PLAYGROUND_LEAD_API_ROUTES_GOALS', true),
@@ -55,6 +110,14 @@ return [
         'teammates' => (bool) env('PLAYGROUND_LEAD_API_ROUTES_TEAMMATES', true),
     ],
 
+    /*
+    |--------------------------------------------------------------------------
+    | Abilities
+    |--------------------------------------------------------------------------
+    |
+    |
+    */
+
     'abilities' => [
         'admin' => [
             'playground-lead-api:*',
@@ -67,7 +130,6 @@ return [
             'playground-lead-api:plan:*',
             'playground-lead-api:region:*',
             'playground-lead-api:report:*',
-            'playground-lead-api:source:*',
             'playground-lead-api:source:*',
             'playground-lead-api:task:*',
             'playground-lead-api:team:*',
@@ -97,39 +159,5 @@ return [
             'playground-lead-api:teammate:view',
             'playground-lead-api:teammate:viewAny',
         ],
-        'guest' => [
-            'deny',
-        ],
-        // 'guest' => [
-        //     'app:view',
-
-        //     'playground:view',
-
-        //     'playground-auth:logout',
-        //     'playground-auth:reset-password',
-
-        //     'playground-lead-api:campaign:view',
-        //     'playground-lead-api:campaign:viewAny',
-        //     'playground-lead-api:goal:view',
-        //     'playground-lead-api:goal:viewAny',
-        //     'playground-lead-api:lead:view',
-        //     'playground-lead-api:lead:viewAny',
-        //     'playground-lead-api:opportunity:view',
-        //     'playground-lead-api:opportunity:viewAny',
-        //     'playground-lead-api:plan:view',
-        //     'playground-lead-api:plan:viewAny',
-        //     'playground-lead-api:region:view',
-        //     'playground-lead-api:region:viewAny',
-        //     'playground-lead-api:report:view',
-        //     'playground-lead-api:report:viewAny',
-        //     'playground-lead-api:source:view',
-        //     'playground-lead-api:source:viewAny',
-        //     'playground-lead-api:task:view',
-        //     'playground-lead-api:task:viewAny',
-        //     'playground-lead-api:team:view',
-        //     'playground-lead-api:team:viewAny',
-        //     'playground-lead-api:teammate:view',
-        //     'playground-lead-api:teammate:viewAny',
-        // ],
     ],
 ];

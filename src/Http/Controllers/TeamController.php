@@ -1,25 +1,16 @@
 <?php
-
-declare(strict_types=1);
 /**
  * Playground
  */
+
+declare(strict_types=1);
 namespace Playground\Lead\Api\Http\Controllers;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
-use Playground\Lead\Api\Http\Requests\Team\CreateRequest;
-use Playground\Lead\Api\Http\Requests\Team\DestroyRequest;
-use Playground\Lead\Api\Http\Requests\Team\EditRequest;
-use Playground\Lead\Api\Http\Requests\Team\IndexRequest;
-use Playground\Lead\Api\Http\Requests\Team\LockRequest;
-use Playground\Lead\Api\Http\Requests\Team\RestoreRequest;
-use Playground\Lead\Api\Http\Requests\Team\ShowRequest;
-use Playground\Lead\Api\Http\Requests\Team\StoreRequest;
-use Playground\Lead\Api\Http\Requests\Team\UnlockRequest;
-use Playground\Lead\Api\Http\Requests\Team\UpdateRequest;
-use Playground\Lead\Api\Http\Resources\Team as TeamResource;
-use Playground\Lead\Api\Http\Resources\TeamCollection;
+use Illuminate\Support\Carbon;
+use Playground\Lead\Api\Http\Requests;
+use Playground\Lead\Api\Http\Resources;
 use Playground\Lead\Models\Team;
 
 /**
@@ -31,7 +22,7 @@ class TeamController extends Controller
      * @var array<string, string>
      */
     public array $packageInfo = [
-        'model_attribute' => 'label',
+        'model_attribute' => 'title',
         'model_label' => 'Team',
         'model_label_plural' => 'Teams',
         'model_route' => 'playground.lead.api.teams',
@@ -46,33 +37,35 @@ class TeamController extends Controller
     ];
 
     /**
-     * Create information for the Team resource in storage.
+     * Create the Team resource in storage.
      *
      * @route GET /api/lead/teams/create playground.lead.api.teams.create
      */
     public function create(
-        CreateRequest $request
-    ): JsonResponse|TeamResource {
+        Requests\Team\CreateRequest $request
+    ): JsonResponse|Resources\Team {
 
         $validated = $request->validated();
 
+        $user = $request->user();
+
         $team = new Team($validated);
 
-        return (new TeamResource($team))->additional(['meta' => [
+        return (new Resources\Team($team))->additional(['meta' => [
             'info' => $this->packageInfo,
         ]])->response($request);
     }
 
     /**
-     * Edit information for the Team resource in storage.
+     * Edit the Team resource in storage.
      *
      * @route GET /api/lead/teams/edit playground.lead.api.teams.edit
      */
     public function edit(
         Team $team,
-        EditRequest $request
-    ): JsonResponse|TeamResource {
-        return (new TeamResource($team))->additional(['meta' => [
+        Requests\Team\EditRequest $request
+    ): JsonResponse|Resources\Team {
+        return (new Resources\Team($team))->additional(['meta' => [
             'info' => $this->packageInfo,
         ]])->response($request);
     }
@@ -84,9 +77,16 @@ class TeamController extends Controller
      */
     public function destroy(
         Team $team,
-        DestroyRequest $request
+        Requests\Team\DestroyRequest $request
     ): Response {
+
         $validated = $request->validated();
+
+        $user = $request->user();
+
+        if ($user?->id) {
+            $team->modified_by_id = $user->id;
+        }
 
         if (empty($validated['force'])) {
             $team->delete();
@@ -104,15 +104,22 @@ class TeamController extends Controller
      */
     public function lock(
         Team $team,
-        LockRequest $request
-    ): JsonResponse|TeamResource {
+        Requests\Team\LockRequest $request
+    ): JsonResponse|Resources\Team {
+
         $validated = $request->validated();
 
-        $team->setAttribute('locked', true);
+        $user = $request->user();
+
+        if ($user?->id) {
+            $team->modified_by_id = $user->id;
+        }
+
+        $team->locked = true;
 
         $team->save();
 
-        return (new TeamResource($team))->additional(['meta' => [
+        return (new Resources\Team($team))->additional(['meta' => [
             'info' => $this->packageInfo,
         ]])->response($request);
     }
@@ -123,8 +130,9 @@ class TeamController extends Controller
      * @route GET /api/lead/teams playground.lead.api.teams
      */
     public function index(
-        IndexRequest $request
-    ): JsonResponse|TeamCollection {
+        Requests\Team\IndexRequest $request
+    ): JsonResponse|Resources\TeamCollection {
+
         $user = $request->user();
 
         $validated = $request->validated();
@@ -134,6 +142,7 @@ class TeamController extends Controller
         $query->sort($validated['sort'] ?? null);
 
         if (! empty($validated['filter']) && is_array($validated['filter'])) {
+
             $query->filterTrash($validated['filter']['trash'] ?? null);
 
             $query->filterIds(
@@ -158,13 +167,11 @@ class TeamController extends Controller
         }
 
         $perPage = ! empty($validated['perPage']) && is_int($validated['perPage']) ? $validated['perPage'] : null;
-        $paginator = $query->paginate( $perPage);
+        $paginator = $query->paginate($perPage);
 
         $paginator->appends($validated);
 
-        return (new TeamCollection($paginator))->additional(['meta' => [
-            'info' => $this->packageInfo,
-        ]])->response($request);
+        return (new Resources\TeamCollection($paginator))->response($request);
     }
 
     /**
@@ -174,15 +181,18 @@ class TeamController extends Controller
      */
     public function restore(
         Team $team,
-        RestoreRequest $request
-    ): JsonResponse|TeamResource {
-        $validated = $request->validated();
+        Requests\Team\RestoreRequest $request
+    ): JsonResponse|Resources\Team {
 
         $user = $request->user();
 
+        if ($user?->id) {
+            $team->modified_by_id = $user->id;
+        }
+
         $team->restore();
 
-        return (new TeamResource($team))->additional(['meta' => [
+        return (new Resources\Team($team))->additional(['meta' => [
             'info' => $this->packageInfo,
         ]])->response($request);
     }
@@ -194,21 +204,21 @@ class TeamController extends Controller
      */
     public function show(
         Team $team,
-        ShowRequest $request
-    ): JsonResponse|TeamResource {
-        return (new TeamResource($team))->additional(['meta' => [
+        Requests\Team\ShowRequest $request
+    ): JsonResponse|Resources\Team {
+        return (new Resources\Team($team))->additional(['meta' => [
             'info' => $this->packageInfo,
         ]])->response($request);
     }
 
-    /**
+   /**
      * Store a newly created API Team resource in storage.
      *
      * @route POST /api/lead/teams playground.lead.api.teams.post
      */
     public function store(
-        StoreRequest $request
-    ): Response|JsonResponse|TeamResource {
+        Requests\Team\StoreRequest $request
+    ): Response|JsonResponse|Resources\Team {
         $validated = $request->validated();
 
         $user = $request->user();
@@ -219,9 +229,9 @@ class TeamController extends Controller
 
         $team->save();
 
-        return (new TeamResource($team))->additional(['meta' => [
+        return (new Resources\Team($team))->additional(['meta' => [
             'info' => $this->packageInfo,
-        ]])->response($request);
+        ]])->response($request)->setStatusCode(201);
     }
 
     /**
@@ -231,15 +241,22 @@ class TeamController extends Controller
      */
     public function unlock(
         Team $team,
-        UnlockRequest $request
-    ): JsonResponse|TeamResource {
+        Requests\Team\UnlockRequest $request
+    ): JsonResponse|Resources\Team {
+
         $validated = $request->validated();
 
-        $team->setAttribute('locked', false);
+        $user = $request->user();
+
+        $team->locked = false;
+
+        if ($user?->id) {
+            $team->modified_by_id = $user->id;
+        }
 
         $team->save();
 
-        return (new TeamResource($team))->additional(['meta' => [
+        return (new Resources\Team($team))->additional(['meta' => [
             'info' => $this->packageInfo,
         ]])->response($request);
     }
@@ -251,17 +268,20 @@ class TeamController extends Controller
      */
     public function update(
         Team $team,
-        UpdateRequest $request
-    ): JsonResponse|TeamResource {
+        Requests\Team\UpdateRequest $request
+    ): JsonResponse {
+
         $validated = $request->validated();
 
         $user = $request->user();
 
-        $team->modified_by_id = $user?->id;
+        if ($user?->id) {
+            $team->modified_by_id = $user->id;
+        }
 
         $team->update($validated);
 
-        return (new TeamResource($team))->additional(['meta' => [
+        return (new Resources\Team($team))->additional(['meta' => [
             'info' => $this->packageInfo,
         ]])->response($request);
     }

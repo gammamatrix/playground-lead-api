@@ -1,0 +1,21 @@
+get:
+  tags:
+    - Goal
+  summary: 'Create a goal form.'
+  operationId: create_goal
+  responses:
+    200:
+      description: 'The create goal information.'
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                $ref: ../../models/goal.yml
+              meta:
+                type: object
+    401:
+      description: Unauthorized
+    403:
+      description: Forbidden
