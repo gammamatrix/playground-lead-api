@@ -351,6 +351,7 @@ properties:
   currency:
     description: 'The currency of the report.'
     type: string
+    nullable: true
   amount:
     description: 'The amount of the report.'
     type: number

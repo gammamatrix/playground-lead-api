@@ -321,6 +321,7 @@ properties:
   currency:
     description: 'The currency of the task.'
     type: string
+    nullable: true
   amount:
     description: 'The amount of the task.'
     type: number

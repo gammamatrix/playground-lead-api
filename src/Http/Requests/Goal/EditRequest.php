@@ -103,7 +103,7 @@ class EditRequest extends FormRequest
         'email' => ['nullable', 'string'],
         'phone' => ['nullable', 'string'],
         'team_role' => ['nullable', 'string'],
-        'currency' => ['string'],
+        'currency' => ['nullable', 'string'],
         'amount' => ['nullable', 'decimal'],
         'bonus' => ['nullable', 'decimal'],
         'bonus_rate' => ['nullable', 'decimal'],

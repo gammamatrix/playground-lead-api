@@ -4,7 +4,19 @@
 [![Test Coverage](https://raw.githubusercontent.com/gammamatrix/playground-lead-api/testing/develop/coverage.svg)](tests)
 [![PHPStan Level 9](https://img.shields.io/badge/PHPStan-level%209-brightgreen)](.github/workflows/ci.yml#L120)
 
-The Playground: Lead API package.
+The `playground-lead-api` Laravel package.
+
+This package provides an API for interacting with the [Playground Lead](https://github.com/gammamatrix/playground-lead), a Campaign Sales Management tool.
+
+If you need a UI, then use [Playground Lead Resource](https://github.com/gammamatrix/playground-lead-resource), which provides a Blade UI.
+
+## Documentation
+
+Read more on using [Playground Lead API at Read the Docs: Playground Documentation.](https://gammamatrix-playground.readthedocs.io/en/develop/components/lead.html)
+
+<!-- ### Postman
+A postman collection is provided in the repository: [postman-playground-lead-api.json.](postman-playground-lead-api.json)
+- This same collection is viewable on the [Postman: GammaMatrix Playground workspace.](https://www.postman.com/gammamatrix/workspace/playground) -->
 
 ## Documentation
 

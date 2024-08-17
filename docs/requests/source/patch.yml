@@ -321,6 +321,7 @@ properties:
   currency:
     description: 'The currency of the source.'
     type: string
+    nullable: true
   amount:
     description: 'The amount of the source.'
     type: number
