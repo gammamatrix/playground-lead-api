@@ -1,0 +1,21 @@
+get:
+  tags:
+    - Campaign
+  summary: 'Create a campaign form.'
+  operationId: create_campaign
+  responses:
+    200:
+      description: 'The create campaign information.'
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                $ref: ../../models/campaign.yml
+              meta:
+                type: object
+    401:
+      description: Unauthorized
+    403:
+      description: Forbidden

@@ -1,9 +1,9 @@
 <?php
-
-declare(strict_types=1);
 /**
  * Playground
  */
+
+declare(strict_types=1);
 namespace Tests\Feature\Playground\Lead\Api\Http\Controllers\Playground;
 
 use Tests\Feature\Playground\Lead\Api\Http\Controllers\OpportunityTestCase;
@@ -13,9 +13,5 @@ use Tests\Feature\Playground\Lead\Api\Http\Controllers\OpportunityTestCase;
  */
 class OpportunityRouteTest extends OpportunityTestCase
 {
-    use TestTrait;
-
     protected bool $load_migrations_playground = true;
-
-    protected bool $load_migrations_lead = true;
 }

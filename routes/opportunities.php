@@ -1,4 +1,7 @@
 <?php
+/**
+ * Playground
+ */
 
 declare(strict_types=1);
 
@@ -6,11 +9,12 @@ use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
-| Lead Routes: Opportunity
+| Lead API Routes: Opportunity
 |--------------------------------------------------------------------------
 |
 |
 */
+
 Route::group([
     'prefix' => 'api/lead/opportunity',
     'middleware' => config('playground-lead-api.middleware.default'),
@@ -33,6 +37,11 @@ Route::group([
         'uses' => 'OpportunityController@index',
     ])->can('index', Playground\Lead\Models\Opportunity::class);
 
+    Route::post('/index', [
+        'as' => 'playground.lead.api.opportunities.index',
+        'uses' => 'OpportunityController@index',
+    ])->can('index', Playground\Lead\Models\Opportunity::class);
+
     // UI
 
     Route::get('/create', [
@@ -43,47 +52,39 @@ Route::group([
     Route::get('/edit/{opportunity}', [
         'as' => 'playground.lead.api.opportunities.edit',
         'uses' => 'OpportunityController@edit',
-    ])->whereUuid('opportunity')
-        ->can('edit', 'opportunity');
+    ])->whereUuid('opportunity')->can('edit', 'opportunity');
 
     // Route::get('/go/{id}', [
-    //     'as'   => 'playground.lead.api.opportunities.go',
+    //     'as' => 'playground.lead.api.opportunities.go',
     //     'uses' => 'OpportunityController@go',
     // ]);
 
     Route::get('/{opportunity}', [
         'as' => 'playground.lead.api.opportunities.show',
         'uses' => 'OpportunityController@show',
-    ])->whereUuid('opportunity')
-        ->can('detail', 'opportunity');
+    ])->whereUuid('opportunity')->can('detail', 'opportunity');
 
     // API
 
     Route::put('/lock/{opportunity}', [
         'as' => 'playground.lead.api.opportunities.lock',
         'uses' => 'OpportunityController@lock',
-    ])->whereUuid('opportunity')
-        ->can('lock', 'opportunity');
+    ])->whereUuid('opportunity')->can('lock', 'opportunity');
 
     Route::delete('/lock/{opportunity}', [
         'as' => 'playground.lead.api.opportunities.unlock',
         'uses' => 'OpportunityController@unlock',
-    ])->whereUuid('opportunity')
-        ->can('unlock', 'opportunity');
+    ])->whereUuid('opportunity')->can('unlock', 'opportunity');
 
     Route::delete('/{opportunity}', [
         'as' => 'playground.lead.api.opportunities.destroy',
         'uses' => 'OpportunityController@destroy',
-    ])->whereUuid('opportunity')
-        ->can('delete', 'opportunity')
-        ->withTrashed();
+    ])->whereUuid('opportunity')->can('delete', 'opportunity')->withTrashed();
 
     Route::put('/restore/{opportunity}', [
         'as' => 'playground.lead.api.opportunities.restore',
         'uses' => 'OpportunityController@restore',
-    ])->whereUuid('opportunity')
-        ->can('restore', 'opportunity')
-        ->withTrashed();
+    ])->whereUuid('opportunity')->can('restore', 'opportunity')->withTrashed();
 
     Route::post('/', [
         'as' => 'playground.lead.api.opportunities.post',
@@ -91,12 +92,12 @@ Route::group([
     ])->can('store', Playground\Lead\Models\Opportunity::class);
 
     // Route::put('/', [
-    //     'as'   => 'playground.lead.api.opportunities.put',
+    //     'as' => 'playground.lead.api.opportunities.put',
     //     'uses' => 'OpportunityController@store',
-    // ])->can('store', \Playground\Lead\Models\Opportunity::class);
+    // ])->can('store', Playground\Lead\Models\Opportunity::class);
     //
     // Route::put('/{opportunity}', [
-    //     'as'   => 'playground.lead.api.opportunities.put.id',
+    //     'as' => 'playground.lead.api.opportunities.put.id',
     //     'uses' => 'OpportunityController@store',
     // ])->whereUuid('opportunity')->can('update', 'opportunity');
 

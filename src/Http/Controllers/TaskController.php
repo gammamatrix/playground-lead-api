@@ -1,25 +1,16 @@
 <?php
-
-declare(strict_types=1);
 /**
  * Playground
  */
+
+declare(strict_types=1);
 namespace Playground\Lead\Api\Http\Controllers;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
-use Playground\Lead\Api\Http\Requests\Task\CreateRequest;
-use Playground\Lead\Api\Http\Requests\Task\DestroyRequest;
-use Playground\Lead\Api\Http\Requests\Task\EditRequest;
-use Playground\Lead\Api\Http\Requests\Task\IndexRequest;
-use Playground\Lead\Api\Http\Requests\Task\LockRequest;
-use Playground\Lead\Api\Http\Requests\Task\RestoreRequest;
-use Playground\Lead\Api\Http\Requests\Task\ShowRequest;
-use Playground\Lead\Api\Http\Requests\Task\StoreRequest;
-use Playground\Lead\Api\Http\Requests\Task\UnlockRequest;
-use Playground\Lead\Api\Http\Requests\Task\UpdateRequest;
-use Playground\Lead\Api\Http\Resources\Task as TaskResource;
-use Playground\Lead\Api\Http\Resources\TaskCollection;
+use Illuminate\Support\Carbon;
+use Playground\Lead\Api\Http\Requests;
+use Playground\Lead\Api\Http\Resources;
 use Playground\Lead\Models\Task;
 
 /**
@@ -31,7 +22,7 @@ class TaskController extends Controller
      * @var array<string, string>
      */
     public array $packageInfo = [
-        'model_attribute' => 'label',
+        'model_attribute' => 'title',
         'model_label' => 'Task',
         'model_label_plural' => 'Tasks',
         'model_route' => 'playground.lead.api.tasks',
@@ -46,33 +37,35 @@ class TaskController extends Controller
     ];
 
     /**
-     * Create information for the Task resource in storage.
+     * Create the Task resource in storage.
      *
      * @route GET /api/lead/tasks/create playground.lead.api.tasks.create
      */
     public function create(
-        CreateRequest $request
-    ): JsonResponse|TaskResource {
+        Requests\Task\CreateRequest $request
+    ): JsonResponse|Resources\Task {
 
         $validated = $request->validated();
 
+        $user = $request->user();
+
         $task = new Task($validated);
 
-        return (new TaskResource($task))->additional(['meta' => [
+        return (new Resources\Task($task))->additional(['meta' => [
             'info' => $this->packageInfo,
         ]])->response($request);
     }
 
     /**
-     * Edit information for the Task resource in storage.
+     * Edit the Task resource in storage.
      *
      * @route GET /api/lead/tasks/edit playground.lead.api.tasks.edit
      */
     public function edit(
         Task $task,
-        EditRequest $request
-    ): JsonResponse|TaskResource {
-        return (new TaskResource($task))->additional(['meta' => [
+        Requests\Task\EditRequest $request
+    ): JsonResponse|Resources\Task {
+        return (new Resources\Task($task))->additional(['meta' => [
             'info' => $this->packageInfo,
         ]])->response($request);
     }
@@ -84,9 +77,16 @@ class TaskController extends Controller
      */
     public function destroy(
         Task $task,
-        DestroyRequest $request
+        Requests\Task\DestroyRequest $request
     ): Response {
+
         $validated = $request->validated();
+
+        $user = $request->user();
+
+        if ($user?->id) {
+            $task->modified_by_id = $user->id;
+        }
 
         if (empty($validated['force'])) {
             $task->delete();
@@ -104,15 +104,22 @@ class TaskController extends Controller
      */
     public function lock(
         Task $task,
-        LockRequest $request
-    ): JsonResponse|TaskResource {
+        Requests\Task\LockRequest $request
+    ): JsonResponse|Resources\Task {
+
         $validated = $request->validated();
 
-        $task->setAttribute('locked', true);
+        $user = $request->user();
+
+        if ($user?->id) {
+            $task->modified_by_id = $user->id;
+        }
+
+        $task->locked = true;
 
         $task->save();
 
-        return (new TaskResource($task))->additional(['meta' => [
+        return (new Resources\Task($task))->additional(['meta' => [
             'info' => $this->packageInfo,
         ]])->response($request);
     }
@@ -123,8 +130,9 @@ class TaskController extends Controller
      * @route GET /api/lead/tasks playground.lead.api.tasks
      */
     public function index(
-        IndexRequest $request
-    ): JsonResponse|TaskCollection {
+        Requests\Task\IndexRequest $request
+    ): JsonResponse|Resources\TaskCollection {
+
         $user = $request->user();
 
         $validated = $request->validated();
@@ -134,6 +142,7 @@ class TaskController extends Controller
         $query->sort($validated['sort'] ?? null);
 
         if (! empty($validated['filter']) && is_array($validated['filter'])) {
+
             $query->filterTrash($validated['filter']['trash'] ?? null);
 
             $query->filterIds(
@@ -158,13 +167,11 @@ class TaskController extends Controller
         }
 
         $perPage = ! empty($validated['perPage']) && is_int($validated['perPage']) ? $validated['perPage'] : null;
-        $paginator = $query->paginate( $perPage);
+        $paginator = $query->paginate($perPage);
 
         $paginator->appends($validated);
 
-        return (new TaskCollection($paginator))->additional(['meta' => [
-            'info' => $this->packageInfo,
-        ]])->response($request);
+        return (new Resources\TaskCollection($paginator))->response($request);
     }
 
     /**
@@ -174,15 +181,18 @@ class TaskController extends Controller
      */
     public function restore(
         Task $task,
-        RestoreRequest $request
-    ): JsonResponse|TaskResource {
-        $validated = $request->validated();
+        Requests\Task\RestoreRequest $request
+    ): JsonResponse|Resources\Task {
 
         $user = $request->user();
 
+        if ($user?->id) {
+            $task->modified_by_id = $user->id;
+        }
+
         $task->restore();
 
-        return (new TaskResource($task))->additional(['meta' => [
+        return (new Resources\Task($task))->additional(['meta' => [
             'info' => $this->packageInfo,
         ]])->response($request);
     }
@@ -194,21 +204,21 @@ class TaskController extends Controller
      */
     public function show(
         Task $task,
-        ShowRequest $request
-    ): JsonResponse|TaskResource {
-        return (new TaskResource($task))->additional(['meta' => [
+        Requests\Task\ShowRequest $request
+    ): JsonResponse|Resources\Task {
+        return (new Resources\Task($task))->additional(['meta' => [
             'info' => $this->packageInfo,
         ]])->response($request);
     }
 
-    /**
+   /**
      * Store a newly created API Task resource in storage.
      *
      * @route POST /api/lead/tasks playground.lead.api.tasks.post
      */
     public function store(
-        StoreRequest $request
-    ): Response|JsonResponse|TaskResource {
+        Requests\Task\StoreRequest $request
+    ): Response|JsonResponse|Resources\Task {
         $validated = $request->validated();
 
         $user = $request->user();
@@ -219,9 +229,9 @@ class TaskController extends Controller
 
         $task->save();
 
-        return (new TaskResource($task))->additional(['meta' => [
+        return (new Resources\Task($task))->additional(['meta' => [
             'info' => $this->packageInfo,
-        ]])->response($request);
+        ]])->response($request)->setStatusCode(201);
     }
 
     /**
@@ -231,15 +241,22 @@ class TaskController extends Controller
      */
     public function unlock(
         Task $task,
-        UnlockRequest $request
-    ): JsonResponse|TaskResource {
+        Requests\Task\UnlockRequest $request
+    ): JsonResponse|Resources\Task {
+
         $validated = $request->validated();
 
-        $task->setAttribute('locked', false);
+        $user = $request->user();
+
+        $task->locked = false;
+
+        if ($user?->id) {
+            $task->modified_by_id = $user->id;
+        }
 
         $task->save();
 
-        return (new TaskResource($task))->additional(['meta' => [
+        return (new Resources\Task($task))->additional(['meta' => [
             'info' => $this->packageInfo,
         ]])->response($request);
     }
@@ -251,17 +268,20 @@ class TaskController extends Controller
      */
     public function update(
         Task $task,
-        UpdateRequest $request
-    ): JsonResponse|TaskResource {
+        Requests\Task\UpdateRequest $request
+    ): JsonResponse {
+
         $validated = $request->validated();
 
         $user = $request->user();
 
-        $task->modified_by_id = $user?->id;
+        if ($user?->id) {
+            $task->modified_by_id = $user->id;
+        }
 
         $task->update($validated);
 
-        return (new TaskResource($task))->additional(['meta' => [
+        return (new Resources\Task($task))->additional(['meta' => [
             'info' => $this->packageInfo,
         ]])->response($request);
     }

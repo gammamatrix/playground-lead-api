@@ -1,25 +1,16 @@
 <?php
-
-declare(strict_types=1);
 /**
  * Playground
  */
+
+declare(strict_types=1);
 namespace Playground\Lead\Api\Http\Controllers;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
-use Playground\Lead\Api\Http\Requests\Region\CreateRequest;
-use Playground\Lead\Api\Http\Requests\Region\DestroyRequest;
-use Playground\Lead\Api\Http\Requests\Region\EditRequest;
-use Playground\Lead\Api\Http\Requests\Region\IndexRequest;
-use Playground\Lead\Api\Http\Requests\Region\LockRequest;
-use Playground\Lead\Api\Http\Requests\Region\RestoreRequest;
-use Playground\Lead\Api\Http\Requests\Region\ShowRequest;
-use Playground\Lead\Api\Http\Requests\Region\StoreRequest;
-use Playground\Lead\Api\Http\Requests\Region\UnlockRequest;
-use Playground\Lead\Api\Http\Requests\Region\UpdateRequest;
-use Playground\Lead\Api\Http\Resources\Region as RegionResource;
-use Playground\Lead\Api\Http\Resources\RegionCollection;
+use Illuminate\Support\Carbon;
+use Playground\Lead\Api\Http\Requests;
+use Playground\Lead\Api\Http\Resources;
 use Playground\Lead\Models\Region;
 
 /**
@@ -31,7 +22,7 @@ class RegionController extends Controller
      * @var array<string, string>
      */
     public array $packageInfo = [
-        'model_attribute' => 'label',
+        'model_attribute' => 'title',
         'model_label' => 'Region',
         'model_label_plural' => 'Regions',
         'model_route' => 'playground.lead.api.regions',
@@ -46,33 +37,35 @@ class RegionController extends Controller
     ];
 
     /**
-     * Create information for the Region resource in storage.
+     * Create the Region resource in storage.
      *
      * @route GET /api/lead/regions/create playground.lead.api.regions.create
      */
     public function create(
-        CreateRequest $request
-    ): JsonResponse|RegionResource {
+        Requests\Region\CreateRequest $request
+    ): JsonResponse|Resources\Region {
 
         $validated = $request->validated();
 
+        $user = $request->user();
+
         $region = new Region($validated);
 
-        return (new RegionResource($region))->additional(['meta' => [
+        return (new Resources\Region($region))->additional(['meta' => [
             'info' => $this->packageInfo,
         ]])->response($request);
     }
 
     /**
-     * Edit information for the Region resource in storage.
+     * Edit the Region resource in storage.
      *
      * @route GET /api/lead/regions/edit playground.lead.api.regions.edit
      */
     public function edit(
         Region $region,
-        EditRequest $request
-    ): JsonResponse|RegionResource {
-        return (new RegionResource($region))->additional(['meta' => [
+        Requests\Region\EditRequest $request
+    ): JsonResponse|Resources\Region {
+        return (new Resources\Region($region))->additional(['meta' => [
             'info' => $this->packageInfo,
         ]])->response($request);
     }
@@ -84,9 +77,16 @@ class RegionController extends Controller
      */
     public function destroy(
         Region $region,
-        DestroyRequest $request
+        Requests\Region\DestroyRequest $request
     ): Response {
+
         $validated = $request->validated();
+
+        $user = $request->user();
+
+        if ($user?->id) {
+            $region->modified_by_id = $user->id;
+        }
 
         if (empty($validated['force'])) {
             $region->delete();
@@ -104,15 +104,22 @@ class RegionController extends Controller
      */
     public function lock(
         Region $region,
-        LockRequest $request
-    ): JsonResponse|RegionResource {
+        Requests\Region\LockRequest $request
+    ): JsonResponse|Resources\Region {
+
         $validated = $request->validated();
 
-        $region->setAttribute('locked', true);
+        $user = $request->user();
+
+        if ($user?->id) {
+            $region->modified_by_id = $user->id;
+        }
+
+        $region->locked = true;
 
         $region->save();
 
-        return (new RegionResource($region))->additional(['meta' => [
+        return (new Resources\Region($region))->additional(['meta' => [
             'info' => $this->packageInfo,
         ]])->response($request);
     }
@@ -123,8 +130,9 @@ class RegionController extends Controller
      * @route GET /api/lead/regions playground.lead.api.regions
      */
     public function index(
-        IndexRequest $request
-    ): JsonResponse|RegionCollection {
+        Requests\Region\IndexRequest $request
+    ): JsonResponse|Resources\RegionCollection {
+
         $user = $request->user();
 
         $validated = $request->validated();
@@ -134,6 +142,7 @@ class RegionController extends Controller
         $query->sort($validated['sort'] ?? null);
 
         if (! empty($validated['filter']) && is_array($validated['filter'])) {
+
             $query->filterTrash($validated['filter']['trash'] ?? null);
 
             $query->filterIds(
@@ -158,13 +167,11 @@ class RegionController extends Controller
         }
 
         $perPage = ! empty($validated['perPage']) && is_int($validated['perPage']) ? $validated['perPage'] : null;
-        $paginator = $query->paginate( $perPage);
+        $paginator = $query->paginate($perPage);
 
         $paginator->appends($validated);
 
-        return (new RegionCollection($paginator))->additional(['meta' => [
-            'info' => $this->packageInfo,
-        ]])->response($request);
+        return (new Resources\RegionCollection($paginator))->response($request);
     }
 
     /**
@@ -174,15 +181,18 @@ class RegionController extends Controller
      */
     public function restore(
         Region $region,
-        RestoreRequest $request
-    ): JsonResponse|RegionResource {
-        $validated = $request->validated();
+        Requests\Region\RestoreRequest $request
+    ): JsonResponse|Resources\Region {
 
         $user = $request->user();
 
+        if ($user?->id) {
+            $region->modified_by_id = $user->id;
+        }
+
         $region->restore();
 
-        return (new RegionResource($region))->additional(['meta' => [
+        return (new Resources\Region($region))->additional(['meta' => [
             'info' => $this->packageInfo,
         ]])->response($request);
     }
@@ -194,21 +204,21 @@ class RegionController extends Controller
      */
     public function show(
         Region $region,
-        ShowRequest $request
-    ): JsonResponse|RegionResource {
-        return (new RegionResource($region))->additional(['meta' => [
+        Requests\Region\ShowRequest $request
+    ): JsonResponse|Resources\Region {
+        return (new Resources\Region($region))->additional(['meta' => [
             'info' => $this->packageInfo,
         ]])->response($request);
     }
 
-    /**
+   /**
      * Store a newly created API Region resource in storage.
      *
      * @route POST /api/lead/regions playground.lead.api.regions.post
      */
     public function store(
-        StoreRequest $request
-    ): Response|JsonResponse|RegionResource {
+        Requests\Region\StoreRequest $request
+    ): Response|JsonResponse|Resources\Region {
         $validated = $request->validated();
 
         $user = $request->user();
@@ -219,9 +229,9 @@ class RegionController extends Controller
 
         $region->save();
 
-        return (new RegionResource($region))->additional(['meta' => [
+        return (new Resources\Region($region))->additional(['meta' => [
             'info' => $this->packageInfo,
-        ]])->response($request);
+        ]])->response($request)->setStatusCode(201);
     }
 
     /**
@@ -231,15 +241,22 @@ class RegionController extends Controller
      */
     public function unlock(
         Region $region,
-        UnlockRequest $request
-    ): JsonResponse|RegionResource {
+        Requests\Region\UnlockRequest $request
+    ): JsonResponse|Resources\Region {
+
         $validated = $request->validated();
 
-        $region->setAttribute('locked', false);
+        $user = $request->user();
+
+        $region->locked = false;
+
+        if ($user?->id) {
+            $region->modified_by_id = $user->id;
+        }
 
         $region->save();
 
-        return (new RegionResource($region))->additional(['meta' => [
+        return (new Resources\Region($region))->additional(['meta' => [
             'info' => $this->packageInfo,
         ]])->response($request);
     }
@@ -251,17 +268,20 @@ class RegionController extends Controller
      */
     public function update(
         Region $region,
-        UpdateRequest $request
-    ): JsonResponse|RegionResource {
+        Requests\Region\UpdateRequest $request
+    ): JsonResponse {
+
         $validated = $request->validated();
 
         $user = $request->user();
 
-        $region->modified_by_id = $user?->id;
+        if ($user?->id) {
+            $region->modified_by_id = $user->id;
+        }
 
         $region->update($validated);
 
-        return (new RegionResource($region))->additional(['meta' => [
+        return (new Resources\Region($region))->additional(['meta' => [
             'info' => $this->packageInfo,
         ]])->response($request);
     }

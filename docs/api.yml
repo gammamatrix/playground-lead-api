@@ -1,24 +1,24 @@
 openapi: 3.0.3
+info:
+  title: 'Playground Lead API'
+  description: 'Playground: Provides an API, without a UI for interacting with Playground Lead, a Lead System for Laravel applications.'
+  version: 73.0.0
+externalDocs:
+  url: 'https://gammamatrix-playground.readthedocs.io/en/develop/components/lead.html'
+  description: 'Read the Docs: Playground Lead Packages'
 servers:
   -
     url: 'https://api.example.com'
-    description: 'Production server'
+    description: 'Production Server'
   -
     url: 'https://api.staging.example.com'
-    description: 'Staging server'
+    description: 'Staging Server'
   -
     url: 'https://api.dev.example.com'
-    description: 'Dev server'
-info:
-  title: Playground Lead API
-  description: ''
-  termsOfService: ''
-  # contact:
-  #   email: support@example.com
-  version: 73.0.0
-externalDocs:
-  description: ''
-  url: ''
+    description: 'Dev Server'
+  -
+    url: 'http://localhost'
+    description: 'Local Server'
 tags:
   -
     name: Campaign
@@ -58,90 +58,156 @@ paths:
     $ref: paths/campaigns/id.yml
   /api/lead/campaigns:
     $ref: paths/campaigns/index.yml
+  /api/lead/campaigns/index:
+    $ref: paths/campaigns/index-form.yml
   '/api/lead/campaigns/lock/{id}':
     $ref: paths/campaigns/lock.yml
   '/api/lead/campaigns/restore/{id}':
     $ref: paths/campaigns/restore.yml
+  /api/lead/campaigns/create:
+    $ref: paths/campaigns/create.yml
+  '/api/lead/campaigns/edit/{id}':
+    $ref: paths/campaigns/edit.yml
   '/api/lead/goals/{id}':
     $ref: paths/goals/id.yml
   /api/lead/goals:
     $ref: paths/goals/index.yml
+  /api/lead/goals/index:
+    $ref: paths/goals/index-form.yml
   '/api/lead/goals/lock/{id}':
     $ref: paths/goals/lock.yml
   '/api/lead/goals/restore/{id}':
     $ref: paths/goals/restore.yml
+  /api/lead/goals/create:
+    $ref: paths/goals/create.yml
+  '/api/lead/goals/edit/{id}':
+    $ref: paths/goals/edit.yml
   '/api/lead/leads/{id}':
     $ref: paths/leads/id.yml
   /api/lead/leads:
     $ref: paths/leads/index.yml
+  /api/lead/leads/index:
+    $ref: paths/leads/index-form.yml
   '/api/lead/leads/lock/{id}':
     $ref: paths/leads/lock.yml
   '/api/lead/leads/restore/{id}':
     $ref: paths/leads/restore.yml
+  /api/lead/leads/create:
+    $ref: paths/leads/create.yml
+  '/api/lead/leads/edit/{id}':
+    $ref: paths/leads/edit.yml
   '/api/lead/opportunities/{id}':
     $ref: paths/opportunities/id.yml
   /api/lead/opportunities:
     $ref: paths/opportunities/index.yml
+  /api/lead/opportunities/index:
+    $ref: paths/opportunities/index-form.yml
   '/api/lead/opportunities/lock/{id}':
     $ref: paths/opportunities/lock.yml
   '/api/lead/opportunities/restore/{id}':
     $ref: paths/opportunities/restore.yml
+  /api/lead/opportunities/create:
+    $ref: paths/opportunities/create.yml
+  '/api/lead/opportunities/edit/{id}':
+    $ref: paths/opportunities/edit.yml
   '/api/lead/plans/{id}':
     $ref: paths/plans/id.yml
   /api/lead/plans:
     $ref: paths/plans/index.yml
+  /api/lead/plans/index:
+    $ref: paths/plans/index-form.yml
   '/api/lead/plans/lock/{id}':
     $ref: paths/plans/lock.yml
   '/api/lead/plans/restore/{id}':
     $ref: paths/plans/restore.yml
+  /api/lead/plans/create:
+    $ref: paths/plans/create.yml
+  '/api/lead/plans/edit/{id}':
+    $ref: paths/plans/edit.yml
   '/api/lead/regions/{id}':
     $ref: paths/regions/id.yml
   /api/lead/regions:
     $ref: paths/regions/index.yml
+  /api/lead/regions/index:
+    $ref: paths/regions/index-form.yml
   '/api/lead/regions/lock/{id}':
     $ref: paths/regions/lock.yml
   '/api/lead/regions/restore/{id}':
     $ref: paths/regions/restore.yml
+  /api/lead/regions/create:
+    $ref: paths/regions/create.yml
+  '/api/lead/regions/edit/{id}':
+    $ref: paths/regions/edit.yml
   '/api/lead/reports/{id}':
     $ref: paths/reports/id.yml
   /api/lead/reports:
     $ref: paths/reports/index.yml
+  /api/lead/reports/index:
+    $ref: paths/reports/index-form.yml
   '/api/lead/reports/lock/{id}':
     $ref: paths/reports/lock.yml
   '/api/lead/reports/restore/{id}':
     $ref: paths/reports/restore.yml
+  /api/lead/reports/create:
+    $ref: paths/reports/create.yml
+  '/api/lead/reports/edit/{id}':
+    $ref: paths/reports/edit.yml
   '/api/lead/sources/{id}':
     $ref: paths/sources/id.yml
   /api/lead/sources:
     $ref: paths/sources/index.yml
+  /api/lead/sources/index:
+    $ref: paths/sources/index-form.yml
   '/api/lead/sources/lock/{id}':
     $ref: paths/sources/lock.yml
   '/api/lead/sources/restore/{id}':
     $ref: paths/sources/restore.yml
+  /api/lead/sources/create:
+    $ref: paths/sources/create.yml
+  '/api/lead/sources/edit/{id}':
+    $ref: paths/sources/edit.yml
   '/api/lead/tasks/{id}':
     $ref: paths/tasks/id.yml
   /api/lead/tasks:
     $ref: paths/tasks/index.yml
+  /api/lead/tasks/index:
+    $ref: paths/tasks/index-form.yml
   '/api/lead/tasks/lock/{id}':
     $ref: paths/tasks/lock.yml
   '/api/lead/tasks/restore/{id}':
     $ref: paths/tasks/restore.yml
+  /api/lead/tasks/create:
+    $ref: paths/tasks/create.yml
+  '/api/lead/tasks/edit/{id}':
+    $ref: paths/tasks/edit.yml
   '/api/lead/teams/{id}':
     $ref: paths/teams/id.yml
   /api/lead/teams:
     $ref: paths/teams/index.yml
+  /api/lead/teams/index:
+    $ref: paths/teams/index-form.yml
   '/api/lead/teams/lock/{id}':
     $ref: paths/teams/lock.yml
   '/api/lead/teams/restore/{id}':
     $ref: paths/teams/restore.yml
+  /api/lead/teams/create:
+    $ref: paths/teams/create.yml
+  '/api/lead/teams/edit/{id}':
+    $ref: paths/teams/edit.yml
   '/api/lead/teammates/{id}':
     $ref: paths/teammates/id.yml
   /api/lead/teammates:
     $ref: paths/teammates/index.yml
+  /api/lead/teammates/index:
+    $ref: paths/teammates/index-form.yml
   '/api/lead/teammates/lock/{id}':
     $ref: paths/teammates/lock.yml
   '/api/lead/teammates/restore/{id}':
     $ref: paths/teammates/restore.yml
+  /api/lead/teammates/create:
+    $ref: paths/teammates/create.yml
+  '/api/lead/teammates/edit/{id}':
+    $ref: paths/teammates/edit.yml
 components:
   schemas:
     Campaign:
