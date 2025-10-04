@@ -1,0 +1,17 @@
+{
+    "class": "Team",
+    "config": "playground-lead-api",
+    "fqdn": "Playground/Lead/Api/Http/Resources/Team",
+    "module": "Lead",
+    "module_slug": "lead",
+    "name": "Team",
+    "namespace": "Playground/Lead/Api",
+    "organization": "Playground",
+    "package": "playground-lead-api",
+    "collection": false,
+    "model": "Team",
+    "model_fqdn": "Playground/Lead/Models/Team",
+    "model_slug": "team",
+    "type": "",
+    "models": []
+}

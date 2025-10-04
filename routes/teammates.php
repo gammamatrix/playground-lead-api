@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Playground
  */
@@ -62,7 +63,7 @@ Route::group([
     Route::get('/{teammate}', [
         'as' => 'playground.lead.api.teammates.show',
         'uses' => 'TeammateController@show',
-    ])->whereUuid('teammate')->can('detail', 'teammate');
+    ])->whereUuid('teammate')->can('detail', 'teammate')->withTrashed();
 
     // API
 

@@ -1,0 +1,22 @@
+{
+    "class": "ReportRouteTest",
+    "config": "playground-lead-api",
+    "extends": "",
+    "fqdn": "Tests/Feature/Playground/Lead/Api/ReportRouteTest",
+    "model": "Report",
+    "model_fqdn": "",
+    "module": "Lead",
+    "module_slug": "lead",
+    "name": "ReportRouteTest",
+    "namespace": "Tests/Feature/Playground/Lead/Api",
+    "organization": "Playground",
+    "package": "playground-lead-api",
+    "playground": true,
+    "suite": "feature",
+    "type": "playground-api-controller-model-user",
+    "uses": [],
+    "models": {
+        "Report": "resources/configurations/playground-lead/model.report.json"
+    },
+    "package_providers": []
+}

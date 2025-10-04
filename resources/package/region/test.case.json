@@ -1,0 +1,22 @@
+{
+    "class": "RegionTestCase",
+    "config": "playground-lead-api",
+    "extends": "TestCase",
+    "fqdn": "Tests/Feature/Playground/Lead/Api/Http/Controllers/RegionTestCase",
+    "model": "Region",
+    "model_fqdn": "",
+    "module": "Lead",
+    "module_slug": "lead",
+    "name": "RegionTestCase",
+    "namespace": "Tests/Feature/Playground/Lead/Api/Http/Controllers",
+    "organization": "Playground",
+    "package": "playground-lead-api",
+    "playground": true,
+    "suite": "feature",
+    "type": "playground-api-controller-model-case",
+    "uses": [],
+    "models": {
+        "Region": "resources/configurations/playground-lead/model.region.json"
+    },
+    "package_providers": []
+}

@@ -1,14 +1,15 @@
 <?php
+
 /**
  * Playground
  */
 
 declare(strict_types=1);
+
 namespace Playground\Lead\Api\Http\Controllers;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
-use Illuminate\Support\Carbon;
 use Playground\Lead\Api\Http\Requests;
 use Playground\Lead\Api\Http\Resources;
 use Playground\Lead\Models\Teammate;
@@ -45,28 +46,31 @@ class TeammateController extends Controller
         Requests\Teammate\CreateRequest $request
     ): JsonResponse|Resources\Teammate {
 
-        $validated = $request->validated();
+        $packageInfo = $this->packageInfo();
 
-        $user = $request->user();
+        $validated = $request->validated();
 
         $teammate = new Teammate($validated);
 
-        return (new Resources\Teammate($teammate))->additional(['meta' => [
-            'info' => $this->packageInfo,
+        return new Resources\Teammate($teammate)->additional(['meta' => [
+            'info' => $packageInfo,
         ]])->response($request);
     }
 
     /**
      * Edit the Teammate resource in storage.
      *
-     * @route GET /api/lead/teammates/edit playground.lead.api.teammates.edit
+     * @route GET /api/lead/teammates/edit/{teammate} playground.lead.api.teammates.edit
      */
     public function edit(
         Teammate $teammate,
         Requests\Teammate\EditRequest $request
     ): JsonResponse|Resources\Teammate {
-        return (new Resources\Teammate($teammate))->additional(['meta' => [
-            'info' => $this->packageInfo,
+
+        $packageInfo = $this->packageInfo();
+
+        return new Resources\Teammate($teammate)->additional(['meta' => [
+            'info' => $packageInfo,
         ]])->response($request);
     }
 
@@ -107,7 +111,7 @@ class TeammateController extends Controller
         Requests\Teammate\LockRequest $request
     ): JsonResponse|Resources\Teammate {
 
-        $validated = $request->validated();
+        $packageInfo = $this->packageInfo();
 
         $user = $request->user();
 
@@ -119,8 +123,8 @@ class TeammateController extends Controller
 
         $teammate->save();
 
-        return (new Resources\Teammate($teammate))->additional(['meta' => [
-            'info' => $this->packageInfo,
+        return new Resources\Teammate($teammate)->additional(['meta' => [
+            'info' => $packageInfo,
         ]])->response($request);
     }
 
@@ -133,11 +137,20 @@ class TeammateController extends Controller
         Requests\Teammate\IndexRequest $request
     ): JsonResponse|Resources\TeammateCollection {
 
-        $user = $request->user();
+        $packageInfo = $this->packageInfo();
 
+        /**
+         * @var array{
+         *     sort: string|array<mixed>,
+         *     filter: array{
+         *         trash: string
+         *     },
+         *     perPage: int
+         * } $validated
+         */
         $validated = $request->validated();
 
-        $query = Teammate::addSelect(sprintf('%1$s.*', $this->packageInfo['table']));
+        $query = Teammate::addSelect(sprintf('%1$s.*', $packageInfo->table()));
 
         $query->sort($validated['sort'] ?? null);
 
@@ -171,7 +184,7 @@ class TeammateController extends Controller
 
         $paginator->appends($validated);
 
-        return (new Resources\TeammateCollection($paginator))->response($request);
+        return new Resources\TeammateCollection($paginator)->response($request);
     }
 
     /**
@@ -184,16 +197,16 @@ class TeammateController extends Controller
         Requests\Teammate\RestoreRequest $request
     ): JsonResponse|Resources\Teammate {
 
+        $packageInfo = $this->packageInfo();
+
         $user = $request->user();
 
-        if ($user?->id) {
-            $teammate->modified_by_id = $user->id;
-        }
+        $teammate->modified_by_id = $user?->id;
 
         $teammate->restore();
 
-        return (new Resources\Teammate($teammate))->additional(['meta' => [
-            'info' => $this->packageInfo,
+        return new Resources\Teammate($teammate)->additional(['meta' => [
+            'info' => $packageInfo,
         ]])->response($request);
     }
 
@@ -206,12 +219,15 @@ class TeammateController extends Controller
         Teammate $teammate,
         Requests\Teammate\ShowRequest $request
     ): JsonResponse|Resources\Teammate {
-        return (new Resources\Teammate($teammate))->additional(['meta' => [
-            'info' => $this->packageInfo,
+
+        $packageInfo = $this->packageInfo();
+
+        return new Resources\Teammate($teammate)->additional(['meta' => [
+            'info' => $packageInfo,
         ]])->response($request);
     }
 
-   /**
+    /**
      * Store a newly created API Teammate resource in storage.
      *
      * @route POST /api/lead/teammates playground.lead.api.teammates.post
@@ -219,6 +235,9 @@ class TeammateController extends Controller
     public function store(
         Requests\Teammate\StoreRequest $request
     ): Response|JsonResponse|Resources\Teammate {
+
+        $packageInfo = $this->packageInfo();
+
         $validated = $request->validated();
 
         $user = $request->user();
@@ -229,8 +248,8 @@ class TeammateController extends Controller
 
         $teammate->save();
 
-        return (new Resources\Teammate($teammate))->additional(['meta' => [
-            'info' => $this->packageInfo,
+        return new Resources\Teammate($teammate)->additional(['meta' => [
+            'info' => $packageInfo,
         ]])->response($request)->setStatusCode(201);
     }
 
@@ -244,20 +263,18 @@ class TeammateController extends Controller
         Requests\Teammate\UnlockRequest $request
     ): JsonResponse|Resources\Teammate {
 
-        $validated = $request->validated();
+        $packageInfo = $this->packageInfo();
 
         $user = $request->user();
 
         $teammate->locked = false;
 
-        if ($user?->id) {
-            $teammate->modified_by_id = $user->id;
-        }
+        $teammate->modified_by_id = $user?->id;
 
         $teammate->save();
 
-        return (new Resources\Teammate($teammate))->additional(['meta' => [
-            'info' => $this->packageInfo,
+        return new Resources\Teammate($teammate)->additional(['meta' => [
+            'info' => $packageInfo,
         ]])->response($request);
     }
 
@@ -271,18 +288,18 @@ class TeammateController extends Controller
         Requests\Teammate\UpdateRequest $request
     ): JsonResponse {
 
+        $packageInfo = $this->packageInfo();
+
         $validated = $request->validated();
 
         $user = $request->user();
 
-        if ($user?->id) {
-            $teammate->modified_by_id = $user->id;
-        }
+        $teammate->modified_by_id = $user?->id;
 
         $teammate->update($validated);
 
-        return (new Resources\Teammate($teammate))->additional(['meta' => [
-            'info' => $this->packageInfo,
+        return new Resources\Teammate($teammate)->additional(['meta' => [
+            'info' => $packageInfo,
         ]])->response($request);
     }
 }

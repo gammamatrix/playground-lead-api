@@ -1,0 +1,23 @@
+{
+    "class": "RestoreRequestTest",
+    "config": "playground-lead-api",
+    "extends": "RequestCase",
+    "fqdn": "Tests/Unit/Playground/Lead/Api/RestoreRequestTest",
+    "model": "Campaign",
+    "model_fqdn": "",
+    "module": "Lead",
+    "module_slug": "lead",
+    "name": "RestoreRequestTest",
+    "namespace": "Tests/Unit/Playground/Lead/Api",
+    "organization": "Playground",
+    "package": "playground-lead-api",
+    "playground": true,
+    "suite": "unit",
+    "type": "playground-request-model",
+    "uses": [
+        "Tests/Unit/Playground/Lead/Api/PackageProviders",
+        "Playground/Test/Unit/Http/Requests/RequestCase"
+    ],
+    "models": [],
+    "package_providers": []
+}

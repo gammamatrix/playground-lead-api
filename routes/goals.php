@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Playground
  */
@@ -62,7 +63,7 @@ Route::group([
     Route::get('/{goal}', [
         'as' => 'playground.lead.api.goals.show',
         'uses' => 'GoalController@show',
-    ])->whereUuid('goal')->can('detail', 'goal');
+    ])->whereUuid('goal')->can('detail', 'goal')->withTrashed();
 
     // API
 

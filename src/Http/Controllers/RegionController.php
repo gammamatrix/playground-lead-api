@@ -1,14 +1,15 @@
 <?php
+
 /**
  * Playground
  */
 
 declare(strict_types=1);
+
 namespace Playground\Lead\Api\Http\Controllers;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
-use Illuminate\Support\Carbon;
 use Playground\Lead\Api\Http\Requests;
 use Playground\Lead\Api\Http\Resources;
 use Playground\Lead\Models\Region;
@@ -45,28 +46,31 @@ class RegionController extends Controller
         Requests\Region\CreateRequest $request
     ): JsonResponse|Resources\Region {
 
-        $validated = $request->validated();
+        $packageInfo = $this->packageInfo();
 
-        $user = $request->user();
+        $validated = $request->validated();
 
         $region = new Region($validated);
 
-        return (new Resources\Region($region))->additional(['meta' => [
-            'info' => $this->packageInfo,
+        return new Resources\Region($region)->additional(['meta' => [
+            'info' => $packageInfo,
         ]])->response($request);
     }
 
     /**
      * Edit the Region resource in storage.
      *
-     * @route GET /api/lead/regions/edit playground.lead.api.regions.edit
+     * @route GET /api/lead/regions/edit/{region} playground.lead.api.regions.edit
      */
     public function edit(
         Region $region,
         Requests\Region\EditRequest $request
     ): JsonResponse|Resources\Region {
-        return (new Resources\Region($region))->additional(['meta' => [
-            'info' => $this->packageInfo,
+
+        $packageInfo = $this->packageInfo();
+
+        return new Resources\Region($region)->additional(['meta' => [
+            'info' => $packageInfo,
         ]])->response($request);
     }
 
@@ -107,7 +111,7 @@ class RegionController extends Controller
         Requests\Region\LockRequest $request
     ): JsonResponse|Resources\Region {
 
-        $validated = $request->validated();
+        $packageInfo = $this->packageInfo();
 
         $user = $request->user();
 
@@ -119,8 +123,8 @@ class RegionController extends Controller
 
         $region->save();
 
-        return (new Resources\Region($region))->additional(['meta' => [
-            'info' => $this->packageInfo,
+        return new Resources\Region($region)->additional(['meta' => [
+            'info' => $packageInfo,
         ]])->response($request);
     }
 
@@ -133,11 +137,20 @@ class RegionController extends Controller
         Requests\Region\IndexRequest $request
     ): JsonResponse|Resources\RegionCollection {
 
-        $user = $request->user();
+        $packageInfo = $this->packageInfo();
 
+        /**
+         * @var array{
+         *     sort: string|array<mixed>,
+         *     filter: array{
+         *         trash: string
+         *     },
+         *     perPage: int
+         * } $validated
+         */
         $validated = $request->validated();
 
-        $query = Region::addSelect(sprintf('%1$s.*', $this->packageInfo['table']));
+        $query = Region::addSelect(sprintf('%1$s.*', $packageInfo->table()));
 
         $query->sort($validated['sort'] ?? null);
 
@@ -171,7 +184,7 @@ class RegionController extends Controller
 
         $paginator->appends($validated);
 
-        return (new Resources\RegionCollection($paginator))->response($request);
+        return new Resources\RegionCollection($paginator)->response($request);
     }
 
     /**
@@ -184,16 +197,16 @@ class RegionController extends Controller
         Requests\Region\RestoreRequest $request
     ): JsonResponse|Resources\Region {
 
+        $packageInfo = $this->packageInfo();
+
         $user = $request->user();
 
-        if ($user?->id) {
-            $region->modified_by_id = $user->id;
-        }
+        $region->modified_by_id = $user?->id;
 
         $region->restore();
 
-        return (new Resources\Region($region))->additional(['meta' => [
-            'info' => $this->packageInfo,
+        return new Resources\Region($region)->additional(['meta' => [
+            'info' => $packageInfo,
         ]])->response($request);
     }
 
@@ -206,12 +219,15 @@ class RegionController extends Controller
         Region $region,
         Requests\Region\ShowRequest $request
     ): JsonResponse|Resources\Region {
-        return (new Resources\Region($region))->additional(['meta' => [
-            'info' => $this->packageInfo,
+
+        $packageInfo = $this->packageInfo();
+
+        return new Resources\Region($region)->additional(['meta' => [
+            'info' => $packageInfo,
         ]])->response($request);
     }
 
-   /**
+    /**
      * Store a newly created API Region resource in storage.
      *
      * @route POST /api/lead/regions playground.lead.api.regions.post
@@ -219,6 +235,9 @@ class RegionController extends Controller
     public function store(
         Requests\Region\StoreRequest $request
     ): Response|JsonResponse|Resources\Region {
+
+        $packageInfo = $this->packageInfo();
+
         $validated = $request->validated();
 
         $user = $request->user();
@@ -229,8 +248,8 @@ class RegionController extends Controller
 
         $region->save();
 
-        return (new Resources\Region($region))->additional(['meta' => [
-            'info' => $this->packageInfo,
+        return new Resources\Region($region)->additional(['meta' => [
+            'info' => $packageInfo,
         ]])->response($request)->setStatusCode(201);
     }
 
@@ -244,20 +263,18 @@ class RegionController extends Controller
         Requests\Region\UnlockRequest $request
     ): JsonResponse|Resources\Region {
 
-        $validated = $request->validated();
+        $packageInfo = $this->packageInfo();
 
         $user = $request->user();
 
         $region->locked = false;
 
-        if ($user?->id) {
-            $region->modified_by_id = $user->id;
-        }
+        $region->modified_by_id = $user?->id;
 
         $region->save();
 
-        return (new Resources\Region($region))->additional(['meta' => [
-            'info' => $this->packageInfo,
+        return new Resources\Region($region)->additional(['meta' => [
+            'info' => $packageInfo,
         ]])->response($request);
     }
 
@@ -271,18 +288,18 @@ class RegionController extends Controller
         Requests\Region\UpdateRequest $request
     ): JsonResponse {
 
+        $packageInfo = $this->packageInfo();
+
         $validated = $request->validated();
 
         $user = $request->user();
 
-        if ($user?->id) {
-            $region->modified_by_id = $user->id;
-        }
+        $region->modified_by_id = $user?->id;
 
         $region->update($validated);
 
-        return (new Resources\Region($region))->additional(['meta' => [
-            'info' => $this->packageInfo,
+        return new Resources\Region($region)->additional(['meta' => [
+            'info' => $packageInfo,
         ]])->response($request);
     }
 }

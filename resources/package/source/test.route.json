@@ -1,0 +1,22 @@
+{
+    "class": "SourceRouteTest",
+    "config": "playground-lead-api",
+    "extends": "",
+    "fqdn": "Tests/Feature/Playground/Lead/Api/SourceRouteTest",
+    "model": "Source",
+    "model_fqdn": "",
+    "module": "Lead",
+    "module_slug": "lead",
+    "name": "SourceRouteTest",
+    "namespace": "Tests/Feature/Playground/Lead/Api",
+    "organization": "Playground",
+    "package": "playground-lead-api",
+    "playground": true,
+    "suite": "feature",
+    "type": "playground-api-controller-model-user",
+    "uses": [],
+    "models": {
+        "Source": "resources/configurations/playground-lead/model.source.json"
+    },
+    "package_providers": []
+}

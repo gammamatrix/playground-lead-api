@@ -1,0 +1,17 @@
+{
+    "class": "TeammateCollection",
+    "config": "playground-lead-api",
+    "fqdn": "Playground/Lead/Api/Http/Resources/TeammateCollection",
+    "module": "Lead",
+    "module_slug": "lead",
+    "name": "TeammateCollection",
+    "namespace": "Playground/Lead/Api",
+    "organization": "Playground",
+    "package": "playground-lead-api",
+    "collection": true,
+    "model": "Teammate",
+    "model_fqdn": "Playground/Lead/Models/Teammate",
+    "model_slug": "teammate",
+    "type": "",
+    "models": []
+}

@@ -1,0 +1,17 @@
+{
+    "class": "RegionCollection",
+    "config": "playground-lead-api",
+    "fqdn": "Playground/Lead/Api/Http/Resources/RegionCollection",
+    "module": "Lead",
+    "module_slug": "lead",
+    "name": "RegionCollection",
+    "namespace": "Playground/Lead/Api",
+    "organization": "Playground",
+    "package": "playground-lead-api",
+    "collection": true,
+    "model": "Region",
+    "model_fqdn": "Playground/Lead/Models/Region",
+    "model_slug": "region",
+    "type": "",
+    "models": []
+}

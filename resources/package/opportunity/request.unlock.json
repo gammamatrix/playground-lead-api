@@ -1,0 +1,22 @@
+{
+    "class": "UnlockRequest",
+    "config": "playground-lead-api",
+    "fqdn": "Playground/Lead/Api/Http/Requests/Opportunity/Opportunity",
+    "model": "Opportunity",
+    "model_fqdn": "",
+    "module": "Lead",
+    "module_slug": "lead",
+    "name": "Opportunity",
+    "namespace": "Playground/Lead/Api",
+    "organization": "Playground",
+    "package": "playground-lead-api",
+    "abstract": false,
+    "pagination": false,
+    "playground": false,
+    "store": false,
+    "slug": false,
+    "type": "unlock",
+    "extends": "FormRequest",
+    "extends_use": "Playground/Lead/Api/Http/Requests/FormRequest",
+    "models": []
+}

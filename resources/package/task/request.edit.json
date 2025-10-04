@@ -1,0 +1,22 @@
+{
+    "class": "EditRequest",
+    "config": "playground-lead-api",
+    "fqdn": "Playground/Lead/Api/Http/Requests/Task/Task",
+    "model": "Task",
+    "model_fqdn": "",
+    "module": "Lead",
+    "module_slug": "lead",
+    "name": "Task",
+    "namespace": "Playground/Lead/Api",
+    "organization": "Playground",
+    "package": "playground-lead-api",
+    "abstract": false,
+    "pagination": false,
+    "playground": false,
+    "store": false,
+    "slug": false,
+    "type": "edit",
+    "extends": "FormRequest",
+    "extends_use": "Playground/Lead/Api/Http/Requests/FormRequest",
+    "models": []
+}

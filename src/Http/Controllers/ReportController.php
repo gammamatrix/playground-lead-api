@@ -1,14 +1,15 @@
 <?php
+
 /**
  * Playground
  */
 
 declare(strict_types=1);
+
 namespace Playground\Lead\Api\Http\Controllers;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
-use Illuminate\Support\Carbon;
 use Playground\Lead\Api\Http\Requests;
 use Playground\Lead\Api\Http\Resources;
 use Playground\Lead\Models\Report;
@@ -45,28 +46,31 @@ class ReportController extends Controller
         Requests\Report\CreateRequest $request
     ): JsonResponse|Resources\Report {
 
-        $validated = $request->validated();
+        $packageInfo = $this->packageInfo();
 
-        $user = $request->user();
+        $validated = $request->validated();
 
         $report = new Report($validated);
 
-        return (new Resources\Report($report))->additional(['meta' => [
-            'info' => $this->packageInfo,
+        return new Resources\Report($report)->additional(['meta' => [
+            'info' => $packageInfo,
         ]])->response($request);
     }
 
     /**
      * Edit the Report resource in storage.
      *
-     * @route GET /api/lead/reports/edit playground.lead.api.reports.edit
+     * @route GET /api/lead/reports/edit/{report} playground.lead.api.reports.edit
      */
     public function edit(
         Report $report,
         Requests\Report\EditRequest $request
     ): JsonResponse|Resources\Report {
-        return (new Resources\Report($report))->additional(['meta' => [
-            'info' => $this->packageInfo,
+
+        $packageInfo = $this->packageInfo();
+
+        return new Resources\Report($report)->additional(['meta' => [
+            'info' => $packageInfo,
         ]])->response($request);
     }
 
@@ -107,7 +111,7 @@ class ReportController extends Controller
         Requests\Report\LockRequest $request
     ): JsonResponse|Resources\Report {
 
-        $validated = $request->validated();
+        $packageInfo = $this->packageInfo();
 
         $user = $request->user();
 
@@ -119,8 +123,8 @@ class ReportController extends Controller
 
         $report->save();
 
-        return (new Resources\Report($report))->additional(['meta' => [
-            'info' => $this->packageInfo,
+        return new Resources\Report($report)->additional(['meta' => [
+            'info' => $packageInfo,
         ]])->response($request);
     }
 
@@ -133,11 +137,20 @@ class ReportController extends Controller
         Requests\Report\IndexRequest $request
     ): JsonResponse|Resources\ReportCollection {
 
-        $user = $request->user();
+        $packageInfo = $this->packageInfo();
 
+        /**
+         * @var array{
+         *     sort: string|array<mixed>,
+         *     filter: array{
+         *         trash: string
+         *     },
+         *     perPage: int
+         * } $validated
+         */
         $validated = $request->validated();
 
-        $query = Report::addSelect(sprintf('%1$s.*', $this->packageInfo['table']));
+        $query = Report::addSelect(sprintf('%1$s.*', $packageInfo->table()));
 
         $query->sort($validated['sort'] ?? null);
 
@@ -171,7 +184,7 @@ class ReportController extends Controller
 
         $paginator->appends($validated);
 
-        return (new Resources\ReportCollection($paginator))->response($request);
+        return new Resources\ReportCollection($paginator)->response($request);
     }
 
     /**
@@ -184,16 +197,16 @@ class ReportController extends Controller
         Requests\Report\RestoreRequest $request
     ): JsonResponse|Resources\Report {
 
+        $packageInfo = $this->packageInfo();
+
         $user = $request->user();
 
-        if ($user?->id) {
-            $report->modified_by_id = $user->id;
-        }
+        $report->modified_by_id = $user?->id;
 
         $report->restore();
 
-        return (new Resources\Report($report))->additional(['meta' => [
-            'info' => $this->packageInfo,
+        return new Resources\Report($report)->additional(['meta' => [
+            'info' => $packageInfo,
         ]])->response($request);
     }
 
@@ -206,12 +219,15 @@ class ReportController extends Controller
         Report $report,
         Requests\Report\ShowRequest $request
     ): JsonResponse|Resources\Report {
-        return (new Resources\Report($report))->additional(['meta' => [
-            'info' => $this->packageInfo,
+
+        $packageInfo = $this->packageInfo();
+
+        return new Resources\Report($report)->additional(['meta' => [
+            'info' => $packageInfo,
         ]])->response($request);
     }
 
-   /**
+    /**
      * Store a newly created API Report resource in storage.
      *
      * @route POST /api/lead/reports playground.lead.api.reports.post
@@ -219,6 +235,9 @@ class ReportController extends Controller
     public function store(
         Requests\Report\StoreRequest $request
     ): Response|JsonResponse|Resources\Report {
+
+        $packageInfo = $this->packageInfo();
+
         $validated = $request->validated();
 
         $user = $request->user();
@@ -229,8 +248,8 @@ class ReportController extends Controller
 
         $report->save();
 
-        return (new Resources\Report($report))->additional(['meta' => [
-            'info' => $this->packageInfo,
+        return new Resources\Report($report)->additional(['meta' => [
+            'info' => $packageInfo,
         ]])->response($request)->setStatusCode(201);
     }
 
@@ -244,20 +263,18 @@ class ReportController extends Controller
         Requests\Report\UnlockRequest $request
     ): JsonResponse|Resources\Report {
 
-        $validated = $request->validated();
+        $packageInfo = $this->packageInfo();
 
         $user = $request->user();
 
         $report->locked = false;
 
-        if ($user?->id) {
-            $report->modified_by_id = $user->id;
-        }
+        $report->modified_by_id = $user?->id;
 
         $report->save();
 
-        return (new Resources\Report($report))->additional(['meta' => [
-            'info' => $this->packageInfo,
+        return new Resources\Report($report)->additional(['meta' => [
+            'info' => $packageInfo,
         ]])->response($request);
     }
 
@@ -271,18 +288,18 @@ class ReportController extends Controller
         Requests\Report\UpdateRequest $request
     ): JsonResponse {
 
+        $packageInfo = $this->packageInfo();
+
         $validated = $request->validated();
 
         $user = $request->user();
 
-        if ($user?->id) {
-            $report->modified_by_id = $user->id;
-        }
+        $report->modified_by_id = $user?->id;
 
         $report->update($validated);
 
-        return (new Resources\Report($report))->additional(['meta' => [
-            'info' => $this->packageInfo,
+        return new Resources\Report($report)->additional(['meta' => [
+            'info' => $packageInfo,
         ]])->response($request);
     }
 }

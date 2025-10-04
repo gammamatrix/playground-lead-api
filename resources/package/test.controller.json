@@ -1,0 +1,23 @@
+{
+    "class": "TestCase",
+    "config": "playground-lead-api",
+    "extends": "",
+    "fqdn": "Tests/Feature/Playground/Lead/Api/Http/Controllers/TestCase",
+    "model": "",
+    "model_fqdn": "",
+    "module": "Lead",
+    "module_slug": "lead",
+    "name": "ControllerTestCase",
+    "namespace": "Tests/Feature/Playground/Lead/Api/Http/Controllers",
+    "organization": "Playground",
+    "package": "playground-lead-api",
+    "playground": true,
+    "suite": "feature",
+    "type": "playground-api-controller-test-case",
+    "uses": [
+        "Playground/Test/Feature/Http/Controllers/Resource",
+        "Tests/Feature/Playground/Lead/Api/TestCase as BaseTestCase"
+    ],
+    "models": [],
+    "package_providers": []
+}

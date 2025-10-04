@@ -1,0 +1,22 @@
+{
+    "class": "LockRequest",
+    "config": "playground-lead-api",
+    "fqdn": "Playground/Lead/Api/Http/Requests/Teammate/Teammate",
+    "model": "Teammate",
+    "model_fqdn": "",
+    "module": "Lead",
+    "module_slug": "lead",
+    "name": "Teammate",
+    "namespace": "Playground/Lead/Api",
+    "organization": "Playground",
+    "package": "playground-lead-api",
+    "abstract": false,
+    "pagination": false,
+    "playground": false,
+    "store": false,
+    "slug": false,
+    "type": "lock",
+    "extends": "FormRequest",
+    "extends_use": "Playground/Lead/Api/Http/Requests/FormRequest",
+    "models": []
+}

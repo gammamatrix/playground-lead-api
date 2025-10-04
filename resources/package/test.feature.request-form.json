@@ -1,0 +1,23 @@
+{
+    "class": "InstanceTest",
+    "config": "playground-lead-api",
+    "extends": "RequestCase",
+    "fqdn": "Tests/Feature/Playground/Lead/Api/InstanceTest",
+    "model": "",
+    "model_fqdn": "",
+    "module": "Lead",
+    "module_slug": "lead",
+    "name": "FormRequestRequestTest",
+    "namespace": "Tests/Feature/Playground/Lead/Api",
+    "organization": "Playground",
+    "package": "playground-lead-api",
+    "playground": true,
+    "suite": "feature",
+    "type": "playground-request-form",
+    "uses": [
+        "Tests/Unit/Playground/Lead/Api/PackageProviders",
+        "Playground/Test/Unit/Http/Requests/RequestCase"
+    ],
+    "models": [],
+    "package_providers": []
+}

@@ -1,0 +1,22 @@
+{
+    "class": "IndexRequest",
+    "config": "playground-lead-api",
+    "fqdn": "Playground/Lead/Api/Http/Requests/Campaign/Campaign",
+    "model": "Campaign",
+    "model_fqdn": "",
+    "module": "Lead",
+    "module_slug": "lead",
+    "name": "Campaign",
+    "namespace": "Playground/Lead/Api",
+    "organization": "Playground",
+    "package": "playground-lead-api",
+    "abstract": false,
+    "pagination": false,
+    "playground": false,
+    "store": false,
+    "slug": false,
+    "type": "index",
+    "extends": "BaseIndexRequest",
+    "extends_use": "Playground/Http/Requests/IndexRequest as BaseIndexRequest",
+    "models": []
+}

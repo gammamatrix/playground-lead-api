@@ -15,23 +15,28 @@
     "withFactories": false,
     "withMigrations": false,
     "withModels": false,
+    "withOpenAPI": true,
     "withPolicies": true,
     "withRequests": true,
     "withRoutes": true,
-    "withSwagger": true,
     "withTests": true,
+    "withTranslations": false,
     "playground": true,
     "revision": false,
+    "docs_name": "Playground: Lead API at Read the Docs: Playground Documentation",
+    "docs_url": "https://gammamatrix-playground.readthedocs.io/en/develop/built-components/lead.html",
     "package_name": "Playground: Lead API",
-    "package_description": "Playground: Provides an API, without a UI for interacting with Playground Lead, a Lead System for Laravel applications.",
+    "model_package": "playground-lead",
+    "model_package_name": "Playground: Lead",
+    "package_description": "Playground: Provides an API, without a UI for interacting with Playground Lead, a Playground Campaign and Lead Sales Management tool for Laravel applications.",
     "package_homepage": "https://github.com/gammamatrix/playground-lead-api",
-    "package_keywords": [
-        "gammamatrix",
-        "laravel",
-        "lead",
-        "playground"
-    ],
     "package_license": "MIT",
+    "packagist": "gammamatrix/playground-lead-api",
+    "postman_collection": "",
+    "postman_url": "",
+    "service_provider": "",
+    "type": "playground-api",
+    "version": "74.0.0",
     "package_authors": [
         {
             "name": "Jeremy Postlethwaite",
@@ -39,33 +44,69 @@
             "role": "Developer"
         }
     ],
-    "package_require": {
-        "php": "^8.2",
-        "gammamatrix/playground": "*",
-        "gammamatrix/playground-auth": "*",
-        "gammamatrix/playground-http": "*",
-        "gammamatrix/playground-lead": "*"
-    },
-    "package_require_dev": {
-        "gammamatrix/playground-test": "*",
-        "laravel/sanctum": "^4.0"
-    },
-    "package_suggest": [],
     "package_autoload_psr4": [],
     "package_autoload_dev_psr4": [],
-    "package_providers": [],
+    "package_keywords": [
+        "gammamatrix",
+        "laravel",
+        "lead",
+        "campaign",
+        "opportunity",
+        "opportunities",
+        "sales",
+        "playground"
+    ],
     "package_laravel_providers": [
         "Playground/Lead/Api/ServiceProvider"
     ],
-    "packagist": "gammamatrix/playground-lead-api",
-    "controllers": [],
+    "package_providers": [],
+    "package_require": {
+        "php": "^8.4",
+        "gammamatrix/playground": "*",
+        "gammamatrix/playground-auth": "*",
+        "gammamatrix/playground-http": "*",
+        "gammamatrix/playground-lead": "*",
+        "illuminate/support": "^12.0"
+    },
+    "package_require_dev": {
+        "gammamatrix/playground-test": "*",
+        "laravel/sanctum": "^4.0",
+        "illuminate/testing": "^12.0"
+    },
+    "package_suggest": [],
+    "controllers": [
+        "resources/package/controller.base.json",
+        "resources/package/campaign/controller.json",
+        "resources/package/goal/controller.json",
+        "resources/package/lead/controller.json",
+        "resources/package/opportunity/controller.json",
+        "resources/package/plan/controller.json",
+        "resources/package/region/controller.json",
+        "resources/package/report/controller.json",
+        "resources/package/source/controller.json",
+        "resources/package/task/controller.json",
+        "resources/package/team/controller.json",
+        "resources/package/teammate/controller.json"
+    ],
     "models": [],
     "policies": [],
-    "requests": [],
-    "routes": [],
+    "requests": [
+        "resources/package/form.request.json"
+    ],
+    "routes": {
+        "campaigns": "resources/package/campaign/route.json",
+        "goals": "resources/package/goal/route.json",
+        "leads": "resources/package/lead/route.json",
+        "opportunities": "resources/package/opportunity/route.json",
+        "plans": "resources/package/plan/route.json",
+        "regions": "resources/package/region/route.json",
+        "reports": "resources/package/report/route.json",
+        "sources": "resources/package/source/route.json",
+        "tasks": "resources/package/task/route.json",
+        "teams": "resources/package/team/route.json",
+        "teammates": "resources/package/teammate/route.json"
+    },
     "transformers": [],
-    "uses": [],
-    "service_provider": "",
-    "type": "playground-api",
-    "version": "73.0.0"
+    "translations": [],
+    "uses": []
 }

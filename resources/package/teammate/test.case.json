@@ -1,0 +1,22 @@
+{
+    "class": "TeammateTestCase",
+    "config": "playground-lead-api",
+    "extends": "TestCase",
+    "fqdn": "Tests/Feature/Playground/Lead/Api/Http/Controllers/TeammateTestCase",
+    "model": "Teammate",
+    "model_fqdn": "",
+    "module": "Lead",
+    "module_slug": "lead",
+    "name": "TeammateTestCase",
+    "namespace": "Tests/Feature/Playground/Lead/Api/Http/Controllers",
+    "organization": "Playground",
+    "package": "playground-lead-api",
+    "playground": true,
+    "suite": "feature",
+    "type": "playground-api-controller-model-case",
+    "uses": [],
+    "models": {
+        "Teammate": "resources/configurations/playground-lead/model.teammate.json"
+    },
+    "package_providers": []
+}

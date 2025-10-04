@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Playground
  */
@@ -62,7 +63,7 @@ Route::group([
     Route::get('/{region}', [
         'as' => 'playground.lead.api.regions.show',
         'uses' => 'RegionController@show',
-    ])->whereUuid('region')->can('detail', 'region');
+    ])->whereUuid('region')->can('detail', 'region')->withTrashed();
 
     // API
 

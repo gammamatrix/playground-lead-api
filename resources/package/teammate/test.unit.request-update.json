@@ -1,0 +1,23 @@
+{
+    "class": "UpdateRequestTest",
+    "config": "playground-lead-api",
+    "extends": "RequestCase",
+    "fqdn": "Tests/Unit/Playground/Lead/Api/UpdateRequestTest",
+    "model": "Teammate",
+    "model_fqdn": "",
+    "module": "Lead",
+    "module_slug": "lead",
+    "name": "UpdateRequestTest",
+    "namespace": "Tests/Unit/Playground/Lead/Api",
+    "organization": "Playground",
+    "package": "playground-lead-api",
+    "playground": true,
+    "suite": "unit",
+    "type": "playground-request-model-update",
+    "uses": [
+        "Tests/Unit/Playground/Lead/Api/PackageProviders",
+        "Playground/Test/Unit/Http/Requests/RequestCase"
+    ],
+    "models": [],
+    "package_providers": []
+}

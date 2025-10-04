@@ -1,0 +1,22 @@
+{
+    "class": "TaskTestCase",
+    "config": "playground-lead-api",
+    "extends": "TestCase",
+    "fqdn": "Tests/Feature/Playground/Lead/Api/Http/Controllers/TaskTestCase",
+    "model": "Task",
+    "model_fqdn": "",
+    "module": "Lead",
+    "module_slug": "lead",
+    "name": "TaskTestCase",
+    "namespace": "Tests/Feature/Playground/Lead/Api/Http/Controllers",
+    "organization": "Playground",
+    "package": "playground-lead-api",
+    "playground": true,
+    "suite": "feature",
+    "type": "playground-api-controller-model-case",
+    "uses": [],
+    "models": {
+        "Task": "resources/configurations/playground-lead/model.task.json"
+    },
+    "package_providers": []
+}

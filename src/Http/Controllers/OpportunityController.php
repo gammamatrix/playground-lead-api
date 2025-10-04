@@ -1,14 +1,15 @@
 <?php
+
 /**
  * Playground
  */
 
 declare(strict_types=1);
+
 namespace Playground\Lead\Api\Http\Controllers;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
-use Illuminate\Support\Carbon;
 use Playground\Lead\Api\Http\Requests;
 use Playground\Lead\Api\Http\Resources;
 use Playground\Lead\Models\Opportunity;
@@ -45,28 +46,31 @@ class OpportunityController extends Controller
         Requests\Opportunity\CreateRequest $request
     ): JsonResponse|Resources\Opportunity {
 
-        $validated = $request->validated();
+        $packageInfo = $this->packageInfo();
 
-        $user = $request->user();
+        $validated = $request->validated();
 
         $opportunity = new Opportunity($validated);
 
-        return (new Resources\Opportunity($opportunity))->additional(['meta' => [
-            'info' => $this->packageInfo,
+        return new Resources\Opportunity($opportunity)->additional(['meta' => [
+            'info' => $packageInfo,
         ]])->response($request);
     }
 
     /**
      * Edit the Opportunity resource in storage.
      *
-     * @route GET /api/lead/opportunities/edit playground.lead.api.opportunities.edit
+     * @route GET /api/lead/opportunities/edit/{opportunity} playground.lead.api.opportunities.edit
      */
     public function edit(
         Opportunity $opportunity,
         Requests\Opportunity\EditRequest $request
     ): JsonResponse|Resources\Opportunity {
-        return (new Resources\Opportunity($opportunity))->additional(['meta' => [
-            'info' => $this->packageInfo,
+
+        $packageInfo = $this->packageInfo();
+
+        return new Resources\Opportunity($opportunity)->additional(['meta' => [
+            'info' => $packageInfo,
         ]])->response($request);
     }
 
@@ -107,7 +111,7 @@ class OpportunityController extends Controller
         Requests\Opportunity\LockRequest $request
     ): JsonResponse|Resources\Opportunity {
 
-        $validated = $request->validated();
+        $packageInfo = $this->packageInfo();
 
         $user = $request->user();
 
@@ -119,8 +123,8 @@ class OpportunityController extends Controller
 
         $opportunity->save();
 
-        return (new Resources\Opportunity($opportunity))->additional(['meta' => [
-            'info' => $this->packageInfo,
+        return new Resources\Opportunity($opportunity)->additional(['meta' => [
+            'info' => $packageInfo,
         ]])->response($request);
     }
 
@@ -133,11 +137,20 @@ class OpportunityController extends Controller
         Requests\Opportunity\IndexRequest $request
     ): JsonResponse|Resources\OpportunityCollection {
 
-        $user = $request->user();
+        $packageInfo = $this->packageInfo();
 
+        /**
+         * @var array{
+         *     sort: string|array<mixed>,
+         *     filter: array{
+         *         trash: string
+         *     },
+         *     perPage: int
+         * } $validated
+         */
         $validated = $request->validated();
 
-        $query = Opportunity::addSelect(sprintf('%1$s.*', $this->packageInfo['table']));
+        $query = Opportunity::addSelect(sprintf('%1$s.*', $packageInfo->table()));
 
         $query->sort($validated['sort'] ?? null);
 
@@ -171,7 +184,7 @@ class OpportunityController extends Controller
 
         $paginator->appends($validated);
 
-        return (new Resources\OpportunityCollection($paginator))->response($request);
+        return new Resources\OpportunityCollection($paginator)->response($request);
     }
 
     /**
@@ -184,16 +197,16 @@ class OpportunityController extends Controller
         Requests\Opportunity\RestoreRequest $request
     ): JsonResponse|Resources\Opportunity {
 
+        $packageInfo = $this->packageInfo();
+
         $user = $request->user();
 
-        if ($user?->id) {
-            $opportunity->modified_by_id = $user->id;
-        }
+        $opportunity->modified_by_id = $user?->id;
 
         $opportunity->restore();
 
-        return (new Resources\Opportunity($opportunity))->additional(['meta' => [
-            'info' => $this->packageInfo,
+        return new Resources\Opportunity($opportunity)->additional(['meta' => [
+            'info' => $packageInfo,
         ]])->response($request);
     }
 
@@ -206,12 +219,15 @@ class OpportunityController extends Controller
         Opportunity $opportunity,
         Requests\Opportunity\ShowRequest $request
     ): JsonResponse|Resources\Opportunity {
-        return (new Resources\Opportunity($opportunity))->additional(['meta' => [
-            'info' => $this->packageInfo,
+
+        $packageInfo = $this->packageInfo();
+
+        return new Resources\Opportunity($opportunity)->additional(['meta' => [
+            'info' => $packageInfo,
         ]])->response($request);
     }
 
-   /**
+    /**
      * Store a newly created API Opportunity resource in storage.
      *
      * @route POST /api/lead/opportunities playground.lead.api.opportunities.post
@@ -219,6 +235,9 @@ class OpportunityController extends Controller
     public function store(
         Requests\Opportunity\StoreRequest $request
     ): Response|JsonResponse|Resources\Opportunity {
+
+        $packageInfo = $this->packageInfo();
+
         $validated = $request->validated();
 
         $user = $request->user();
@@ -229,8 +248,8 @@ class OpportunityController extends Controller
 
         $opportunity->save();
 
-        return (new Resources\Opportunity($opportunity))->additional(['meta' => [
-            'info' => $this->packageInfo,
+        return new Resources\Opportunity($opportunity)->additional(['meta' => [
+            'info' => $packageInfo,
         ]])->response($request)->setStatusCode(201);
     }
 
@@ -244,20 +263,18 @@ class OpportunityController extends Controller
         Requests\Opportunity\UnlockRequest $request
     ): JsonResponse|Resources\Opportunity {
 
-        $validated = $request->validated();
+        $packageInfo = $this->packageInfo();
 
         $user = $request->user();
 
         $opportunity->locked = false;
 
-        if ($user?->id) {
-            $opportunity->modified_by_id = $user->id;
-        }
+        $opportunity->modified_by_id = $user?->id;
 
         $opportunity->save();
 
-        return (new Resources\Opportunity($opportunity))->additional(['meta' => [
-            'info' => $this->packageInfo,
+        return new Resources\Opportunity($opportunity)->additional(['meta' => [
+            'info' => $packageInfo,
         ]])->response($request);
     }
 
@@ -271,18 +288,18 @@ class OpportunityController extends Controller
         Requests\Opportunity\UpdateRequest $request
     ): JsonResponse {
 
+        $packageInfo = $this->packageInfo();
+
         $validated = $request->validated();
 
         $user = $request->user();
 
-        if ($user?->id) {
-            $opportunity->modified_by_id = $user->id;
-        }
+        $opportunity->modified_by_id = $user?->id;
 
         $opportunity->update($validated);
 
-        return (new Resources\Opportunity($opportunity))->additional(['meta' => [
-            'info' => $this->packageInfo,
+        return new Resources\Opportunity($opportunity)->additional(['meta' => [
+            'info' => $packageInfo,
         ]])->response($request);
     }
 }

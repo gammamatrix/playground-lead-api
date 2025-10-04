@@ -1,0 +1,17 @@
+{
+    "class": "ReportCollection",
+    "config": "playground-lead-api",
+    "fqdn": "Playground/Lead/Api/Http/Resources/ReportCollection",
+    "module": "Lead",
+    "module_slug": "lead",
+    "name": "ReportCollection",
+    "namespace": "Playground/Lead/Api",
+    "organization": "Playground",
+    "package": "playground-lead-api",
+    "collection": true,
+    "model": "Report",
+    "model_fqdn": "Playground/Lead/Models/Report",
+    "model_slug": "report",
+    "type": "",
+    "models": []
+}

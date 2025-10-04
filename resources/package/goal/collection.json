@@ -1,0 +1,17 @@
+{
+    "class": "GoalCollection",
+    "config": "playground-lead-api",
+    "fqdn": "Playground/Lead/Api/Http/Resources/GoalCollection",
+    "module": "Lead",
+    "module_slug": "lead",
+    "name": "GoalCollection",
+    "namespace": "Playground/Lead/Api",
+    "organization": "Playground",
+    "package": "playground-lead-api",
+    "collection": true,
+    "model": "Goal",
+    "model_fqdn": "Playground/Lead/Models/Goal",
+    "model_slug": "goal",
+    "type": "",
+    "models": []
+}

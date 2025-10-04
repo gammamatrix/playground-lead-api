@@ -1,0 +1,22 @@
+{
+    "class": "TaskRouteTest",
+    "config": "playground-lead-api",
+    "extends": "",
+    "fqdn": "Tests/Feature/Playground/Lead/Api/TaskRouteTest",
+    "model": "Task",
+    "model_fqdn": "",
+    "module": "Lead",
+    "module_slug": "lead",
+    "name": "TaskRouteTest",
+    "namespace": "Tests/Feature/Playground/Lead/Api",
+    "organization": "Playground",
+    "package": "playground-lead-api",
+    "playground": true,
+    "suite": "feature",
+    "type": "playground-api-controller-model-user",
+    "uses": [],
+    "models": {
+        "Task": "resources/configurations/playground-lead/model.task.json"
+    },
+    "package_providers": []
+}

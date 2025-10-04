@@ -1,0 +1,22 @@
+{
+    "class": "TeamTestCase",
+    "config": "playground-lead-api",
+    "extends": "TestCase",
+    "fqdn": "Tests/Feature/Playground/Lead/Api/Http/Controllers/TeamTestCase",
+    "model": "Team",
+    "model_fqdn": "",
+    "module": "Lead",
+    "module_slug": "lead",
+    "name": "TeamTestCase",
+    "namespace": "Tests/Feature/Playground/Lead/Api/Http/Controllers",
+    "organization": "Playground",
+    "package": "playground-lead-api",
+    "playground": true,
+    "suite": "feature",
+    "type": "playground-api-controller-model-case",
+    "uses": [],
+    "models": {
+        "Team": "resources/configurations/playground-lead/model.team.json"
+    },
+    "package_providers": []
+}

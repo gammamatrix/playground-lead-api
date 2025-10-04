@@ -1,0 +1,28 @@
+{
+    "class": "PackageProviders",
+    "config": "playground-lead-api",
+    "extends": "",
+    "fqdn": "Tests/Unit/Playground/Lead/Api/PackageProviders",
+    "model": "",
+    "model_fqdn": "",
+    "module": "Lead",
+    "module_slug": "lead",
+    "name": "PackageProviders",
+    "namespace": "Tests/Unit/Playground/Lead/Api",
+    "organization": "Playground",
+    "package": "playground-lead-api",
+    "playground": true,
+    "suite": "unit",
+    "type": "providers-api",
+    "uses": [],
+    "models": [],
+    "package_providers": [
+        "\\Playground\\Test\\ServiceProvider::class",
+        "\\Playground\\ServiceProvider::class",
+        "\\Playground\\Auth\\ServiceProvider::class",
+        "\\Playground\\Http\\ServiceProvider::class",
+        "\\Playground\\Lead\\ServiceProvider::class",
+        "\\Playground\\Lead\\Api\\ServiceProvider::class",
+        "\\Laravel\\Sanctum\\SanctumServiceProvider::class"
+    ]
+}

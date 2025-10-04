@@ -1,0 +1,22 @@
+{
+    "class": "CreateRequest",
+    "config": "playground-lead-api",
+    "fqdn": "Playground/Lead/Api/Http/Requests/Team/Team",
+    "model": "Team",
+    "model_fqdn": "",
+    "module": "Lead",
+    "module_slug": "lead",
+    "name": "Team",
+    "namespace": "Playground/Lead/Api",
+    "organization": "Playground",
+    "package": "playground-lead-api",
+    "abstract": false,
+    "pagination": false,
+    "playground": false,
+    "store": false,
+    "slug": false,
+    "type": "create",
+    "extends": "FormRequest",
+    "extends_use": "Playground/Lead/Api/Http/Requests/FormRequest",
+    "models": []
+}

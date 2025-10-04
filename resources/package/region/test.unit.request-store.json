@@ -1,0 +1,23 @@
+{
+    "class": "StoreRequestTest",
+    "config": "playground-lead-api",
+    "extends": "RequestCase",
+    "fqdn": "Tests/Unit/Playground/Lead/Api/StoreRequestTest",
+    "model": "Region",
+    "model_fqdn": "",
+    "module": "Lead",
+    "module_slug": "lead",
+    "name": "StoreRequestTest",
+    "namespace": "Tests/Unit/Playground/Lead/Api",
+    "organization": "Playground",
+    "package": "playground-lead-api",
+    "playground": true,
+    "suite": "unit",
+    "type": "playground-request-model-store",
+    "uses": [
+        "Tests/Unit/Playground/Lead/Api/PackageProviders",
+        "Playground/Test/Unit/Http/Requests/RequestCase"
+    ],
+    "models": [],
+    "package_providers": []
+}

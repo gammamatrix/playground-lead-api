@@ -1,0 +1,22 @@
+{
+    "class": "PlanRouteTest",
+    "config": "playground-lead-api",
+    "extends": "",
+    "fqdn": "Tests/Feature/Playground/Lead/Api/PlanRouteTest",
+    "model": "Plan",
+    "model_fqdn": "",
+    "module": "Lead",
+    "module_slug": "lead",
+    "name": "PlanRouteTest",
+    "namespace": "Tests/Feature/Playground/Lead/Api",
+    "organization": "Playground",
+    "package": "playground-lead-api",
+    "playground": true,
+    "suite": "feature",
+    "type": "playground-api-controller-model-user",
+    "uses": [],
+    "models": {
+        "Plan": "resources/configurations/playground-lead/model.plan.json"
+    },
+    "package_providers": []
+}

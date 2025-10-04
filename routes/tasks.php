@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Playground
  */
@@ -62,7 +63,7 @@ Route::group([
     Route::get('/{task}', [
         'as' => 'playground.lead.api.tasks.show',
         'uses' => 'TaskController@show',
-    ])->whereUuid('task')->can('detail', 'task');
+    ])->whereUuid('task')->can('detail', 'task')->withTrashed();
 
     // API
 

@@ -1,0 +1,23 @@
+{
+    "class": "PolicyTest",
+    "config": "playground-lead-api",
+    "extends": "",
+    "fqdn": "Tests/Unit/Playground/Lead/Api/Policies/SourcePolicy/PolicyTest",
+    "model": "Source",
+    "model_fqdn": "",
+    "module": "Lead",
+    "module_slug": "lead",
+    "name": "PolicyTest",
+    "namespace": "Tests/Unit/Playground/Lead/Api/Policies/SourcePolicy",
+    "organization": "Playground",
+    "package": "playground-lead-api",
+    "playground": true,
+    "suite": "unit",
+    "type": "policy",
+    "uses": [
+        "Tests/Unit/Playground/Lead/Api/TestCase",
+        "Playground/Lead/Api/Policies/SourcePolicy"
+    ],
+    "models": [],
+    "package_providers": []
+}

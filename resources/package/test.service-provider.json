@@ -1,0 +1,20 @@
+{
+    "class": "InstanceTest",
+    "config": "playground-lead-api",
+    "extends": "",
+    "fqdn": "Tests/Unit/Playground/Lead/Api/ServiceProvider/InstanceTest",
+    "model": "",
+    "model_fqdn": "",
+    "module": "Lead",
+    "module_slug": "lead",
+    "name": "InstanceTest",
+    "namespace": "Tests/Unit/Playground/Lead/Api/ServiceProvider",
+    "organization": "Playground",
+    "package": "playground-lead-api",
+    "playground": true,
+    "suite": "unit",
+    "type": "playground-service-provider-policies",
+    "uses": [],
+    "models": [],
+    "package_providers": []
+}

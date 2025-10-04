@@ -1,14 +1,15 @@
 <?php
+
 /**
  * Playground
  */
 
 declare(strict_types=1);
+
 namespace Playground\Lead\Api\Http\Controllers;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
-use Illuminate\Support\Carbon;
 use Playground\Lead\Api\Http\Requests;
 use Playground\Lead\Api\Http\Resources;
 use Playground\Lead\Models\Plan;
@@ -45,28 +46,31 @@ class PlanController extends Controller
         Requests\Plan\CreateRequest $request
     ): JsonResponse|Resources\Plan {
 
-        $validated = $request->validated();
+        $packageInfo = $this->packageInfo();
 
-        $user = $request->user();
+        $validated = $request->validated();
 
         $plan = new Plan($validated);
 
-        return (new Resources\Plan($plan))->additional(['meta' => [
-            'info' => $this->packageInfo,
+        return new Resources\Plan($plan)->additional(['meta' => [
+            'info' => $packageInfo,
         ]])->response($request);
     }
 
     /**
      * Edit the Plan resource in storage.
      *
-     * @route GET /api/lead/plans/edit playground.lead.api.plans.edit
+     * @route GET /api/lead/plans/edit/{plan} playground.lead.api.plans.edit
      */
     public function edit(
         Plan $plan,
         Requests\Plan\EditRequest $request
     ): JsonResponse|Resources\Plan {
-        return (new Resources\Plan($plan))->additional(['meta' => [
-            'info' => $this->packageInfo,
+
+        $packageInfo = $this->packageInfo();
+
+        return new Resources\Plan($plan)->additional(['meta' => [
+            'info' => $packageInfo,
         ]])->response($request);
     }
 
@@ -107,7 +111,7 @@ class PlanController extends Controller
         Requests\Plan\LockRequest $request
     ): JsonResponse|Resources\Plan {
 
-        $validated = $request->validated();
+        $packageInfo = $this->packageInfo();
 
         $user = $request->user();
 
@@ -119,8 +123,8 @@ class PlanController extends Controller
 
         $plan->save();
 
-        return (new Resources\Plan($plan))->additional(['meta' => [
-            'info' => $this->packageInfo,
+        return new Resources\Plan($plan)->additional(['meta' => [
+            'info' => $packageInfo,
         ]])->response($request);
     }
 
@@ -133,11 +137,20 @@ class PlanController extends Controller
         Requests\Plan\IndexRequest $request
     ): JsonResponse|Resources\PlanCollection {
 
-        $user = $request->user();
+        $packageInfo = $this->packageInfo();
 
+        /**
+         * @var array{
+         *     sort: string|array<mixed>,
+         *     filter: array{
+         *         trash: string
+         *     },
+         *     perPage: int
+         * } $validated
+         */
         $validated = $request->validated();
 
-        $query = Plan::addSelect(sprintf('%1$s.*', $this->packageInfo['table']));
+        $query = Plan::addSelect(sprintf('%1$s.*', $packageInfo->table()));
 
         $query->sort($validated['sort'] ?? null);
 
@@ -171,7 +184,7 @@ class PlanController extends Controller
 
         $paginator->appends($validated);
 
-        return (new Resources\PlanCollection($paginator))->response($request);
+        return new Resources\PlanCollection($paginator)->response($request);
     }
 
     /**
@@ -184,16 +197,16 @@ class PlanController extends Controller
         Requests\Plan\RestoreRequest $request
     ): JsonResponse|Resources\Plan {
 
+        $packageInfo = $this->packageInfo();
+
         $user = $request->user();
 
-        if ($user?->id) {
-            $plan->modified_by_id = $user->id;
-        }
+        $plan->modified_by_id = $user?->id;
 
         $plan->restore();
 
-        return (new Resources\Plan($plan))->additional(['meta' => [
-            'info' => $this->packageInfo,
+        return new Resources\Plan($plan)->additional(['meta' => [
+            'info' => $packageInfo,
         ]])->response($request);
     }
 
@@ -206,12 +219,15 @@ class PlanController extends Controller
         Plan $plan,
         Requests\Plan\ShowRequest $request
     ): JsonResponse|Resources\Plan {
-        return (new Resources\Plan($plan))->additional(['meta' => [
-            'info' => $this->packageInfo,
+
+        $packageInfo = $this->packageInfo();
+
+        return new Resources\Plan($plan)->additional(['meta' => [
+            'info' => $packageInfo,
         ]])->response($request);
     }
 
-   /**
+    /**
      * Store a newly created API Plan resource in storage.
      *
      * @route POST /api/lead/plans playground.lead.api.plans.post
@@ -219,6 +235,9 @@ class PlanController extends Controller
     public function store(
         Requests\Plan\StoreRequest $request
     ): Response|JsonResponse|Resources\Plan {
+
+        $packageInfo = $this->packageInfo();
+
         $validated = $request->validated();
 
         $user = $request->user();
@@ -229,8 +248,8 @@ class PlanController extends Controller
 
         $plan->save();
 
-        return (new Resources\Plan($plan))->additional(['meta' => [
-            'info' => $this->packageInfo,
+        return new Resources\Plan($plan)->additional(['meta' => [
+            'info' => $packageInfo,
         ]])->response($request)->setStatusCode(201);
     }
 
@@ -244,20 +263,18 @@ class PlanController extends Controller
         Requests\Plan\UnlockRequest $request
     ): JsonResponse|Resources\Plan {
 
-        $validated = $request->validated();
+        $packageInfo = $this->packageInfo();
 
         $user = $request->user();
 
         $plan->locked = false;
 
-        if ($user?->id) {
-            $plan->modified_by_id = $user->id;
-        }
+        $plan->modified_by_id = $user?->id;
 
         $plan->save();
 
-        return (new Resources\Plan($plan))->additional(['meta' => [
-            'info' => $this->packageInfo,
+        return new Resources\Plan($plan)->additional(['meta' => [
+            'info' => $packageInfo,
         ]])->response($request);
     }
 
@@ -271,18 +288,18 @@ class PlanController extends Controller
         Requests\Plan\UpdateRequest $request
     ): JsonResponse {
 
+        $packageInfo = $this->packageInfo();
+
         $validated = $request->validated();
 
         $user = $request->user();
 
-        if ($user?->id) {
-            $plan->modified_by_id = $user->id;
-        }
+        $plan->modified_by_id = $user?->id;
 
         $plan->update($validated);
 
-        return (new Resources\Plan($plan))->additional(['meta' => [
-            'info' => $this->packageInfo,
+        return new Resources\Plan($plan)->additional(['meta' => [
+            'info' => $packageInfo,
         ]])->response($request);
     }
 }

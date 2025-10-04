@@ -1,14 +1,15 @@
 <?php
+
 /**
  * Playground
  */
 
 declare(strict_types=1);
+
 namespace Playground\Lead\Api\Http\Controllers;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
-use Illuminate\Support\Carbon;
 use Playground\Lead\Api\Http\Requests;
 use Playground\Lead\Api\Http\Resources;
 use Playground\Lead\Models\Campaign;
@@ -45,28 +46,31 @@ class CampaignController extends Controller
         Requests\Campaign\CreateRequest $request
     ): JsonResponse|Resources\Campaign {
 
-        $validated = $request->validated();
+        $packageInfo = $this->packageInfo();
 
-        $user = $request->user();
+        $validated = $request->validated();
 
         $campaign = new Campaign($validated);
 
-        return (new Resources\Campaign($campaign))->additional(['meta' => [
-            'info' => $this->packageInfo,
+        return new Resources\Campaign($campaign)->additional(['meta' => [
+            'info' => $packageInfo,
         ]])->response($request);
     }
 
     /**
      * Edit the Campaign resource in storage.
      *
-     * @route GET /api/lead/campaigns/edit playground.lead.api.campaigns.edit
+     * @route GET /api/lead/campaigns/edit/{campaign} playground.lead.api.campaigns.edit
      */
     public function edit(
         Campaign $campaign,
         Requests\Campaign\EditRequest $request
     ): JsonResponse|Resources\Campaign {
-        return (new Resources\Campaign($campaign))->additional(['meta' => [
-            'info' => $this->packageInfo,
+
+        $packageInfo = $this->packageInfo();
+
+        return new Resources\Campaign($campaign)->additional(['meta' => [
+            'info' => $packageInfo,
         ]])->response($request);
     }
 
@@ -107,7 +111,7 @@ class CampaignController extends Controller
         Requests\Campaign\LockRequest $request
     ): JsonResponse|Resources\Campaign {
 
-        $validated = $request->validated();
+        $packageInfo = $this->packageInfo();
 
         $user = $request->user();
 
@@ -119,8 +123,8 @@ class CampaignController extends Controller
 
         $campaign->save();
 
-        return (new Resources\Campaign($campaign))->additional(['meta' => [
-            'info' => $this->packageInfo,
+        return new Resources\Campaign($campaign)->additional(['meta' => [
+            'info' => $packageInfo,
         ]])->response($request);
     }
 
@@ -133,11 +137,20 @@ class CampaignController extends Controller
         Requests\Campaign\IndexRequest $request
     ): JsonResponse|Resources\CampaignCollection {
 
-        $user = $request->user();
+        $packageInfo = $this->packageInfo();
 
+        /**
+         * @var array{
+         *     sort: string|array<mixed>,
+         *     filter: array{
+         *         trash: string
+         *     },
+         *     perPage: int
+         * } $validated
+         */
         $validated = $request->validated();
 
-        $query = Campaign::addSelect(sprintf('%1$s.*', $this->packageInfo['table']));
+        $query = Campaign::addSelect(sprintf('%1$s.*', $packageInfo->table()));
 
         $query->sort($validated['sort'] ?? null);
 
@@ -171,7 +184,7 @@ class CampaignController extends Controller
 
         $paginator->appends($validated);
 
-        return (new Resources\CampaignCollection($paginator))->response($request);
+        return new Resources\CampaignCollection($paginator)->response($request);
     }
 
     /**
@@ -184,16 +197,16 @@ class CampaignController extends Controller
         Requests\Campaign\RestoreRequest $request
     ): JsonResponse|Resources\Campaign {
 
+        $packageInfo = $this->packageInfo();
+
         $user = $request->user();
 
-        if ($user?->id) {
-            $campaign->modified_by_id = $user->id;
-        }
+        $campaign->modified_by_id = $user?->id;
 
         $campaign->restore();
 
-        return (new Resources\Campaign($campaign))->additional(['meta' => [
-            'info' => $this->packageInfo,
+        return new Resources\Campaign($campaign)->additional(['meta' => [
+            'info' => $packageInfo,
         ]])->response($request);
     }
 
@@ -206,12 +219,15 @@ class CampaignController extends Controller
         Campaign $campaign,
         Requests\Campaign\ShowRequest $request
     ): JsonResponse|Resources\Campaign {
-        return (new Resources\Campaign($campaign))->additional(['meta' => [
-            'info' => $this->packageInfo,
+
+        $packageInfo = $this->packageInfo();
+
+        return new Resources\Campaign($campaign)->additional(['meta' => [
+            'info' => $packageInfo,
         ]])->response($request);
     }
 
-   /**
+    /**
      * Store a newly created API Campaign resource in storage.
      *
      * @route POST /api/lead/campaigns playground.lead.api.campaigns.post
@@ -219,6 +235,9 @@ class CampaignController extends Controller
     public function store(
         Requests\Campaign\StoreRequest $request
     ): Response|JsonResponse|Resources\Campaign {
+
+        $packageInfo = $this->packageInfo();
+
         $validated = $request->validated();
 
         $user = $request->user();
@@ -229,8 +248,8 @@ class CampaignController extends Controller
 
         $campaign->save();
 
-        return (new Resources\Campaign($campaign))->additional(['meta' => [
-            'info' => $this->packageInfo,
+        return new Resources\Campaign($campaign)->additional(['meta' => [
+            'info' => $packageInfo,
         ]])->response($request)->setStatusCode(201);
     }
 
@@ -244,20 +263,18 @@ class CampaignController extends Controller
         Requests\Campaign\UnlockRequest $request
     ): JsonResponse|Resources\Campaign {
 
-        $validated = $request->validated();
+        $packageInfo = $this->packageInfo();
 
         $user = $request->user();
 
         $campaign->locked = false;
 
-        if ($user?->id) {
-            $campaign->modified_by_id = $user->id;
-        }
+        $campaign->modified_by_id = $user?->id;
 
         $campaign->save();
 
-        return (new Resources\Campaign($campaign))->additional(['meta' => [
-            'info' => $this->packageInfo,
+        return new Resources\Campaign($campaign)->additional(['meta' => [
+            'info' => $packageInfo,
         ]])->response($request);
     }
 
@@ -271,18 +288,18 @@ class CampaignController extends Controller
         Requests\Campaign\UpdateRequest $request
     ): JsonResponse {
 
+        $packageInfo = $this->packageInfo();
+
         $validated = $request->validated();
 
         $user = $request->user();
 
-        if ($user?->id) {
-            $campaign->modified_by_id = $user->id;
-        }
+        $campaign->modified_by_id = $user?->id;
 
         $campaign->update($validated);
 
-        return (new Resources\Campaign($campaign))->additional(['meta' => [
-            'info' => $this->packageInfo,
+        return new Resources\Campaign($campaign)->additional(['meta' => [
+            'info' => $packageInfo,
         ]])->response($request);
     }
 }

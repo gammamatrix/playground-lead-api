@@ -1,0 +1,17 @@
+{
+    "class": "Task",
+    "config": "playground-lead-api",
+    "fqdn": "Playground/Lead/Api/Http/Resources/Task",
+    "module": "Lead",
+    "module_slug": "lead",
+    "name": "Task",
+    "namespace": "Playground/Lead/Api",
+    "organization": "Playground",
+    "package": "playground-lead-api",
+    "collection": false,
+    "model": "Task",
+    "model_fqdn": "Playground/Lead/Models/Task",
+    "model_slug": "task",
+    "type": "",
+    "models": []
+}

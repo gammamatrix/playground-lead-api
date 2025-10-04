@@ -1,9 +1,11 @@
 <?php
+
 /**
  * Playground
  */
 
 declare(strict_types=1);
+
 namespace Playground\Lead\Api\Http\Requests\Campaign;
 
 use Playground\Lead\Api\Http\Requests\FormRequest;

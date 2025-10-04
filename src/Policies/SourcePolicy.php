@@ -1,9 +1,11 @@
 <?php
+
 /**
  * Playground
  */
 
 declare(strict_types=1);
+
 namespace Playground\Lead\Api\Policies;
 
 use Playground\Auth\Policies\ModelPolicy;
@@ -21,7 +23,7 @@ class SourcePolicy extends ModelPolicy
     protected $rolesToView = [
         'user',
         'staff',
-        'sales',
+        'publisher',
         'manager',
         'admin',
         'root',
@@ -31,7 +33,7 @@ class SourcePolicy extends ModelPolicy
      * @var array<int, string> The roles allowed for actions in the MVC.
      */
     protected $rolesForAction = [
-        'sales',
+        'publisher',
         'manager',
         'admin',
         'root',

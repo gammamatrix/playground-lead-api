@@ -1,14 +1,15 @@
 <?php
+
 /**
  * Playground
  */
 
 declare(strict_types=1);
+
 namespace Playground\Lead\Api\Http\Controllers;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
-use Illuminate\Support\Carbon;
 use Playground\Lead\Api\Http\Requests;
 use Playground\Lead\Api\Http\Resources;
 use Playground\Lead\Models\Goal;
@@ -45,28 +46,31 @@ class GoalController extends Controller
         Requests\Goal\CreateRequest $request
     ): JsonResponse|Resources\Goal {
 
-        $validated = $request->validated();
+        $packageInfo = $this->packageInfo();
 
-        $user = $request->user();
+        $validated = $request->validated();
 
         $goal = new Goal($validated);
 
-        return (new Resources\Goal($goal))->additional(['meta' => [
-            'info' => $this->packageInfo,
+        return new Resources\Goal($goal)->additional(['meta' => [
+            'info' => $packageInfo,
         ]])->response($request);
     }
 
     /**
      * Edit the Goal resource in storage.
      *
-     * @route GET /api/lead/goals/edit playground.lead.api.goals.edit
+     * @route GET /api/lead/goals/edit/{goal} playground.lead.api.goals.edit
      */
     public function edit(
         Goal $goal,
         Requests\Goal\EditRequest $request
     ): JsonResponse|Resources\Goal {
-        return (new Resources\Goal($goal))->additional(['meta' => [
-            'info' => $this->packageInfo,
+
+        $packageInfo = $this->packageInfo();
+
+        return new Resources\Goal($goal)->additional(['meta' => [
+            'info' => $packageInfo,
         ]])->response($request);
     }
 
@@ -107,7 +111,7 @@ class GoalController extends Controller
         Requests\Goal\LockRequest $request
     ): JsonResponse|Resources\Goal {
 
-        $validated = $request->validated();
+        $packageInfo = $this->packageInfo();
 
         $user = $request->user();
 
@@ -119,8 +123,8 @@ class GoalController extends Controller
 
         $goal->save();
 
-        return (new Resources\Goal($goal))->additional(['meta' => [
-            'info' => $this->packageInfo,
+        return new Resources\Goal($goal)->additional(['meta' => [
+            'info' => $packageInfo,
         ]])->response($request);
     }
 
@@ -133,11 +137,20 @@ class GoalController extends Controller
         Requests\Goal\IndexRequest $request
     ): JsonResponse|Resources\GoalCollection {
 
-        $user = $request->user();
+        $packageInfo = $this->packageInfo();
 
+        /**
+         * @var array{
+         *     sort: string|array<mixed>,
+         *     filter: array{
+         *         trash: string
+         *     },
+         *     perPage: int
+         * } $validated
+         */
         $validated = $request->validated();
 
-        $query = Goal::addSelect(sprintf('%1$s.*', $this->packageInfo['table']));
+        $query = Goal::addSelect(sprintf('%1$s.*', $packageInfo->table()));
 
         $query->sort($validated['sort'] ?? null);
 
@@ -171,7 +184,7 @@ class GoalController extends Controller
 
         $paginator->appends($validated);
 
-        return (new Resources\GoalCollection($paginator))->response($request);
+        return new Resources\GoalCollection($paginator)->response($request);
     }
 
     /**
@@ -184,16 +197,16 @@ class GoalController extends Controller
         Requests\Goal\RestoreRequest $request
     ): JsonResponse|Resources\Goal {
 
+        $packageInfo = $this->packageInfo();
+
         $user = $request->user();
 
-        if ($user?->id) {
-            $goal->modified_by_id = $user->id;
-        }
+        $goal->modified_by_id = $user?->id;
 
         $goal->restore();
 
-        return (new Resources\Goal($goal))->additional(['meta' => [
-            'info' => $this->packageInfo,
+        return new Resources\Goal($goal)->additional(['meta' => [
+            'info' => $packageInfo,
         ]])->response($request);
     }
 
@@ -206,12 +219,15 @@ class GoalController extends Controller
         Goal $goal,
         Requests\Goal\ShowRequest $request
     ): JsonResponse|Resources\Goal {
-        return (new Resources\Goal($goal))->additional(['meta' => [
-            'info' => $this->packageInfo,
+
+        $packageInfo = $this->packageInfo();
+
+        return new Resources\Goal($goal)->additional(['meta' => [
+            'info' => $packageInfo,
         ]])->response($request);
     }
 
-   /**
+    /**
      * Store a newly created API Goal resource in storage.
      *
      * @route POST /api/lead/goals playground.lead.api.goals.post
@@ -219,6 +235,9 @@ class GoalController extends Controller
     public function store(
         Requests\Goal\StoreRequest $request
     ): Response|JsonResponse|Resources\Goal {
+
+        $packageInfo = $this->packageInfo();
+
         $validated = $request->validated();
 
         $user = $request->user();
@@ -229,8 +248,8 @@ class GoalController extends Controller
 
         $goal->save();
 
-        return (new Resources\Goal($goal))->additional(['meta' => [
-            'info' => $this->packageInfo,
+        return new Resources\Goal($goal)->additional(['meta' => [
+            'info' => $packageInfo,
         ]])->response($request)->setStatusCode(201);
     }
 
@@ -244,20 +263,18 @@ class GoalController extends Controller
         Requests\Goal\UnlockRequest $request
     ): JsonResponse|Resources\Goal {
 
-        $validated = $request->validated();
+        $packageInfo = $this->packageInfo();
 
         $user = $request->user();
 
         $goal->locked = false;
 
-        if ($user?->id) {
-            $goal->modified_by_id = $user->id;
-        }
+        $goal->modified_by_id = $user?->id;
 
         $goal->save();
 
-        return (new Resources\Goal($goal))->additional(['meta' => [
-            'info' => $this->packageInfo,
+        return new Resources\Goal($goal)->additional(['meta' => [
+            'info' => $packageInfo,
         ]])->response($request);
     }
 
@@ -271,18 +288,18 @@ class GoalController extends Controller
         Requests\Goal\UpdateRequest $request
     ): JsonResponse {
 
+        $packageInfo = $this->packageInfo();
+
         $validated = $request->validated();
 
         $user = $request->user();
 
-        if ($user?->id) {
-            $goal->modified_by_id = $user->id;
-        }
+        $goal->modified_by_id = $user?->id;
 
         $goal->update($validated);
 
-        return (new Resources\Goal($goal))->additional(['meta' => [
-            'info' => $this->packageInfo,
+        return new Resources\Goal($goal)->additional(['meta' => [
+            'info' => $packageInfo,
         ]])->response($request);
     }
 }

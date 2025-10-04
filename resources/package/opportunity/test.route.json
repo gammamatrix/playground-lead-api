@@ -1,0 +1,22 @@
+{
+    "class": "OpportunityRouteTest",
+    "config": "playground-lead-api",
+    "extends": "",
+    "fqdn": "Tests/Feature/Playground/Lead/Api/OpportunityRouteTest",
+    "model": "Opportunity",
+    "model_fqdn": "",
+    "module": "Lead",
+    "module_slug": "lead",
+    "name": "OpportunityRouteTest",
+    "namespace": "Tests/Feature/Playground/Lead/Api",
+    "organization": "Playground",
+    "package": "playground-lead-api",
+    "playground": true,
+    "suite": "feature",
+    "type": "playground-api-controller-model-user",
+    "uses": [],
+    "models": {
+        "Opportunity": "resources/configurations/playground-lead/model.opportunity.json"
+    },
+    "package_providers": []
+}

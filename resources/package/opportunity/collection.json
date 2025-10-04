@@ -1,0 +1,17 @@
+{
+    "class": "OpportunityCollection",
+    "config": "playground-lead-api",
+    "fqdn": "Playground/Lead/Api/Http/Resources/OpportunityCollection",
+    "module": "Lead",
+    "module_slug": "lead",
+    "name": "OpportunityCollection",
+    "namespace": "Playground/Lead/Api",
+    "organization": "Playground",
+    "package": "playground-lead-api",
+    "collection": true,
+    "model": "Opportunity",
+    "model_fqdn": "Playground/Lead/Models/Opportunity",
+    "model_slug": "opportunity",
+    "type": "",
+    "models": []
+}

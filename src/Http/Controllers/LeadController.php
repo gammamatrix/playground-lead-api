@@ -1,14 +1,15 @@
 <?php
+
 /**
  * Playground
  */
 
 declare(strict_types=1);
+
 namespace Playground\Lead\Api\Http\Controllers;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
-use Illuminate\Support\Carbon;
 use Playground\Lead\Api\Http\Requests;
 use Playground\Lead\Api\Http\Resources;
 use Playground\Lead\Models\Lead;
@@ -45,28 +46,31 @@ class LeadController extends Controller
         Requests\Lead\CreateRequest $request
     ): JsonResponse|Resources\Lead {
 
-        $validated = $request->validated();
+        $packageInfo = $this->packageInfo();
 
-        $user = $request->user();
+        $validated = $request->validated();
 
         $lead = new Lead($validated);
 
-        return (new Resources\Lead($lead))->additional(['meta' => [
-            'info' => $this->packageInfo,
+        return new Resources\Lead($lead)->additional(['meta' => [
+            'info' => $packageInfo,
         ]])->response($request);
     }
 
     /**
      * Edit the Lead resource in storage.
      *
-     * @route GET /api/lead/leads/edit playground.lead.api.leads.edit
+     * @route GET /api/lead/leads/edit/{lead} playground.lead.api.leads.edit
      */
     public function edit(
         Lead $lead,
         Requests\Lead\EditRequest $request
     ): JsonResponse|Resources\Lead {
-        return (new Resources\Lead($lead))->additional(['meta' => [
-            'info' => $this->packageInfo,
+
+        $packageInfo = $this->packageInfo();
+
+        return new Resources\Lead($lead)->additional(['meta' => [
+            'info' => $packageInfo,
         ]])->response($request);
     }
 
@@ -107,7 +111,7 @@ class LeadController extends Controller
         Requests\Lead\LockRequest $request
     ): JsonResponse|Resources\Lead {
 
-        $validated = $request->validated();
+        $packageInfo = $this->packageInfo();
 
         $user = $request->user();
 
@@ -119,8 +123,8 @@ class LeadController extends Controller
 
         $lead->save();
 
-        return (new Resources\Lead($lead))->additional(['meta' => [
-            'info' => $this->packageInfo,
+        return new Resources\Lead($lead)->additional(['meta' => [
+            'info' => $packageInfo,
         ]])->response($request);
     }
 
@@ -133,11 +137,20 @@ class LeadController extends Controller
         Requests\Lead\IndexRequest $request
     ): JsonResponse|Resources\LeadCollection {
 
-        $user = $request->user();
+        $packageInfo = $this->packageInfo();
 
+        /**
+         * @var array{
+         *     sort: string|array<mixed>,
+         *     filter: array{
+         *         trash: string
+         *     },
+         *     perPage: int
+         * } $validated
+         */
         $validated = $request->validated();
 
-        $query = Lead::addSelect(sprintf('%1$s.*', $this->packageInfo['table']));
+        $query = Lead::addSelect(sprintf('%1$s.*', $packageInfo->table()));
 
         $query->sort($validated['sort'] ?? null);
 
@@ -171,7 +184,7 @@ class LeadController extends Controller
 
         $paginator->appends($validated);
 
-        return (new Resources\LeadCollection($paginator))->response($request);
+        return new Resources\LeadCollection($paginator)->response($request);
     }
 
     /**
@@ -184,16 +197,16 @@ class LeadController extends Controller
         Requests\Lead\RestoreRequest $request
     ): JsonResponse|Resources\Lead {
 
+        $packageInfo = $this->packageInfo();
+
         $user = $request->user();
 
-        if ($user?->id) {
-            $lead->modified_by_id = $user->id;
-        }
+        $lead->modified_by_id = $user?->id;
 
         $lead->restore();
 
-        return (new Resources\Lead($lead))->additional(['meta' => [
-            'info' => $this->packageInfo,
+        return new Resources\Lead($lead)->additional(['meta' => [
+            'info' => $packageInfo,
         ]])->response($request);
     }
 
@@ -206,12 +219,15 @@ class LeadController extends Controller
         Lead $lead,
         Requests\Lead\ShowRequest $request
     ): JsonResponse|Resources\Lead {
-        return (new Resources\Lead($lead))->additional(['meta' => [
-            'info' => $this->packageInfo,
+
+        $packageInfo = $this->packageInfo();
+
+        return new Resources\Lead($lead)->additional(['meta' => [
+            'info' => $packageInfo,
         ]])->response($request);
     }
 
-   /**
+    /**
      * Store a newly created API Lead resource in storage.
      *
      * @route POST /api/lead/leads playground.lead.api.leads.post
@@ -219,6 +235,9 @@ class LeadController extends Controller
     public function store(
         Requests\Lead\StoreRequest $request
     ): Response|JsonResponse|Resources\Lead {
+
+        $packageInfo = $this->packageInfo();
+
         $validated = $request->validated();
 
         $user = $request->user();
@@ -229,8 +248,8 @@ class LeadController extends Controller
 
         $lead->save();
 
-        return (new Resources\Lead($lead))->additional(['meta' => [
-            'info' => $this->packageInfo,
+        return new Resources\Lead($lead)->additional(['meta' => [
+            'info' => $packageInfo,
         ]])->response($request)->setStatusCode(201);
     }
 
@@ -244,20 +263,18 @@ class LeadController extends Controller
         Requests\Lead\UnlockRequest $request
     ): JsonResponse|Resources\Lead {
 
-        $validated = $request->validated();
+        $packageInfo = $this->packageInfo();
 
         $user = $request->user();
 
         $lead->locked = false;
 
-        if ($user?->id) {
-            $lead->modified_by_id = $user->id;
-        }
+        $lead->modified_by_id = $user?->id;
 
         $lead->save();
 
-        return (new Resources\Lead($lead))->additional(['meta' => [
-            'info' => $this->packageInfo,
+        return new Resources\Lead($lead)->additional(['meta' => [
+            'info' => $packageInfo,
         ]])->response($request);
     }
 
@@ -271,18 +288,18 @@ class LeadController extends Controller
         Requests\Lead\UpdateRequest $request
     ): JsonResponse {
 
+        $packageInfo = $this->packageInfo();
+
         $validated = $request->validated();
 
         $user = $request->user();
 
-        if ($user?->id) {
-            $lead->modified_by_id = $user->id;
-        }
+        $lead->modified_by_id = $user?->id;
 
         $lead->update($validated);
 
-        return (new Resources\Lead($lead))->additional(['meta' => [
-            'info' => $this->packageInfo,
+        return new Resources\Lead($lead)->additional(['meta' => [
+            'info' => $packageInfo,
         ]])->response($request);
     }
 }
