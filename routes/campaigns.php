@@ -7,6 +7,7 @@
 declare(strict_types=1);
 
 use Illuminate\Support\Facades\Route;
+use Playground\Lead\Models\Campaign;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,19 +37,19 @@ Route::group([
     Route::get('/', [
         'as' => 'playground.lead.api.campaigns',
         'uses' => 'CampaignController@index',
-    ])->can('index', Playground\Lead\Models\Campaign::class);
+    ])->can('index', Campaign::class);
 
     Route::post('/index', [
         'as' => 'playground.lead.api.campaigns.index',
         'uses' => 'CampaignController@index',
-    ])->can('index', Playground\Lead\Models\Campaign::class);
+    ])->can('index', Campaign::class);
 
     // UI
 
     Route::get('/create', [
         'as' => 'playground.lead.api.campaigns.create',
         'uses' => 'CampaignController@create',
-    ])->can('create', Playground\Lead\Models\Campaign::class);
+    ])->can('create', Campaign::class);
 
     Route::get('/edit/{campaign}', [
         'as' => 'playground.lead.api.campaigns.edit',
@@ -90,7 +91,7 @@ Route::group([
     Route::post('/', [
         'as' => 'playground.lead.api.campaigns.post',
         'uses' => 'CampaignController@store',
-    ])->can('store', Playground\Lead\Models\Campaign::class);
+    ])->can('store', Campaign::class);
 
     // Route::put('/', [
     //     'as' => 'playground.lead.api.campaigns.put',

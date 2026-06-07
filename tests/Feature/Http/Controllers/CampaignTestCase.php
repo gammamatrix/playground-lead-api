@@ -8,12 +8,14 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Playground\Lead\Api\Http\Controllers;
 
+use Playground\Lead\Models\Campaign;
+
 /**
  * \Tests\Feature\Playground\Lead\Api\Http\Controllers\CampaignTestCase
  */
 class CampaignTestCase extends TestCase
 {
-    public string $fqdn = \Playground\Lead\Models\Campaign::class;
+    public string $fqdn = Campaign::class;
 
     protected int $status_code_json_guest_create = 401;
 

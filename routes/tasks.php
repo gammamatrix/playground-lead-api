@@ -7,6 +7,7 @@
 declare(strict_types=1);
 
 use Illuminate\Support\Facades\Route;
+use Playground\Lead\Models\Task;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,19 +37,19 @@ Route::group([
     Route::get('/', [
         'as' => 'playground.lead.api.tasks',
         'uses' => 'TaskController@index',
-    ])->can('index', Playground\Lead\Models\Task::class);
+    ])->can('index', Task::class);
 
     Route::post('/index', [
         'as' => 'playground.lead.api.tasks.index',
         'uses' => 'TaskController@index',
-    ])->can('index', Playground\Lead\Models\Task::class);
+    ])->can('index', Task::class);
 
     // UI
 
     Route::get('/create', [
         'as' => 'playground.lead.api.tasks.create',
         'uses' => 'TaskController@create',
-    ])->can('create', Playground\Lead\Models\Task::class);
+    ])->can('create', Task::class);
 
     Route::get('/edit/{task}', [
         'as' => 'playground.lead.api.tasks.edit',
@@ -90,7 +91,7 @@ Route::group([
     Route::post('/', [
         'as' => 'playground.lead.api.tasks.post',
         'uses' => 'TaskController@store',
-    ])->can('store', Playground\Lead\Models\Task::class);
+    ])->can('store', Task::class);
 
     // Route::put('/', [
     //     'as' => 'playground.lead.api.tasks.put',

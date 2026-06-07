@@ -8,6 +8,9 @@ declare(strict_types=1);
 
 namespace Tests\Unit\Playground\Lead\Api;
 
+use Laravel\Sanctum\SanctumServiceProvider;
+use Playground\ServiceProvider;
+
 /**
  * \Tests\Unit\Playground\Lead\Api\PackageProviders
  */
@@ -17,12 +20,12 @@ trait PackageProviders
     {
         return [
             \Playground\Test\ServiceProvider::class,
-            \Playground\ServiceProvider::class,
+            ServiceProvider::class,
             \Playground\Auth\ServiceProvider::class,
             \Playground\Http\ServiceProvider::class,
             \Playground\Lead\ServiceProvider::class,
             \Playground\Lead\Api\ServiceProvider::class,
-            \Laravel\Sanctum\SanctumServiceProvider::class,
+            SanctumServiceProvider::class,
         ];
     }
 }

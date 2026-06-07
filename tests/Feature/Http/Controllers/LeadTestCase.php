@@ -8,12 +8,14 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Playground\Lead\Api\Http\Controllers;
 
+use Playground\Lead\Models\Lead;
+
 /**
  * \Tests\Feature\Playground\Lead\Api\Http\Controllers\LeadTestCase
  */
 class LeadTestCase extends TestCase
 {
-    public string $fqdn = \Playground\Lead\Models\Lead::class;
+    public string $fqdn = Lead::class;
 
     protected int $status_code_json_guest_create = 401;
 

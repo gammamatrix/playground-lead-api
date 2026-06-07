@@ -7,6 +7,7 @@
 declare(strict_types=1);
 
 use Illuminate\Support\Facades\Route;
+use Playground\Lead\Models\Region;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,19 +37,19 @@ Route::group([
     Route::get('/', [
         'as' => 'playground.lead.api.regions',
         'uses' => 'RegionController@index',
-    ])->can('index', Playground\Lead\Models\Region::class);
+    ])->can('index', Region::class);
 
     Route::post('/index', [
         'as' => 'playground.lead.api.regions.index',
         'uses' => 'RegionController@index',
-    ])->can('index', Playground\Lead\Models\Region::class);
+    ])->can('index', Region::class);
 
     // UI
 
     Route::get('/create', [
         'as' => 'playground.lead.api.regions.create',
         'uses' => 'RegionController@create',
-    ])->can('create', Playground\Lead\Models\Region::class);
+    ])->can('create', Region::class);
 
     Route::get('/edit/{region}', [
         'as' => 'playground.lead.api.regions.edit',
@@ -90,7 +91,7 @@ Route::group([
     Route::post('/', [
         'as' => 'playground.lead.api.regions.post',
         'uses' => 'RegionController@store',
-    ])->can('store', Playground\Lead\Models\Region::class);
+    ])->can('store', Region::class);
 
     // Route::put('/', [
     //     'as' => 'playground.lead.api.regions.put',

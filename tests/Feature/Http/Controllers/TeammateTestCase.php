@@ -8,12 +8,14 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Playground\Lead\Api\Http\Controllers;
 
+use Playground\Lead\Models\Teammate;
+
 /**
  * \Tests\Feature\Playground\Lead\Api\Http\Controllers\TeammateTestCase
  */
 class TeammateTestCase extends TestCase
 {
-    public string $fqdn = \Playground\Lead\Models\Teammate::class;
+    public string $fqdn = Teammate::class;
 
     protected int $status_code_json_guest_create = 401;
 

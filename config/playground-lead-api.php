@@ -5,6 +5,30 @@
  */
 
 declare(strict_types=1);
+use Illuminate\Routing\Middleware\SubstituteBindings;
+use Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful;
+use Playground\Lead\Api\Policies\CampaignPolicy;
+use Playground\Lead\Api\Policies\GoalPolicy;
+use Playground\Lead\Api\Policies\LeadPolicy;
+use Playground\Lead\Api\Policies\OpportunityPolicy;
+use Playground\Lead\Api\Policies\PlanPolicy;
+use Playground\Lead\Api\Policies\RegionPolicy;
+use Playground\Lead\Api\Policies\ReportPolicy;
+use Playground\Lead\Api\Policies\SourcePolicy;
+use Playground\Lead\Api\Policies\TaskPolicy;
+use Playground\Lead\Api\Policies\TeammatePolicy;
+use Playground\Lead\Api\Policies\TeamPolicy;
+use Playground\Lead\Models\Campaign;
+use Playground\Lead\Models\Goal;
+use Playground\Lead\Models\Lead;
+use Playground\Lead\Models\Opportunity;
+use Playground\Lead\Models\Plan;
+use Playground\Lead\Models\Region;
+use Playground\Lead\Models\Report;
+use Playground\Lead\Models\Source;
+use Playground\Lead\Models\Task;
+use Playground\Lead\Models\Team;
+use Playground\Lead\Models\Teammate;
 
 /**
  * Playground: Lead API Configuration and Environment Variables
@@ -50,20 +74,20 @@ return [
     'middleware' => [
         'default' => env('PLAYGROUND_LEAD_API_MIDDLEWARE_DEFAULT', [
             'web',
-            Illuminate\Routing\Middleware\SubstituteBindings::class,
+            SubstituteBindings::class,
             'auth:sanctum',
-            Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
+            EnsureFrontendRequestsAreStateful::class,
         ]),
         'auth' => env('PLAYGROUND_LEAD_API_MIDDLEWARE_AUTH', [
             'web',
-            Illuminate\Routing\Middleware\SubstituteBindings::class,
+            SubstituteBindings::class,
             'auth:sanctum',
-            Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
+            EnsureFrontendRequestsAreStateful::class,
         ]),
         'guest' => env('PLAYGROUND_LEAD_API_MIDDLEWARE_GUEST', [
             'web',
-            Illuminate\Routing\Middleware\SubstituteBindings::class,
-            Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
+            SubstituteBindings::class,
+            EnsureFrontendRequestsAreStateful::class,
         ]),
     ],
 
@@ -76,17 +100,17 @@ return [
     */
 
     'policies' => [
-        Playground\Lead\Models\Campaign::class => Playground\Lead\Api\Policies\CampaignPolicy::class,
-        Playground\Lead\Models\Goal::class => Playground\Lead\Api\Policies\GoalPolicy::class,
-        Playground\Lead\Models\Lead::class => Playground\Lead\Api\Policies\LeadPolicy::class,
-        Playground\Lead\Models\Opportunity::class => Playground\Lead\Api\Policies\OpportunityPolicy::class,
-        Playground\Lead\Models\Plan::class => Playground\Lead\Api\Policies\PlanPolicy::class,
-        Playground\Lead\Models\Region::class => Playground\Lead\Api\Policies\RegionPolicy::class,
-        Playground\Lead\Models\Report::class => Playground\Lead\Api\Policies\ReportPolicy::class,
-        Playground\Lead\Models\Source::class => Playground\Lead\Api\Policies\SourcePolicy::class,
-        Playground\Lead\Models\Task::class => Playground\Lead\Api\Policies\TaskPolicy::class,
-        Playground\Lead\Models\Team::class => Playground\Lead\Api\Policies\TeamPolicy::class,
-        Playground\Lead\Models\Teammate::class => Playground\Lead\Api\Policies\TeammatePolicy::class,
+        Campaign::class => CampaignPolicy::class,
+        Goal::class => GoalPolicy::class,
+        Lead::class => LeadPolicy::class,
+        Opportunity::class => OpportunityPolicy::class,
+        Plan::class => PlanPolicy::class,
+        Region::class => RegionPolicy::class,
+        Report::class => ReportPolicy::class,
+        Source::class => SourcePolicy::class,
+        Task::class => TaskPolicy::class,
+        Team::class => TeamPolicy::class,
+        Teammate::class => TeammatePolicy::class,
     ],
 
     /*

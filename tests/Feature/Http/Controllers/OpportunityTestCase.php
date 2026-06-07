@@ -8,12 +8,14 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Playground\Lead\Api\Http\Controllers;
 
+use Playground\Lead\Models\Opportunity;
+
 /**
  * \Tests\Feature\Playground\Lead\Api\Http\Controllers\OpportunityTestCase
  */
 class OpportunityTestCase extends TestCase
 {
-    public string $fqdn = \Playground\Lead\Models\Opportunity::class;
+    public string $fqdn = Opportunity::class;
 
     protected int $status_code_json_guest_create = 401;
 

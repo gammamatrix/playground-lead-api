@@ -8,6 +8,7 @@ declare(strict_types=1);
 
 namespace Tests\Unit\Playground\Lead\Api\Http\Requests\Region;
 
+use Playground\Lead\Api\Http\Requests\Region\EditRequest;
 use Tests\Unit\Playground\Lead\Api\Http\Requests\RequestTestCase;
 
 /**
@@ -15,5 +16,5 @@ use Tests\Unit\Playground\Lead\Api\Http\Requests\RequestTestCase;
  */
 class EditRequestTest extends RequestTestCase
 {
-    protected string $requestClass = \Playground\Lead\Api\Http\Requests\Region\EditRequest::class;
+    protected string $requestClass = EditRequest::class;
 }

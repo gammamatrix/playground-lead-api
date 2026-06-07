@@ -8,6 +8,7 @@ declare(strict_types=1);
 
 namespace Tests\Unit\Playground\Lead\Api\Http\Requests\Opportunity;
 
+use Playground\Lead\Api\Http\Requests\Opportunity\IndexRequest;
 use Tests\Unit\Playground\Lead\Api\Http\Requests\RequestTestCase;
 
 /**
@@ -15,5 +16,5 @@ use Tests\Unit\Playground\Lead\Api\Http\Requests\RequestTestCase;
  */
 class IndexRequestTest extends RequestTestCase
 {
-    protected string $requestClass = \Playground\Lead\Api\Http\Requests\Opportunity\IndexRequest::class;
+    protected string $requestClass = IndexRequest::class;
 }

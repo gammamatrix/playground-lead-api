@@ -7,6 +7,7 @@
 declare(strict_types=1);
 
 use Illuminate\Support\Facades\Route;
+use Playground\Lead\Models\Plan;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,19 +37,19 @@ Route::group([
     Route::get('/', [
         'as' => 'playground.lead.api.plans',
         'uses' => 'PlanController@index',
-    ])->can('index', Playground\Lead\Models\Plan::class);
+    ])->can('index', Plan::class);
 
     Route::post('/index', [
         'as' => 'playground.lead.api.plans.index',
         'uses' => 'PlanController@index',
-    ])->can('index', Playground\Lead\Models\Plan::class);
+    ])->can('index', Plan::class);
 
     // UI
 
     Route::get('/create', [
         'as' => 'playground.lead.api.plans.create',
         'uses' => 'PlanController@create',
-    ])->can('create', Playground\Lead\Models\Plan::class);
+    ])->can('create', Plan::class);
 
     Route::get('/edit/{plan}', [
         'as' => 'playground.lead.api.plans.edit',
@@ -90,7 +91,7 @@ Route::group([
     Route::post('/', [
         'as' => 'playground.lead.api.plans.post',
         'uses' => 'PlanController@store',
-    ])->can('store', Playground\Lead\Models\Plan::class);
+    ])->can('store', Plan::class);
 
     // Route::put('/', [
     //     'as' => 'playground.lead.api.plans.put',

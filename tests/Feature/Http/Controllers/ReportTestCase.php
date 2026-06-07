@@ -8,12 +8,14 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Playground\Lead\Api\Http\Controllers;
 
+use Playground\Lead\Models\Report;
+
 /**
  * \Tests\Feature\Playground\Lead\Api\Http\Controllers\ReportTestCase
  */
 class ReportTestCase extends TestCase
 {
-    public string $fqdn = \Playground\Lead\Models\Report::class;
+    public string $fqdn = Report::class;
 
     protected int $status_code_json_guest_create = 401;
 

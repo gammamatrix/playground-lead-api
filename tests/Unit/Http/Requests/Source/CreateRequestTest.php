@@ -8,6 +8,7 @@ declare(strict_types=1);
 
 namespace Tests\Unit\Playground\Lead\Api\Http\Requests\Source;
 
+use Playground\Lead\Api\Http\Requests\Source\CreateRequest;
 use Tests\Unit\Playground\Lead\Api\Http\Requests\RequestTestCase;
 
 /**
@@ -15,5 +16,5 @@ use Tests\Unit\Playground\Lead\Api\Http\Requests\RequestTestCase;
  */
 class CreateRequestTest extends RequestTestCase
 {
-    protected string $requestClass = \Playground\Lead\Api\Http\Requests\Source\CreateRequest::class;
+    protected string $requestClass = CreateRequest::class;
 }

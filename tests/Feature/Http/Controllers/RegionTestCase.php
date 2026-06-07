@@ -8,12 +8,14 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Playground\Lead\Api\Http\Controllers;
 
+use Playground\Lead\Models\Region;
+
 /**
  * \Tests\Feature\Playground\Lead\Api\Http\Controllers\RegionTestCase
  */
 class RegionTestCase extends TestCase
 {
-    public string $fqdn = \Playground\Lead\Models\Region::class;
+    public string $fqdn = Region::class;
 
     protected int $status_code_json_guest_create = 401;
 

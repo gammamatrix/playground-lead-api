@@ -7,6 +7,7 @@
 declare(strict_types=1);
 
 use Illuminate\Support\Facades\Route;
+use Playground\Lead\Models\Team;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,19 +37,19 @@ Route::group([
     Route::get('/', [
         'as' => 'playground.lead.api.teams',
         'uses' => 'TeamController@index',
-    ])->can('index', Playground\Lead\Models\Team::class);
+    ])->can('index', Team::class);
 
     Route::post('/index', [
         'as' => 'playground.lead.api.teams.index',
         'uses' => 'TeamController@index',
-    ])->can('index', Playground\Lead\Models\Team::class);
+    ])->can('index', Team::class);
 
     // UI
 
     Route::get('/create', [
         'as' => 'playground.lead.api.teams.create',
         'uses' => 'TeamController@create',
-    ])->can('create', Playground\Lead\Models\Team::class);
+    ])->can('create', Team::class);
 
     Route::get('/edit/{team}', [
         'as' => 'playground.lead.api.teams.edit',
@@ -90,7 +91,7 @@ Route::group([
     Route::post('/', [
         'as' => 'playground.lead.api.teams.post',
         'uses' => 'TeamController@store',
-    ])->can('store', Playground\Lead\Models\Team::class);
+    ])->can('store', Team::class);
 
     // Route::put('/', [
     //     'as' => 'playground.lead.api.teams.put',
