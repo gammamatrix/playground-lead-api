@@ -29,6 +29,8 @@ class CampaignController extends Controller
         'model_route' => 'playground.lead.api.campaigns',
         'model_slug' => 'campaign',
         'model_slug_plural' => 'campaigns',
+        'model_variable' => 'campaign',
+        'model_variable_plural' => 'campaigns',
         'module_label' => 'Lead',
         'module_label_plural' => 'Leads',
         'module_route' => 'playground.lead.api',

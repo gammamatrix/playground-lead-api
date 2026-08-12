@@ -29,6 +29,8 @@ class OpportunityController extends Controller
         'model_route' => 'playground.lead.api.opportunities',
         'model_slug' => 'opportunity',
         'model_slug_plural' => 'opportunities',
+        'model_variable' => 'opportunity',
+        'model_variable_plural' => 'opportunities',
         'module_label' => 'Lead',
         'module_label_plural' => 'Leads',
         'module_route' => 'playground.lead.api',

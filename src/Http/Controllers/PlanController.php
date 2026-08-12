@@ -29,6 +29,8 @@ class PlanController extends Controller
         'model_route' => 'playground.lead.api.plans',
         'model_slug' => 'plan',
         'model_slug_plural' => 'plans',
+        'model_variable' => 'plan',
+        'model_variable_plural' => 'plans',
         'module_label' => 'Lead',
         'module_label_plural' => 'Leads',
         'module_route' => 'playground.lead.api',
