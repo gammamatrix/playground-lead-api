@@ -29,6 +29,8 @@ class TaskController extends Controller
         'model_route' => 'playground.lead.api.tasks',
         'model_slug' => 'task',
         'model_slug_plural' => 'tasks',
+        'model_variable' => 'task',
+        'model_variable_plural' => 'tasks',
         'module_label' => 'Lead',
         'module_label_plural' => 'Leads',
         'module_route' => 'playground.lead.api',

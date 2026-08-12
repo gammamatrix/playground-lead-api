@@ -29,6 +29,8 @@ class TeamController extends Controller
         'model_route' => 'playground.lead.api.teams',
         'model_slug' => 'team',
         'model_slug_plural' => 'teams',
+        'model_variable' => 'team',
+        'model_variable_plural' => 'teams',
         'module_label' => 'Lead',
         'module_label_plural' => 'Leads',
         'module_route' => 'playground.lead.api',

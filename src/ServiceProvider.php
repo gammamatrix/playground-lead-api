@@ -204,7 +204,7 @@ class ServiceProvider extends AuthServiceProvider
 
         $sitemap = ! empty($config['sitemap']) && is_array($config['sitemap']) ? $config['sitemap'] : [];
 
-        AboutCommand::add('Playground: Lead API', fn () => [
+        AboutCommand::add('Playground: Lead API API', fn () => [
 
             '<fg=yellow;options=bold>Load</> Policies' => ! empty($load['policies']) ? '<fg=green;options=bold>ENABLED</>' : '<fg=yellow;options=bold>DISABLED</>',
             '<fg=yellow;options=bold>Load</> Routes' => ! empty($load['routes']) ? '<fg=green;options=bold>ENABLED</>' : '<fg=yellow;options=bold>DISABLED</>',

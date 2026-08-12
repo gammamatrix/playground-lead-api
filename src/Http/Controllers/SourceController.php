@@ -29,6 +29,8 @@ class SourceController extends Controller
         'model_route' => 'playground.lead.api.sources',
         'model_slug' => 'source',
         'model_slug_plural' => 'sources',
+        'model_variable' => 'source',
+        'model_variable_plural' => 'sources',
         'module_label' => 'Lead',
         'module_label_plural' => 'Leads',
         'module_route' => 'playground.lead.api',
