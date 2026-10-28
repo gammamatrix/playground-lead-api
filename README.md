@@ -26,19 +26,19 @@ This application provides OpenAPI documentation: [openapi.yaml](openapi.yaml).
 - Index endpoints support advanced query filtering.
 
 OpenAPI API Documentation is built with npm using Redocly.
-- npm is only needed to generate documentation and is not needed to operate the Playground: Lead API API.
+- npm is only needed to generate documentation and is not needed to operate the Playground: Lead API.
 
 See [package.json](package.json) requirements.
 
 Install npm.
 
-```sh
+```shell
 npm install
 ```
 
 Build the documentation to generate the [openapi.yaml](openapi.yaml) configuration.
 
-```sh
+```shell
 npm run docs
 ```
 
@@ -49,7 +49,7 @@ Documentation
 
 You can install the package via composer:
 
-```bash
+```shell
 composer require gammamatrix/playground-lead-api
 ```
 
@@ -63,7 +63,7 @@ Playground provides information in the `artisan about` command.
 
 You can publish the config file with:
 
-```bash
+```shell
 php artisan vendor:publish --provider="Playground\Lead\Api\ServiceProvider" --tag="playground-config"
 ```
 
@@ -72,7 +72,7 @@ All routes are enabled by default. They may be disabled via environment variable
 See the contents of the published config file: [config/playground-lead-api.php](config/playground-lead-api.php)
 
 You can publish the routes file with:
-```bash
+```shell
 php artisan vendor:publish --provider="Playground\Lead\Api\ServiceProvider" --tag="playground-routes"
 ```
 - The routes while be published in a folder at `routes/playground-lead-api`
@@ -86,32 +86,26 @@ Information on [environment variables is available on the wiki for this package]
 
 ## Migrations
 
-This package requires the migrations in [playground-lead](https://github.com/gammamatrix/playground-lead) a Laravel package.
+This package requires the migrations in [](https://github.com/gammamatrix/) a Laravel package.
 
 ## Cloc
 
-```sh
+```shell
 composer cloc
 ```
 
-```
-➜  playground-lead-api git:(develop) ✗ composer cloc
-     800 text files.
-     784 unique files.
-      17 files ignored.
-
-github.com/AlDanial/cloc v 2.06  T=0.21 s (3773.3 files/s, 365856.9 lines/s)
+```terminaloutput
 -------------------------------------------------------------------------------
 Language                     files          blank        comment           code
 -------------------------------------------------------------------------------
-YAML                           114              5              0          31277
-JSON                           335              0              0          21046
-PHP                            321           3006           3957          15434
-XML                             10              0              7           1087
-Markdown                         3             55              1            127
+YAML                           114              4              0          31189
+PHP                            322           3027           3989          15791
+JSON                           336              0              0          15161
+XML                              3              0              7            215
+Markdown                         3             54              1            110
 INI                              1              3              0             12
 -------------------------------------------------------------------------------
-SUM:                           784           3069           3965          68983
+SUM:                           779           3088           3997          62478
 -------------------------------------------------------------------------------
 ```
 
@@ -124,30 +118,30 @@ Tests at level 10 on:
 - `tests/Feature/`
 - `tests/Unit/`
 
-```sh
+```shell
 composer analyse
 ```
 
 ## Coding Standards
 
-```sh
+```shell
 composer format
 ```
 
 ## Testing
 
 Run unit tests:
-```sh
+```shell
 composer test
 ```
 
 Run unit and feature tests:
-```sh
+```shell
 composer test-dev
 ```
 
 Run unit and feature tests in parallel:
-```sh
+```shell
 composer test-parallel
 ```
 

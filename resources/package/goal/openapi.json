@@ -5,7 +5,7 @@
     "model": "Goal",
     "model_fqdn": "",
     "model_column": "",
-    "model_label": "",
+    "model_label": "Goal",
     "model_slug_plural": "",
     "module": "Lead",
     "module_slug": "lead",

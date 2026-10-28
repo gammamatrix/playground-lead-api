@@ -13,7 +13,7 @@ use Playground\Lead\Models\Teammate;
 /**
  * \Tests\Feature\Playground\Lead\Api\Http\Controllers\TeammateTestCase
  */
-class TeammateTestCase extends TestCase
+class TeammateTestCase extends PlaygroundCase
 {
     public string $fqdn = Teammate::class;
 
@@ -48,17 +48,33 @@ class TeammateTestCase extends TestCase
      */
     public array $packageInfo = [
         'model_attribute' => 'title',
+        'model_camel' => 'teammate',
+        'model_camels' => 'teammates',
+        'model_kebab' => 'teammate',
+        'model_kebabs' => 'teammates',
+        'model_lower' => 'teammate',
+        'model_lowers' => 'teammates',
         'model_label' => 'Teammate',
         'model_label_plural' => 'Teammates',
+        'model_labels' => 'Teammates',
         'model_route' => 'playground.lead.api.teammates',
+        'model_route_param' => 'teammate',
         'model_slug' => 'teammate',
+        'model_slugs' => 'teammates',
         'model_slug_plural' => 'teammates',
+        'model_snake' => 'teammate',
+        'model_snakes' => 'teammates',
+        'model_studly' => 'Teammate',
+        'model_studlies' => 'Teammates',
         'model_variable' => 'teammate',
+        'model_variables' => 'teammates',
         'model_variable_plural' => 'teammates',
         'module_label' => 'Lead',
         'module_label_plural' => 'Leads',
+        'module_labels' => 'Leads',
         'module_route' => 'playground.lead.api',
         'module_slug' => 'lead',
+        'module_slugs' => 'leads',
         'privilege' => 'playground-lead-api:teammate',
         'table' => 'lead_teammates',
     ];

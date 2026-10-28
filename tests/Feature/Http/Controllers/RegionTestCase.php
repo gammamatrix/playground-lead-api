@@ -13,7 +13,7 @@ use Playground\Lead\Models\Region;
 /**
  * \Tests\Feature\Playground\Lead\Api\Http\Controllers\RegionTestCase
  */
-class RegionTestCase extends TestCase
+class RegionTestCase extends PlaygroundCase
 {
     public string $fqdn = Region::class;
 
@@ -48,17 +48,33 @@ class RegionTestCase extends TestCase
      */
     public array $packageInfo = [
         'model_attribute' => 'title',
+        'model_camel' => 'region',
+        'model_camels' => 'regions',
+        'model_kebab' => 'region',
+        'model_kebabs' => 'regions',
+        'model_lower' => 'region',
+        'model_lowers' => 'regions',
         'model_label' => 'Region',
         'model_label_plural' => 'Regions',
+        'model_labels' => 'Regions',
         'model_route' => 'playground.lead.api.regions',
+        'model_route_param' => 'region',
         'model_slug' => 'region',
+        'model_slugs' => 'regions',
         'model_slug_plural' => 'regions',
+        'model_snake' => 'region',
+        'model_snakes' => 'regions',
+        'model_studly' => 'Region',
+        'model_studlies' => 'Regions',
         'model_variable' => 'region',
+        'model_variables' => 'regions',
         'model_variable_plural' => 'regions',
         'module_label' => 'Lead',
         'module_label_plural' => 'Leads',
+        'module_labels' => 'Leads',
         'module_route' => 'playground.lead.api',
         'module_slug' => 'lead',
+        'module_slugs' => 'leads',
         'privilege' => 'playground-lead-api:region',
         'table' => 'lead_regions',
     ];

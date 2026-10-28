@@ -13,7 +13,7 @@ use Playground\Lead\Models\Goal;
 /**
  * \Tests\Feature\Playground\Lead\Api\Http\Controllers\GoalTestCase
  */
-class GoalTestCase extends TestCase
+class GoalTestCase extends PlaygroundCase
 {
     public string $fqdn = Goal::class;
 
@@ -48,17 +48,33 @@ class GoalTestCase extends TestCase
      */
     public array $packageInfo = [
         'model_attribute' => 'title',
+        'model_camel' => 'goal',
+        'model_camels' => 'goals',
+        'model_kebab' => 'goal',
+        'model_kebabs' => 'goals',
+        'model_lower' => 'goal',
+        'model_lowers' => 'goals',
         'model_label' => 'Goal',
         'model_label_plural' => 'Goals',
+        'model_labels' => 'Goals',
         'model_route' => 'playground.lead.api.goals',
+        'model_route_param' => 'goal',
         'model_slug' => 'goal',
+        'model_slugs' => 'goals',
         'model_slug_plural' => 'goals',
+        'model_snake' => 'goal',
+        'model_snakes' => 'goals',
+        'model_studly' => 'Goal',
+        'model_studlies' => 'Goals',
         'model_variable' => 'goal',
+        'model_variables' => 'goals',
         'model_variable_plural' => 'goals',
         'module_label' => 'Lead',
         'module_label_plural' => 'Leads',
+        'module_labels' => 'Leads',
         'module_route' => 'playground.lead.api',
         'module_slug' => 'lead',
+        'module_slugs' => 'leads',
         'privilege' => 'playground-lead-api:goal',
         'table' => 'lead_goals',
     ];

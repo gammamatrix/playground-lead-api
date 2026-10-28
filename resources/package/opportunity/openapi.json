@@ -5,7 +5,7 @@
     "model": "Opportunity",
     "model_fqdn": "",
     "model_column": "",
-    "model_label": "",
+    "model_label": "Opportunity",
     "model_slug_plural": "",
     "module": "Lead",
     "module_slug": "lead",

@@ -4,12 +4,16 @@
     "config_space": "PLAYGROUND_LEAD_API",
     "fqdn": "Playground/Lead/Api/ServiceProvider",
     "module": "Lead",
+    "module_label": "Lead",
+    "module_labels": "Leads",
     "module_slug": "lead",
+    "module_slugs": "leads",
     "name": "Lead API",
     "namespace": "Playground/Lead/Api",
     "organization": "Playground",
     "organization_email": "jeremy.postlethwaite@gmail.com",
     "package": "playground-lead-api",
+    "recipe": "lead",
     "withBlades": false,
     "withControllers": true,
     "withFactories": false,
@@ -19,6 +23,7 @@
     "withPolicies": true,
     "withRequests": true,
     "withRoutes": true,
+    "withSeeders": false,
     "withTests": true,
     "withTranslations": false,
     "playground": true,
@@ -66,47 +71,19 @@
         "gammamatrix/playground": "*",
         "gammamatrix/playground-auth": "*",
         "gammamatrix/playground-http": "*",
-        "gammamatrix/playground-lead": "*",
-        "illuminate/support": "^13.0"
+        "gammamatrix/playground-lead": "*"
     },
     "package_require_dev": {
         "gammamatrix/playground-test": "*",
-        "laravel/sanctum": "^4.0",
-        "illuminate/testing": "^13.0"
+        "laravel/sanctum": "^4.0"
     },
     "package_suggest": [],
-    "controllers": [
-        "resources/package/controller.base.json",
-        "resources/package/campaign/controller.json",
-        "resources/package/goal/controller.json",
-        "resources/package/lead/controller.json",
-        "resources/package/opportunity/controller.json",
-        "resources/package/plan/controller.json",
-        "resources/package/region/controller.json",
-        "resources/package/report/controller.json",
-        "resources/package/source/controller.json",
-        "resources/package/task/controller.json",
-        "resources/package/team/controller.json",
-        "resources/package/teammate/controller.json"
-    ],
+    "controllers": [],
     "models": [],
     "policies": [],
-    "requests": [
-        "resources/package/form.request.json"
-    ],
-    "routes": {
-        "campaigns": "resources/package/campaign/route.json",
-        "goals": "resources/package/goal/route.json",
-        "leads": "resources/package/lead/route.json",
-        "opportunities": "resources/package/opportunity/route.json",
-        "plans": "resources/package/plan/route.json",
-        "regions": "resources/package/region/route.json",
-        "reports": "resources/package/report/route.json",
-        "sources": "resources/package/source/route.json",
-        "tasks": "resources/package/task/route.json",
-        "teams": "resources/package/team/route.json",
-        "teammates": "resources/package/teammate/route.json"
-    },
+    "requests": [],
+    "routes": [],
+    "seeders": [],
     "transformers": [],
     "translations": [],
     "uses": []

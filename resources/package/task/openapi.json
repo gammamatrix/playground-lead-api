@@ -5,7 +5,7 @@
     "model": "Task",
     "model_fqdn": "",
     "model_column": "",
-    "model_label": "",
+    "model_label": "Task",
     "model_slug_plural": "",
     "module": "Lead",
     "module_slug": "lead",

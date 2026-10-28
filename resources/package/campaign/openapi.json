@@ -5,7 +5,7 @@
     "model": "Campaign",
     "model_fqdn": "",
     "model_column": "",
-    "model_label": "",
+    "model_label": "Campaign",
     "model_slug_plural": "",
     "module": "Lead",
     "module_slug": "lead",

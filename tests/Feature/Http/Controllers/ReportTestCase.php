@@ -13,7 +13,7 @@ use Playground\Lead\Models\Report;
 /**
  * \Tests\Feature\Playground\Lead\Api\Http\Controllers\ReportTestCase
  */
-class ReportTestCase extends TestCase
+class ReportTestCase extends PlaygroundCase
 {
     public string $fqdn = Report::class;
 
@@ -48,17 +48,33 @@ class ReportTestCase extends TestCase
      */
     public array $packageInfo = [
         'model_attribute' => 'title',
+        'model_camel' => 'report',
+        'model_camels' => 'reports',
+        'model_kebab' => 'report',
+        'model_kebabs' => 'reports',
+        'model_lower' => 'report',
+        'model_lowers' => 'reports',
         'model_label' => 'Report',
         'model_label_plural' => 'Reports',
+        'model_labels' => 'Reports',
         'model_route' => 'playground.lead.api.reports',
+        'model_route_param' => 'report',
         'model_slug' => 'report',
+        'model_slugs' => 'reports',
         'model_slug_plural' => 'reports',
+        'model_snake' => 'report',
+        'model_snakes' => 'reports',
+        'model_studly' => 'Report',
+        'model_studlies' => 'Reports',
         'model_variable' => 'report',
+        'model_variables' => 'reports',
         'model_variable_plural' => 'reports',
         'module_label' => 'Lead',
         'module_label_plural' => 'Leads',
+        'module_labels' => 'Leads',
         'module_route' => 'playground.lead.api',
         'module_slug' => 'lead',
+        'module_slugs' => 'leads',
         'privilege' => 'playground-lead-api:report',
         'table' => 'lead_reports',
     ];

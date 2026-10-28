@@ -13,7 +13,7 @@ use Playground\Lead\Models\Campaign;
 /**
  * \Tests\Feature\Playground\Lead\Api\Http\Controllers\CampaignTestCase
  */
-class CampaignTestCase extends TestCase
+class CampaignTestCase extends PlaygroundCase
 {
     public string $fqdn = Campaign::class;
 
@@ -48,17 +48,33 @@ class CampaignTestCase extends TestCase
      */
     public array $packageInfo = [
         'model_attribute' => 'title',
+        'model_camel' => 'campaign',
+        'model_camels' => 'campaigns',
+        'model_kebab' => 'campaign',
+        'model_kebabs' => 'campaigns',
+        'model_lower' => 'campaign',
+        'model_lowers' => 'campaigns',
         'model_label' => 'Campaign',
         'model_label_plural' => 'Campaigns',
+        'model_labels' => 'Campaigns',
         'model_route' => 'playground.lead.api.campaigns',
+        'model_route_param' => 'campaign',
         'model_slug' => 'campaign',
+        'model_slugs' => 'campaigns',
         'model_slug_plural' => 'campaigns',
+        'model_snake' => 'campaign',
+        'model_snakes' => 'campaigns',
+        'model_studly' => 'Campaign',
+        'model_studlies' => 'Campaigns',
         'model_variable' => 'campaign',
+        'model_variables' => 'campaigns',
         'model_variable_plural' => 'campaigns',
         'module_label' => 'Lead',
         'module_label_plural' => 'Leads',
+        'module_labels' => 'Leads',
         'module_route' => 'playground.lead.api',
         'module_slug' => 'lead',
+        'module_slugs' => 'leads',
         'privilege' => 'playground-lead-api:campaign',
         'table' => 'lead_campaigns',
     ];

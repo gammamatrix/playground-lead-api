@@ -13,7 +13,7 @@ use Playground\Lead\Models\Lead;
 /**
  * \Tests\Feature\Playground\Lead\Api\Http\Controllers\LeadTestCase
  */
-class LeadTestCase extends TestCase
+class LeadTestCase extends PlaygroundCase
 {
     public string $fqdn = Lead::class;
 
@@ -48,17 +48,33 @@ class LeadTestCase extends TestCase
      */
     public array $packageInfo = [
         'model_attribute' => 'title',
+        'model_camel' => 'lead',
+        'model_camels' => 'leads',
+        'model_kebab' => 'lead',
+        'model_kebabs' => 'leads',
+        'model_lower' => 'lead',
+        'model_lowers' => 'leads',
         'model_label' => 'Lead',
         'model_label_plural' => 'Leads',
+        'model_labels' => 'Leads',
         'model_route' => 'playground.lead.api.leads',
+        'model_route_param' => 'lead',
         'model_slug' => 'lead',
+        'model_slugs' => 'leads',
         'model_slug_plural' => 'leads',
+        'model_snake' => 'lead',
+        'model_snakes' => 'leads',
+        'model_studly' => 'Lead',
+        'model_studlies' => 'Leads',
         'model_variable' => 'lead',
+        'model_variables' => 'leads',
         'model_variable_plural' => 'leads',
         'module_label' => 'Lead',
         'module_label_plural' => 'Leads',
+        'module_labels' => 'Leads',
         'module_route' => 'playground.lead.api',
         'module_slug' => 'lead',
+        'module_slugs' => 'leads',
         'privilege' => 'playground-lead-api:lead',
         'table' => 'lead_leads',
     ];

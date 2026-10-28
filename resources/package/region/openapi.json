@@ -5,7 +5,7 @@
     "model": "Region",
     "model_fqdn": "",
     "model_column": "",
-    "model_label": "",
+    "model_label": "Region",
     "model_slug_plural": "",
     "module": "Lead",
     "module_slug": "lead",

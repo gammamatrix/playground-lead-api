@@ -5,7 +5,7 @@
     "model": "Report",
     "model_fqdn": "",
     "model_column": "",
-    "model_label": "",
+    "model_label": "Report",
     "model_slug_plural": "",
     "module": "Lead",
     "module_slug": "lead",

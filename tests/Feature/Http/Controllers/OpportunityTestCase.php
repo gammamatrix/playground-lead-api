@@ -13,7 +13,7 @@ use Playground\Lead\Models\Opportunity;
 /**
  * \Tests\Feature\Playground\Lead\Api\Http\Controllers\OpportunityTestCase
  */
-class OpportunityTestCase extends TestCase
+class OpportunityTestCase extends PlaygroundCase
 {
     public string $fqdn = Opportunity::class;
 
@@ -48,17 +48,33 @@ class OpportunityTestCase extends TestCase
      */
     public array $packageInfo = [
         'model_attribute' => 'title',
+        'model_camel' => 'opportunity',
+        'model_camels' => 'opportunities',
+        'model_kebab' => 'opportunity',
+        'model_kebabs' => 'opportunities',
+        'model_lower' => 'opportunity',
+        'model_lowers' => 'opportunities',
         'model_label' => 'Opportunity',
         'model_label_plural' => 'Opportunities',
+        'model_labels' => 'Opportunities',
         'model_route' => 'playground.lead.api.opportunities',
+        'model_route_param' => 'opportunity',
         'model_slug' => 'opportunity',
+        'model_slugs' => 'opportunities',
         'model_slug_plural' => 'opportunities',
+        'model_snake' => 'opportunity',
+        'model_snakes' => 'opportunities',
+        'model_studly' => 'Opportunity',
+        'model_studlies' => 'Opportunities',
         'model_variable' => 'opportunity',
+        'model_variables' => 'opportunities',
         'model_variable_plural' => 'opportunities',
         'module_label' => 'Lead',
         'module_label_plural' => 'Leads',
+        'module_labels' => 'Leads',
         'module_route' => 'playground.lead.api',
         'module_slug' => 'lead',
+        'module_slugs' => 'leads',
         'privilege' => 'playground-lead-api:opportunity',
         'table' => 'lead_opportunities',
     ];

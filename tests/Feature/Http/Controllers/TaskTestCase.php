@@ -13,7 +13,7 @@ use Playground\Lead\Models\Task;
 /**
  * \Tests\Feature\Playground\Lead\Api\Http\Controllers\TaskTestCase
  */
-class TaskTestCase extends TestCase
+class TaskTestCase extends PlaygroundCase
 {
     public string $fqdn = Task::class;
 
@@ -48,17 +48,33 @@ class TaskTestCase extends TestCase
      */
     public array $packageInfo = [
         'model_attribute' => 'title',
+        'model_camel' => 'task',
+        'model_camels' => 'tasks',
+        'model_kebab' => 'task',
+        'model_kebabs' => 'tasks',
+        'model_lower' => 'task',
+        'model_lowers' => 'tasks',
         'model_label' => 'Task',
         'model_label_plural' => 'Tasks',
+        'model_labels' => 'Tasks',
         'model_route' => 'playground.lead.api.tasks',
+        'model_route_param' => 'task',
         'model_slug' => 'task',
+        'model_slugs' => 'tasks',
         'model_slug_plural' => 'tasks',
+        'model_snake' => 'task',
+        'model_snakes' => 'tasks',
+        'model_studly' => 'Task',
+        'model_studlies' => 'Tasks',
         'model_variable' => 'task',
+        'model_variables' => 'tasks',
         'model_variable_plural' => 'tasks',
         'module_label' => 'Lead',
         'module_label_plural' => 'Leads',
+        'module_labels' => 'Leads',
         'module_route' => 'playground.lead.api',
         'module_slug' => 'lead',
+        'module_slugs' => 'leads',
         'privilege' => 'playground-lead-api:task',
         'table' => 'lead_tasks',
     ];

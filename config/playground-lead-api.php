@@ -5,8 +5,10 @@
  */
 
 declare(strict_types=1);
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful;
+use Playground\Auth\Policies\Policy;
 use Playground\Lead\Api\Policies\CampaignPolicy;
 use Playground\Lead\Api\Policies\GoalPolicy;
 use Playground\Lead\Api\Policies\LeadPolicy;
@@ -32,6 +34,36 @@ use Playground\Lead\Models\Teammate;
 
 /**
  * Playground: Lead API Configuration and Environment Variables
+ *
+ * @return array{
+ *       about: bool,
+ *       load: array{
+ *           policies: bool,
+ *           routes: bool,
+ *           translations: bool
+ *       },
+ *       matrix: array{
+ *           enabled: bool,
+ *       },
+ *       middleware: array{
+ *           default: string|string[],
+ *           auth: string|string[],
+ *           guest: string|string[]
+ *       },
+ *       policies: array<
+ *           class-string<Model>,
+ *           class-string<Policy>
+ *       >,
+ *       routes: array{
+ *       },
+ *       abilities: array<string, string[]>,
+ *       sitemap: array{
+ *            enable: bool,
+ *            guest: bool,
+ *            user: bool,
+ *            view: string
+ *       }
+ *   }
  */
 return [
 
@@ -61,6 +93,18 @@ return [
         'policies' => (bool) env('PLAYGROUND_LEAD_API_LOAD_POLICIES', true),
         'routes' => (bool) env('PLAYGROUND_LEAD_API_LOAD_ROUTES', true),
         'translations' => (bool) env('PLAYGROUND_LEAD_API_LOAD_TRANSLATIONS', true),
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Matrix
+    |--------------------------------------------------------------------------
+    |
+    |
+    */
+
+    'matrix' => [
+        'enabled' => (bool) env('PLAYGROUND_LEAD_API_MATRIX_ENABLED', false),
     ],
 
     /*
