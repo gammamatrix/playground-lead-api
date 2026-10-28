@@ -86,7 +86,7 @@ Information on [environment variables is available on the wiki for this package]
 
 ## Migrations
 
-This package requires the migrations in [](https://github.com/gammamatrix/) a Laravel package.
+This package requires the migrations in [playground-lead](https://github.com/gammamatrix/playground-lead) a Laravel package.
 
 ## Cloc
 

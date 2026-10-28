@@ -31,6 +31,7 @@
     "docs_name": "Playground: Lead API at Read the Docs: Playground Documentation",
     "docs_url": "https://gammamatrix-playground.readthedocs.io/en/develop/built-components/lead.html",
     "package_name": "Playground: Lead API",
+    "model_index": "",
     "model_package": "playground-lead",
     "model_package_name": "Playground: Lead",
     "package_description": "Playground: Provides an API, without a UI for interacting with Playground Lead, a Playground Campaign and Lead Sales Management tool for Laravel applications.",

@@ -55,6 +55,17 @@ use Playground\Lead\Models\Teammate;
  *           class-string<Policy>
  *       >,
  *       routes: array{
+ *           campaigns: bool,
+ *           goals: bool,
+ *           leads: bool,
+ *           opportunities: bool,
+ *           plans: bool,
+ *           regions: bool,
+ *           reports: bool,
+ *           sources: bool,
+ *           tasks: bool,
+ *           teams: bool,
+ *           teammates: bool,
  *       },
  *       abilities: array<string, string[]>,
  *       sitemap: array{
