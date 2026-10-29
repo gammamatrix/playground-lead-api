@@ -29,12 +29,6 @@ class SourceTestCase extends PlaygroundCase
 
     protected int $status_code_json_guest_restore = 401;
 
-    protected int $status_code_json_guest_restore_revision = 401;
-
-    protected int $status_code_guest_json_revision = 401;
-
-    protected int $status_code_guest_json_revisions = 401;
-
     protected int $status_code_json_guest_show = 401;
 
     protected int $status_code_guest_json_store = 401;
