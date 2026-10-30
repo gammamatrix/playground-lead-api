@@ -8,6 +8,7 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Playground\Lead\Api\Http\Controllers;
 
+use Illuminate\Database\Eloquent\Model;
 use Playground\Lead\Models\Teammate;
 
 /**
@@ -15,6 +16,9 @@ use Playground\Lead\Models\Teammate;
  */
 class TeammateTestCase extends PlaygroundCase
 {
+    /**
+     * @var class-string<Model>
+     */
     public string $fqdn = Teammate::class;
 
     protected int $status_code_json_guest_create = 401;

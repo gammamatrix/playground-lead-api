@@ -7,7 +7,7 @@
     "module_labels": "Leads",
     "module_slug": "lead",
     "module_slugs": "leads",
-    "name": "Team",
+    "name": "team",
     "namespace": "Playground/Lead/Api",
     "organization": "Playground",
     "package": "playground-lead-api",

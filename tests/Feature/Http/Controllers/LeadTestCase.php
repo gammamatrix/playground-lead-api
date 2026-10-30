@@ -8,6 +8,7 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Playground\Lead\Api\Http\Controllers;
 
+use Illuminate\Database\Eloquent\Model;
 use Playground\Lead\Models\Lead;
 
 /**
@@ -15,6 +16,9 @@ use Playground\Lead\Models\Lead;
  */
 class LeadTestCase extends PlaygroundCase
 {
+    /**
+     * @var class-string<Model>
+     */
     public string $fqdn = Lead::class;
 
     protected int $status_code_json_guest_create = 401;

@@ -7,7 +7,7 @@
     "module_labels": "Leads",
     "module_slug": "lead",
     "module_slugs": "leads",
-    "name": "Teammate",
+    "name": "teammate",
     "namespace": "Playground/Lead/Api",
     "organization": "Playground",
     "package": "playground-lead-api",
