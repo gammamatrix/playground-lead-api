@@ -55,6 +55,7 @@
     "privilege": "playground-lead-api:opportunity",
     "route": "playground.lead.api",
     "view": "",
+    "actions": [],
     "implements": [],
     "uses": [],
     "packageInfo": {

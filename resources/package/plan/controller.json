@@ -55,6 +55,7 @@
     "privilege": "playground-lead-api:plan",
     "route": "playground.lead.api",
     "view": "",
+    "actions": [],
     "implements": [],
     "uses": [],
     "packageInfo": {
